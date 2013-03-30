@@ -1,0 +1,42 @@
+{
+    "name":"imatic/form-bundle",
+    "type":"symfony-bundle",
+    "description":"Imatic Form Bundle",
+    "authors":[
+        {
+            "name":"Viliam Husár",
+            "email":"viliam.husar@imatic.cz"
+        },
+        {
+            "name":"Imatic Software s.r.o.",
+            "homepage":"http://imatic.cz/"
+        }
+    ],
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"http://composer.imatic.cz"
+        }
+    ],
+    "require":{
+        "php":">=5.3.3",
+        "genemu/form-bundle":"2.1.*",
+        "symfony/framework-bundle":">=2.1,<2.4",
+        "symfony/form":">=2.1,<2.4",
+        "symfony/translation":">=2.1,<2.4",
+        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/doctrine-bundle": "~1.2"
+    },
+    "autoload":{
+        "psr-0":{
+            "Imatic\\Bundle\\FormBundle":""
+        }
+    },
+    "target-dir":"Imatic/Bundle/FormBundle",
+    "minimum-stability":"dev",
+    "extra":{
+        "branch-alias":{
+            "dev-master":"2.3-dev"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+parameters:
+    imatic_form.form.type_guesser.genemu.class: Imatic\Bundle\FormBundle\Form\GenemuTypeGuesser
+
+services:
+    imatic_form.form.type_guesser.genemu:
+        class: %imatic_form.form.type_guesser.genemu.class%
+        arguments: [@doctrine]
+        calls:
+            - [ setTranslator, [ @translator ] ]
+        tags:
+            - { name: form.type_guesser }
