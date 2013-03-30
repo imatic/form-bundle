@@ -1,5 +1,7 @@
 parameters:
     imatic_form.form.type_guesser.genemu.class: Imatic\Bundle\FormBundle\Form\GenemuTypeGuesser
+    imatic_form.form.type.date_range.class: Imatic\Bundle\FormBundle\Form\Type\DateRangeType
+    imatic_form.form.type.datetime_range.class: Imatic\Bundle\FormBundle\Form\Type\DateTimeRangeType
 
 services:
     imatic_form.form.type_guesser.genemu:
@@ -9,3 +11,15 @@ services:
             - [ setTranslator, [ @translator ] ]
         tags:
             - { name: form.type_guesser }
+
+    imatic_form.form.type.date_range:
+        class: %imatic_form.form.type.date_range.class%
+        arguments: [@translator]
+        tags:
+            - { name: form.type, alias: imatic_type_date_range }
+
+    imatic_form.form.type.datetime_range:
+        class: %imatic_form.form.type.datetime_range.class%
+        arguments: [@translator]
+        tags:
+            - { name: form.type, alias: imatic_type_datetime_range }
