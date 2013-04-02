@@ -21,11 +21,11 @@
     "require":{
         "php":">=5.3.3",
         "genemu/form-bundle":"2.1.*",
-        "symfony/framework-bundle":">=2.1,<2.3",
-        "symfony/form":">=2.1,<2.3",
-        "symfony/translation":">=2.1,<2.3",
+        "symfony/framework-bundle":"~2.1",
+        "symfony/form":"~2.1",
+        "symfony/translation":"~2.1",
         "doctrine/orm": "~2.2,>=2.2.3",
-        "doctrine/doctrine-bundle": "1.2.*"
+        "doctrine/doctrine-bundle": "~1.2"
     },
     "autoload":{
         "psr-0":{
