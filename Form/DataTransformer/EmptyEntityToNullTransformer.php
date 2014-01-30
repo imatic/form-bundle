@@ -58,7 +58,7 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
             return $value;
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
