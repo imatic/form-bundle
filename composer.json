@@ -2,6 +2,7 @@
     "name":"imatic/form-bundle",
     "type":"symfony-bundle",
     "description":"Imatic Form Bundle",
+    "license":"proprietary",
     "authors":[
         {
             "name":"Viliam Husár",
@@ -17,7 +18,7 @@
         "genemu/form-bundle":"2.2.*",
         "symfony/framework-bundle":"2.4.*",
         "doctrine/orm": ">=2.2.3,<2.5-dev",
-        "doctrine/doctrine-bundle": "1.2.*"
+        "doctrine/doctrine-bundle": ">=1.2"
     },
     "autoload":{
         "psr-0":{
