@@ -2,6 +2,45 @@
 ImaticFormBundle
 ================
 
+***************
+Form extensions
+***************
+
+Form theme
+----------
+
+This extensions allows you to set form theme through the type's options.
+
+.. sourcecode:: php
+
+    <?php
+
+    class InvoiceType extends AbstractType
+    {
+        public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            // example: setting template of child form (field)
+            $builder->add('example', null, [
+                // override form theme template
+                'template' => 'MyBundle:Form:example_theme.html.twig',
+
+                // pass extra variables to the theme templates when this field is rendered
+                'template_parameters' => [
+                    'foo' => 'bar',
+                ],
+            ]);
+        }
+
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        {
+            // example: setting template of the form type itself
+            $resolver->setDefaults([
+                'template' => 'MyBundle:Form:example_theme.html.twig',
+                'template_parameters' => ['foo' => 'bar'],
+            ]);
+        }
+    }
+
 
 *********************
 Validator constraints

@@ -5,6 +5,7 @@ parameters:
     imatic_form.form.type.range.class: Imatic\Bundle\FormBundle\Form\Type\RangeType
 
 services:
+    # Form types
     imatic_form.form.type_guesser.genemu:
         class: %imatic_form.form.type_guesser.genemu.class%
         arguments: [@doctrine]
@@ -29,3 +30,11 @@ services:
         class: %imatic_form.form.type.range.class%
         tags:
             - { name: form.type, alias: imatic_type_range }
+
+    # Form extensions
+    imatic_view.form.extension.form_theme:
+        class:        Imatic\Bundle\FormBundle\Form\Extension\FormTypeThemeExtension
+        arguments:
+            - '@twig'
+        tags:
+            - { name: 'form.type_extension', alias: form }
