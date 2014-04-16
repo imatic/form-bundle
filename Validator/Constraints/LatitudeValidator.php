@@ -14,7 +14,7 @@ class LatitudeValidator extends ConstraintValidator
         }
 
         if (!is_numeric($value) || -90 > $value || 90 < $value) {
-            $this->context->addViolation($constraint->message, array('%value%' => $value));
+            $this->context->addViolation($constraint->message, ['%value%' => $value]);
         }
     }
 }

@@ -16,7 +16,7 @@ class NotNullOneOf extends Constraint
     /** @var string */
     public $message = 'At least one item must be defined.';
     /** @var array */
-    public $properties = array();
+    public $properties = [];
 
     /**
      * {@inheritDoc}
@@ -31,6 +31,6 @@ class NotNullOneOf extends Constraint
      */
     public function getRequiredOptions()
     {
-        return array('properties');
+        return ['properties'];
     }
 }

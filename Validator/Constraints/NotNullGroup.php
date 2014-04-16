@@ -16,7 +16,7 @@ class NotNullGroup extends Constraint
     /** @var string */
     public $message = 'This value should not be null.';
     /** @var array */
-    public $properties = array();
+    public $properties = [];
 
     /**
      * {@inheritDoc}
@@ -31,6 +31,6 @@ class NotNullGroup extends Constraint
      */
     public function getRequiredOptions()
     {
-        return array('properties');
+        return ['properties'];
     }
 }

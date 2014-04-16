@@ -36,14 +36,14 @@ class FormTypeThemeExtension extends AbstractTypeExtension
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'template' => null,
-            'template_parameters' => array(),
-        ));
-        $resolver->setAllowedTypes(array(
-            'template' => array('null', 'string', 'array'),
+            'template_parameters' => [],
+        ]);
+        $resolver->setAllowedTypes([
+            'template' => ['null', 'string', 'array'],
             'template_parameters' => 'array',
-        ));
+        ]);
     }
 
     public function getExtendedType()

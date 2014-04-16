@@ -28,7 +28,7 @@ class GenemuTypeGuesser extends BaseDoctrineOrmTypeGuesser
     public function guessType($class, $property)
     {
         if (!$ret = $this->getMetadata($class)) {
-            return new TypeGuess('text', array(), Guess::LOW_CONFIDENCE);
+            return new TypeGuess('text', [], Guess::LOW_CONFIDENCE);
         }
 
         list($metadata, $name) = $ret;
@@ -39,23 +39,23 @@ class GenemuTypeGuesser extends BaseDoctrineOrmTypeGuesser
             $mapping = $metadata->getAssociationMapping($property);
 
             $placeholder = $multiple ? "Select values" : "Select a value";
-            $placeholder = $this->translator->trans($placeholder, array(), 'messages');
+            $placeholder = $this->translator->trans($placeholder, [], 'messages');
 
-            return new TypeGuess('genemu_jqueryselect2_entity', array(
+            return new TypeGuess('genemu_jqueryselect2_entity', [
                 'em' => $name,
                 'class' => $mapping['targetEntity'],
                 'multiple' => $multiple,
-                'configs' => array('placeholder' => $placeholder, 'allowClear' => true)
-            ), Guess::VERY_HIGH_CONFIDENCE);
+                'configs' => ['placeholder' => $placeholder, 'allowClear' => true]
+            ], Guess::VERY_HIGH_CONFIDENCE);
         }
 
         switch ($metadata->getTypeOfField($property)) {
             case 'date':
-                $options = array(
+                $options = [
                     'widget' => 'single_text',
                     'format' => 'd.M.y',
-                    'configs' => array('dateFormat' => 'd/M/Y')
-                );
+                    'configs' => ['dateFormat' => 'd/M/Y']
+                ];
 
                 return new TypeGuess('genemu_jquerydate', $options, Guess::VERY_HIGH_CONFIDENCE);
         }

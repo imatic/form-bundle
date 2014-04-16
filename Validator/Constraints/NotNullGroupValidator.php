@@ -17,7 +17,7 @@ class NotNullGroupValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        $nullProperties = array();
+        $nullProperties = [];
         foreach ($constraint->properties as $property) {
             $reflProperty = new \ReflectionProperty($value, $property);
             $reflProperty->setAccessible(true);

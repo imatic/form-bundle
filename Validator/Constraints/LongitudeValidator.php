@@ -14,7 +14,7 @@ class LongitudeValidator extends ConstraintValidator
         }
 
         if (!is_numeric($value) || -180 > $value || 180 < $value) {
-            $this->context->addViolation($constraint->message, array('%value%' => $value));
+            $this->context->addViolation($constraint->message, ['%value%' => $value]);
         }
     }
 }
