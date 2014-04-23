@@ -1,0 +1,26 @@
+{% trans_default_domain 'ImaticFormBundle' %}
+
+{% block imatic_type_ajax_entity_choice_widget %}
+<div class="{{ horizontal_input_wrapper_class }}">
+    <input
+        type="hidden" {{ block('widget_attributes') }}
+        value="{{ value }}"
+        data-imatic-form-ajax-choice="{{ {
+            multiple: multiple,
+            allowClear: allow_clear,
+            placeholder: placeholder|default('select2.placeholder'|trans),
+            ajaxPath: ajax_path,
+            initialValue: initial_value,
+            formatSearching: 'select2.searching'|trans ~ '...',
+            formatInputTooShort: 'select2.inputTooShort'|trans,
+            formatNoMatches: 'select2.noMatches'|trans
+        }|json_encode }}"
+    >
+    <script type="text/javascript">
+        $(document).ready(function () {
+            imatic.form.initAjaxEntityChoice(document.getElementById({{ id|json_encode|raw }}));
+        });
+    </script>
+    {{ block('form_message') }}
+</div>
+{% endblock %}

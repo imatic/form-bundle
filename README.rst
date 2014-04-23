@@ -2,6 +2,38 @@
 ImaticFormBundle
 ================
 
+**********
+Form types
+**********
+
+- imatic_type_date_range
+- imatic_type_datetime_range
+- imatic_type_range
+- imatic_type_ajax_entity_choice
+
+Ajax entity choice
+------------------
+
+Implements choice of single entity or collection of entities using ajax.
+
+Dependencies: jQuery, Select2
+
+.. sourcecode:: php
+
+    <?php
+
+    class ExampleType extends AbstractType
+    {
+        public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            $builder->add('author', 'imatic_type_ajax_entity_choice', [
+                'class' => 'MyExampleBundle:User',
+                'route' => 'app_example_example_autocomplete',
+            ]);
+        }
+    }
+
+
 ***************
 Form extensions
 ***************
@@ -15,7 +47,7 @@ This extensions allows you to set form theme through the type's options.
 
     <?php
 
-    class InvoiceType extends AbstractType
+    class ExampleType extends AbstractType
     {
         public function buildForm(FormBuilderInterface $builder, array $options)
         {

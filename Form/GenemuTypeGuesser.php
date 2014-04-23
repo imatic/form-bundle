@@ -39,7 +39,7 @@ class GenemuTypeGuesser extends BaseDoctrineOrmTypeGuesser
             $mapping = $metadata->getAssociationMapping($property);
 
             $placeholder = $multiple ? "Select values" : "Select a value";
-            $placeholder = $this->translator->trans($placeholder, [], 'messages');
+            $placeholder = $this->translator->trans($placeholder, [], 'ImaticFormBundle');
 
             return new TypeGuess('genemu_jqueryselect2_entity', [
                 'em' => $name,

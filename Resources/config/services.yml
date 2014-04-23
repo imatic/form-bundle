@@ -31,6 +31,14 @@ services:
         tags:
             - { name: form.type, alias: imatic_type_range }
 
+    imatic_form.form.type.ajax_entity_choice:
+        class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
+        arguments:
+            - '@doctrine'
+            - '@router'
+        tags:
+            - { name: form.type, alias: imatic_type_ajax_entity_choice }
+
     # Form extensions
     imatic_view.form.extension.form_theme:
         class:        Imatic\Bundle\FormBundle\Form\Extension\FormTypeThemeExtension
