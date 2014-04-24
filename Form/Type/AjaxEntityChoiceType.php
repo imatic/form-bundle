@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\Collections\Collection;
@@ -120,7 +121,9 @@ class AjaxEntityChoiceType extends AbstractType
             'property' => null,
             'placeholder' => null,
             'multiple' => false,
-            'allow_clear' => false,
+            'allow_clear' => function (Options $options) {
+                return !$options->get('required');
+            },
             'route' => null,
             'route_attrs' => array(),
             'compound' => false,

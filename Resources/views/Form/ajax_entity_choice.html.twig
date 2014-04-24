@@ -10,6 +10,7 @@
             allowClear: allow_clear,
             placeholder: placeholder|default('select2.placeholder'|trans),
             ajaxPath: ajax_path,
+            ajaxRequestFormat: 'filter',
             initialValue: initial_value,
             formatSearching: 'select2.searching'|trans ~ '...',
             formatInputTooShort: 'select2.inputTooShort'|trans,
@@ -18,7 +19,7 @@
     >
     <script type="text/javascript">
         $(document).ready(function () {
-            imatic.form.initAjaxEntityChoice(document.getElementById({{ id|json_encode|raw }}));
+            imatic.form.ajaxChoice.init(document.getElementById({{ id|json_encode|raw }}));
         });
     </script>
     {{ block('form_message') }}
