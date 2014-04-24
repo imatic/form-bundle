@@ -1,3 +1,5 @@
+"use_strict";
+
 var imatic = imatic || {};
 imatic.form = imatic.form || {};
 
