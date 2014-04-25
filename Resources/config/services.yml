@@ -3,6 +3,8 @@ parameters:
     imatic_form.form.type.date_range.class: Imatic\Bundle\FormBundle\Form\Type\DateRangeType
     imatic_form.form.type.datetime_range.class: Imatic\Bundle\FormBundle\Form\Type\DateTimeRangeType
     imatic_form.form.type.range.class: Imatic\Bundle\FormBundle\Form\Type\RangeType
+    imatic_form.form.type.ajax_entity_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
+    imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormTypeThemeExtension
 
 services:
     # Form types
@@ -32,7 +34,7 @@ services:
             - { name: form.type, alias: imatic_type_range }
 
     imatic_form.form.type.ajax_entity_choice:
-        class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
+        class: %imatic_form.form.type.ajax_entity_choice.class%
         arguments:
             - '@doctrine'
             - '@router'
@@ -41,7 +43,7 @@ services:
 
     # Form extensions
     imatic_view.form.extension.form_theme:
-        class:        Imatic\Bundle\FormBundle\Form\Extension\FormTypeThemeExtension
+        class: %imatic_view.form.extension.form_theme.class%
         arguments:
             - '@twig'
         tags:

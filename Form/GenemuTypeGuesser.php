@@ -2,7 +2,7 @@
 
 namespace Imatic\Bundle\FormBundle\Form;
 
-use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser as BaseDoctrineOrmTypeGuesser;
+use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\Guess;
@@ -12,12 +12,11 @@ use Doctrine\ORM\Mapping\ClassMetadata;
  * Uses Genemu widgets instead Form core widgets.
  *
  * @author Viliam Husár <viliam.husar@imatic.cz>
+ * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
-class GenemuTypeGuesser extends BaseDoctrineOrmTypeGuesser
+class GenemuTypeGuesser extends DoctrineOrmTypeGuesser
 {
-    /**
-     * @var TranslatorInterface
-     */
+    /** @var TranslatorInterface */
     protected $translator;
 
     public function setTranslator(TranslatorInterface $translator)
@@ -28,24 +27,24 @@ class GenemuTypeGuesser extends BaseDoctrineOrmTypeGuesser
     public function guessType($class, $property)
     {
         if (!$ret = $this->getMetadata($class)) {
-            return new TypeGuess('text', [], Guess::LOW_CONFIDENCE);
+            return;
         }
 
         list($metadata, $name) = $ret;
 
-        /** @var $metadata  ClassMetadata */
+        /** @var $metadata ClassMetadata */
         if ($metadata->hasAssociation($property)) {
             $multiple = $metadata->isCollectionValuedAssociation($property);
             $mapping = $metadata->getAssociationMapping($property);
 
-            $placeholder = $multiple ? "Select values" : "Select a value";
+            $placeholder = $multiple ? 'Select values' : 'Select a value';
             $placeholder = $this->translator->trans($placeholder, [], 'ImaticFormBundle');
 
             return new TypeGuess('genemu_jqueryselect2_entity', [
                 'em' => $name,
                 'class' => $mapping['targetEntity'],
                 'multiple' => $multiple,
-                'configs' => ['placeholder' => $placeholder, 'allowClear' => true]
+                'configs' => ['placeholder' => $placeholder, 'allowClear' => true],
             ], Guess::VERY_HIGH_CONFIDENCE);
         }
 
