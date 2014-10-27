@@ -122,7 +122,9 @@ class AjaxEntityChoiceType extends AbstractType
             'placeholder' => null,
             'multiple' => false,
             'allow_clear' => function (Options $options) {
-                return !$options->get('required');
+                if (!$options['multiple']) {
+                    return !$options['required'];
+                }
             },
             'route' => null,
             'route_attrs' => array(),
