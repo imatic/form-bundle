@@ -43,6 +43,7 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
                 if (
                     null !== $reflPropertyValue
                     && ($this->strict || '' !== $reflPropertyValue)
+                    && (!$reflPropertyValue instanceof \Countable || sizeof($reflPropertyValue) > 0)
                 ) {
                     $hasNonEmptyValue = true;
                     break;
