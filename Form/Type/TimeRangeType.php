@@ -6,7 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DateTimeRangeType extends AbstractType
+/**
+ * @author Miloslav Nenadal <miloslav.nenadal@imatic.cz>
+ */
+class TimeRangeType extends AbstractType
 {
     /**
      * {@inheritDoc}
@@ -25,12 +28,9 @@ class DateTimeRangeType extends AbstractType
         );
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getName()
     {
-        return 'imatic_type_datetime_range';
+        return 'imatic_type_time_range';
     }
 
     /**
@@ -40,7 +40,7 @@ class DateTimeRangeType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'field_type' => 'datetime',
+                'field_type' => 'time',
                 'field_options' => array()
             )
         );
