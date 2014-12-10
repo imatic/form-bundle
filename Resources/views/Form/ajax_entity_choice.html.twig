@@ -1,7 +1,7 @@
 {% trans_default_domain 'ImaticFormBundle' %}
 
 {% block imatic_type_ajax_entity_choice_widget %}
-<div class="{{ horizontal_input_wrapper_class }}">
+{% if horizontal %}<div class="{{ horizontal_input_wrapper_class }}">{% endif %}
     <input
         type="hidden" {{ block('widget_attributes') }}
         value="{{ value }}"
@@ -23,5 +23,5 @@
         });
     </script>
     {{ block('form_message') }}
-</div>
+{% if horizontal %}</div>{% endif %}
 {% endblock %}

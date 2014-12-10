@@ -132,5 +132,4 @@ class AjaxEntityChoiceType extends AbstractType
             'template' => 'ImaticFormBundle:Form:ajax_entity_choice.html.twig',
         ));
     }
-
 }
