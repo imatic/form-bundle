@@ -7,13 +7,28 @@ ImaticFormBundle
 Validator constraints
 *********************
 
+Number
+------
+
+* ensures that number have correct precision and scale
+
+options
+```````
+* precision
+* scale
+
+Latitude
+--------
+
+Longtitude
+----------
+
 NotNullGroup
 ------------
 
 This class-level constraint ensures that all given properties are either set or null.
 
 Valid states: all properties are null, all properties are NOT null.
-
 
 NotNullOneOf
 ------------
@@ -91,3 +106,35 @@ If strict mode is enabled, only nulls are considered empty.
         
         // ...
     }
+
+******************
+Entity subscribers
+******************
+
+RemoveUnsentFieldsSubscriber
+----------------------------
+
+* removes fields which weren't submitted
+
+
+.. sourcecode:: php
+
+   <?php
+
+   $post = [
+       'title' => 'Jackie Chan Adventures',
+       'type' => 'cartoon',
+   ];
+   $request = new Request([], $post);
+
+   $this->createFormBuilder()
+       ->add('title', 'text')
+       ->add('type', 'text')
+       ->add('description', 'text')
+       ->addEventSubscriber(new RemoveUnsentFieldsSubscriber())
+       ->getForm()
+   ;
+
+   $form->handleRequest($request);
+   $form->all(); // contains only fields: title, type
+
