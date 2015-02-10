@@ -1,35 +1,35 @@
 {
-    "name":"imatic/form-bundle",
-    "type":"symfony-bundle",
-    "description":"Imatic Form Bundle",
-    "license":"proprietary",
-    "authors":[
+    "name": "imatic/form-bundle",
+    "type": "symfony-bundle",
+    "description": "Imatic Form Bundle",
+    "license": "proprietary",
+    "authors": [
         {
-            "name":"Viliam Husár",
-            "email":"viliam.husar@imatic.cz"
+            "name": "Viliam Husár",
+            "email": "viliam.husar@imatic.cz"
         },
         {
-            "name":"Imatic Software s.r.o.",
-            "homepage":"http://imatic.cz/"
+            "name": "Imatic Software s.r.o.",
+            "homepage": "http://imatic.cz/"
         }
     ],
-    "require":{
-        "php":">=5.3.3",
-        "genemu/form-bundle":"2.2.*",
-        "symfony/framework-bundle":"2.4.*",
+    "require": {
+        "php": ">=5.3.3",
+        "genemu/form-bundle": "2.2.*",
+        "symfony/framework-bundle": "~2.4",
         "doctrine/orm": ">=2.2.3,<2.5-dev",
         "doctrine/doctrine-bundle": ">=1.2"
     },
-    "autoload":{
-        "psr-0":{
-            "Imatic\\Bundle\\FormBundle":""
+    "autoload": {
+        "psr-0": {
+            "Imatic\\Bundle\\FormBundle": ""
         }
     },
-    "minimum-stability":"dev",
-    "target-dir":"Imatic/Bundle/FormBundle",
-    "extra":{
-        "branch-alias":{
-            "dev-master":"2.4.x-dev"
+    "minimum-stability": "dev",
+    "target-dir": "Imatic/Bundle/FormBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.4.x-dev"
         }
     },
     "require-dev": {
