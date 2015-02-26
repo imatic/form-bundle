@@ -78,6 +78,22 @@ This extensions allows you to set form theme through the type's options.
 Validator constraints
 *********************
 
+Number
+------
+
+* ensures that number have correct precision and scale
+
+options
+```````
+* precision
+* scale
+
+Latitude
+--------
+
+Longtitude
+----------
+
 NotNullGroup
 ------------
 
