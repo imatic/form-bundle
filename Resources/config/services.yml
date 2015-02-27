@@ -6,6 +6,7 @@ parameters:
     imatic_form.form.type.range.class: Imatic\Bundle\FormBundle\Form\Type\RangeType
     imatic_form.form.type.ajax_entity_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
     imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormTypeThemeExtension
+    imatic_view.form.extension.genemu_jquery_select2_choice: Imatic\Bundle\FormBundle\Form\Extension\GenemuJQuerySelect2ChoiceExtension
 
 services:
     imatic_form.form.type_guesser.genemu:
@@ -51,3 +52,8 @@ services:
             - '@twig'
         tags:
             - { name: 'form.type_extension', alias: form }
+
+    imatic_view.form.extension.genemu_jquery_select2_choice:
+        class: %imatic_view.form.extension.genemu_jquery_select2_choice%
+        tags:
+            - { name: 'form.type_extension', alias: genemu_jqueryselect2_choice }

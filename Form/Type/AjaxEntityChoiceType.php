@@ -17,7 +17,7 @@ use Imatic\Bundle\FormBundle\Form\DataTransformer\CollectionToScalarTransformer;
 
 /**
  * Ajax entity choice type
- * 
+ *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
 class AjaxEntityChoiceType extends AbstractType
