@@ -6,15 +6,12 @@ use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\Guess;
-use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
- * Uses Genemu widgets instead Form core widgets.
- *
  * @author Viliam Husár <viliam.husar@imatic.cz>
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
-class GenemuTypeGuesser extends DoctrineOrmTypeGuesser
+class DefaultTypeGuesser extends DoctrineOrmTypeGuesser
 {
     /** @var TranslatorInterface */
     protected $translator;
@@ -48,15 +45,18 @@ class GenemuTypeGuesser extends DoctrineOrmTypeGuesser
             ], Guess::VERY_HIGH_CONFIDENCE);
         }
 
-        switch ($metadata->getTypeOfField($property)) {
+        $type = $metadata->getTypeOfField($property);
+
+        switch ($type) {
             case 'date':
+            case 'datetime':
+            case 'time':
                 $options = [
                     'widget' => 'single_text',
-                    'format' => 'd.M.y',
-                    'configs' => ['dateFormat' => 'd/M/Y']
+                    "{$type}picker" => true,
                 ];
 
-                return new TypeGuess('genemu_jquerydate', $options, Guess::VERY_HIGH_CONFIDENCE);
+                return new TypeGuess($type, $options, Guess::VERY_HIGH_CONFIDENCE);
         }
 
         return parent::guessType($class, $property);

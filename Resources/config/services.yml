@@ -1,5 +1,5 @@
 parameters:
-    imatic_form.form.type_guesser.genemu.class: Imatic\Bundle\FormBundle\Form\GenemuTypeGuesser
+    imatic_form.form.type_guesser.default.class: Imatic\Bundle\FormBundle\Form\DefaultTypeGuesser
     imatic_form.form.type.date_range.class: Imatic\Bundle\FormBundle\Form\Type\DateRangeType
     imatic_form.form.type.datetime_range.class: Imatic\Bundle\FormBundle\Form\Type\DateTimeRangeType
     imatic_form.form.type.time_range.class: Imatic\Bundle\FormBundle\Form\Type\TimeRangeType
@@ -9,8 +9,8 @@ parameters:
     imatic_view.form.extension.genemu_jquery_select2_choice: Imatic\Bundle\FormBundle\Form\Extension\GenemuJQuerySelect2ChoiceExtension
 
 services:
-    imatic_form.form.type_guesser.genemu:
-        class: %imatic_form.form.type_guesser.genemu.class%
+    imatic_form.form.type_guesser.default:
+        class: %imatic_form.form.type_guesser.default.class%
         arguments: [@doctrine]
         calls:
             - [ setTranslator, [ @translator ] ]
