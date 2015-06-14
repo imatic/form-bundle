@@ -10,9 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class RangeType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -21,9 +18,7 @@ class RangeType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
@@ -32,9 +27,7 @@ class RangeType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    
     public function getName()
     {
         return 'imatic_type_range';

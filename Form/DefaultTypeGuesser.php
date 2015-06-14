@@ -3,9 +3,9 @@
 namespace Imatic\Bundle\FormBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser;
-use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\Guess;
+use Symfony\Component\Form\Guess\TypeGuess;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Viliam Husár <viliam.husar@imatic.cz>

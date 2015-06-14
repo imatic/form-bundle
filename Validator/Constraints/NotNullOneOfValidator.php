@@ -12,9 +12,6 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class NotNullOneOfValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritDoc}
-     */
     public function validate($value, Constraint $constraint)
     {
         $hasNotNullValue = false;

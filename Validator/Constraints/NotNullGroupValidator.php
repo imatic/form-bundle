@@ -12,9 +12,6 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class NotNullGroupValidator extends ConstraintValidator
 {
-    /**
-     * {@inheritDoc}
-     */
     public function validate($value, Constraint $constraint)
     {
         $nullProperties = [];

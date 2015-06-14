@@ -2,8 +2,8 @@
 
 namespace Imatic\Bundle\FormBundle\Tests\Unit\Form\Type;
 
-use Symfony\Component\Form\Test\TypeTestCase;
 use Imatic\Bundle\FormBundle\Form\Type\TimeRangeType;
+use Symfony\Component\Form\Test\TypeTestCase;
 
 /**
  * @author Miloslav Nenadal <miloslav.nenadal@imatic.cz>

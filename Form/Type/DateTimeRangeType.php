@@ -8,9 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DateTimeRangeType extends AbstractType
 {
-    /**
-     * {@inheritDoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
@@ -25,17 +22,13 @@ class DateTimeRangeType extends AbstractType
         );
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function getName()
     {
         return 'imatic_type_datetime_range';
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(

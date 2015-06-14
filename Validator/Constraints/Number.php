@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Exception\MissingOptionsException;
 
 /**
  * @Annotation
- *
+ * 
  * @author Miloslav Nenadal <miloslav.nenadal@imatic.cz>
  */
 class Number extends Constraint

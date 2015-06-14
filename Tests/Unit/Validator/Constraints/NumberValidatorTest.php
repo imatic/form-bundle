@@ -2,8 +2,8 @@
 
 namespace Imatic\Bundle\FormBundle\Tests\Unit\Validator\Constraints;
 
-use Imatic\Bundle\FormBundle\Validator\Constraints\NumberValidator;
 use Imatic\Bundle\FormBundle\Validator\Constraints\Number;
+use Imatic\Bundle\FormBundle\Validator\Constraints\NumberValidator;
 
 /**
  * @author Miloslav Nenadal <miloslav.nenadal@imatic.cz>

@@ -12,7 +12,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class NumberValidator extends ConstraintValidator
 {
     /**
-     * @param float $value
+     * @param float  $value
      * @param Number $constraint
      * @throws Exception
      */

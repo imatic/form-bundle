@@ -4,6 +4,7 @@ parameters:
     imatic_form.form.type.datetime_range.class: Imatic\Bundle\FormBundle\Form\Type\DateTimeRangeType
     imatic_form.form.type.time_range.class: Imatic\Bundle\FormBundle\Form\Type\TimeRangeType
     imatic_form.form.type.range.class: Imatic\Bundle\FormBundle\Form\Type\RangeType
+    imatic_form.form.type.ajax_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxChoiceType
     imatic_form.form.type.ajax_entity_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
     imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormTypeThemeExtension
     imatic_view.form.extension.genemu_jquery_select2_choice: Imatic\Bundle\FormBundle\Form\Extension\GenemuJQuerySelect2ChoiceExtension
@@ -37,11 +38,18 @@ services:
         tags:
             - { name: form.type, alias: imatic_type_range }
 
+    imatic_form.form.type.ajax_choice:
+        class: %imatic_form.form.type.ajax_choice.class%
+        arguments:
+            - '@router'
+        tags:
+            - { name: form.type, alias: imatic_type_ajax_choice }
+
     imatic_form.form.type.ajax_entity_choice:
         class: %imatic_form.form.type.ajax_entity_choice.class%
         arguments:
-            - '@doctrine'
             - '@router'
+            - '@doctrine'
         tags:
             - { name: form.type, alias: imatic_type_ajax_entity_choice }
 

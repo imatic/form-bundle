@@ -28,9 +28,7 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
         $this->strict = $strict;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function reverseTransform($value)
     {
         if (is_object($value)) {
@@ -60,9 +58,7 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    
     public function transform($value)
     {
         return $value;

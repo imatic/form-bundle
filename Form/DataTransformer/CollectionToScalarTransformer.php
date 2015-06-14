@@ -2,16 +2,16 @@
 
 namespace Imatic\Bundle\FormBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Doctrine\ORM\EntityManager;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Transforms collection to a scalar value
  *
- * @author Pavel Batecko <pavel.batecko at imatic.cz>
+ * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
 class CollectionToScalarTransformer implements DataTransformerInterface
 {

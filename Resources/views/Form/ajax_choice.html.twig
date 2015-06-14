@@ -1,7 +1,6 @@
 {% trans_default_domain 'ImaticFormBundle' %}
 
-{% block imatic_type_ajax_entity_choice_widget %}
-{% if horizontal %}<div class="{{ horizontal_input_wrapper_class }}">{% endif %}
+{% block imatic_type_ajax_choice_widget %}
     <input
         type="hidden" {{ block('widget_attributes') }}
         value="{{ value }}"
@@ -17,11 +16,21 @@
             formatNoMatches: 'select2.noMatches'|trans
         }|json_encode }}"
     >
-    <script type="text/javascript">
-        $(document).ready(function () {
-            imatic.form.ajaxChoice.init(document.getElementById({{ id|json_encode|raw }}));
-        });
-    </script>
     {{ block('form_message') }}
-{% if horizontal %}</div>{% endif %}
 {% endblock %}
+
+{% block imatic_type_ajax_choice_javascript %}
+    <script type="text/javascript">
+    $(function () {
+        var $field = $(document.getElementById({{ id|json_encode|raw }}));
+
+        {% block imatic_type_ajax_choice_javascript_prototype %}
+            Imatic.Form.AjaxChoice.init($field[0]);
+        {% endblock %}
+    });
+    </script>
+{% endblock %}
+
+{% block imatic_type_ajax_entity_choice_widget block('imatic_type_ajax_choice_widget') %}
+{% block imatic_type_ajax_entity_choice_javascript block('imatic_type_ajax_choice_javascript') %}
+{% block imatic_type_ajax_entity_choice_javascript_prototype block('imatic_type_ajax_choice_javascript_prototype') %}
