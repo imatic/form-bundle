@@ -45,7 +45,8 @@ class GenemuTypeGuesser extends BaseDoctrineOrmTypeGuesser
                 'em' => $name,
                 'class' => $mapping['targetEntity'],
                 'multiple' => $multiple,
-                'configs' => array('placeholder' => $placeholder, 'allowClear' => true)
+                'required' => false,
+                'configs' => array('placeholder' => $placeholder, 'allowClear' => true),
             ), Guess::VERY_HIGH_CONFIDENCE);
         }
 
