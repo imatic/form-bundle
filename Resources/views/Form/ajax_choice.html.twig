@@ -1,33 +1,36 @@
 {% trans_default_domain 'ImaticFormBundle' %}
 
 {% block imatic_type_ajax_choice_widget %}
-    <input
-        type="hidden" {{ block('widget_attributes') }}
-        value="{{ value }}"
-        data-imatic-form-ajax-choice="{{ {
-            multiple: multiple,
-            allowClear: allow_clear,
-            placeholder: placeholder|default('select2.placeholder'|trans),
-            ajaxPath: ajax_path,
-            ajaxRequestFormat: 'filter',
-            initialValue: initial_value,
-            formatSearching: 'select2.searching'|trans ~ '...',
-            formatInputTooShort: 'select2.inputTooShort'|trans,
-            formatNoMatches: 'select2.noMatches'|trans
-        }|json_encode }}"
-    >
-    {{ block('form_message') }}
+    <select class="form-control" {{ block('widget_attributes') }} value="{{ value }}">
+        {% if initial_value is not null %}
+            {% if multiple %}
+                {% for item in initial_value %}
+                    <option value="{{ item.id }}" selected>{{ item.text }}</option>
+                {% endfor %}
+            {% else %}
+                <option value="{{ initial_value.id }}" selected>{{ initial_value.text }}</option>
+            {% endif %}
+        {% endif %}
+    </select>
 {% endblock %}
 
 {% block imatic_type_ajax_choice_javascript %}
     <script type="text/javascript">
-    $(function () {
+    (function ($) {
         var $field = $(document.getElementById({{ id|json_encode|raw }}));
 
         {% block imatic_type_ajax_choice_javascript_prototype %}
-            Imatic.Form.AjaxChoice.init($field[0]);
+            var ajaxChoice = new Imatic.Form.AjaxChoice($field, {{ {
+                multiple: multiple,
+                allowClear: allow_clear,
+                placeholder: placeholder|default((multiple ? 'Select a value' : 'Select values')|trans),
+                ajaxPath: ajax_path,
+                requestType: 'filter'
+            }|json_encode|raw }});
+
+            ajaxChoice.apply();
         {% endblock %}
-    });
+    })(jQuery);
     </script>
 {% endblock %}
 

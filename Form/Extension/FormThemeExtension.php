@@ -8,11 +8,13 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Form type theme extension
+ * Form theme extension
+ *
+ * Allows configuring form theme through options.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
-class FormTypeThemeExtension extends AbstractTypeExtension
+class FormThemeExtension extends AbstractTypeExtension
 {
     /** @var \Twig_Environment */
     private $twig;

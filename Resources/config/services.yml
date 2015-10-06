@@ -6,7 +6,11 @@ parameters:
     imatic_form.form.type.range.class: Imatic\Bundle\FormBundle\Form\Type\RangeType
     imatic_form.form.type.ajax_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxChoiceType
     imatic_form.form.type.ajax_entity_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
-    imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormTypeThemeExtension
+    imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormThemeExtension
+    imatic_view.form.extension.date.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
+    imatic_view.form.extension.datetime.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
+    imatic_view.form.extension.time.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
+    imatic_view.form.extension.birthday.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
     imatic_view.form.extension.genemu_jquery_select2_choice: Imatic\Bundle\FormBundle\Form\Extension\GenemuJQuerySelect2ChoiceExtension
 
 services:
@@ -60,6 +64,34 @@ services:
             - '@twig'
         tags:
             - { name: 'form.type_extension', alias: form }
+
+    imatic_view.form.extension.date:
+        class: %imatic_view.form.extension.date.class%
+        arguments:
+            - 'date'
+        tags:
+            - { name: 'form.type_extension', alias: date }
+
+    imatic_view.form.extension.datetime:
+        class: %imatic_view.form.extension.datetime.class%
+        arguments:
+            - 'datetime'
+        tags:
+            - { name: 'form.type_extension', alias: datetime }
+
+    imatic_view.form.extension.time:
+        class: %imatic_view.form.extension.time.class%
+        arguments:
+            - 'time'
+        tags:
+            - { name: 'form.type_extension', alias: time }
+
+    imatic_view.form.extension.birthday:
+        class: %imatic_view.form.extension.birthday.class%
+        arguments:
+            - 'birthday'
+        tags:
+            - { name: 'form.type_extension', alias: birthday }
 
     imatic_view.form.extension.genemu_jquery_select2_choice:
         class: %imatic_view.form.extension.genemu_jquery_select2_choice%

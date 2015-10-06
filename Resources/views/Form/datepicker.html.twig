@@ -1,0 +1,37 @@
+{% block date_widget %}
+    <div class="input-group date">
+        {% set type = 'text' %}
+        {{- block('form_widget_simple') -}}
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+{% endblock %}
+
+{% block date_javascript %}
+    <script type="text/javascript">
+        (function ($) {
+            var $field = $(document.getElementById({{ id|json_encode|raw }}));
+
+            {% block date_javascript_prototype %}
+            var datepicker = new Imatic.Form.Datepicker(
+                $field,
+                Imatic.View.App.getLocale(),
+                {{ pick_date ? 'true' : 'false' }},
+                {{ pick_time ? 'true' : 'false' }},
+                {{ extra_options|json_encode|raw }}
+            );
+
+            datepicker.apply();
+            {% endblock %}
+        })(jQuery);
+    </script>
+{% endblock %}
+
+{% block datetime_widget block('date_widget') %}
+{% block datetime_javascript block('date_javascript') %}
+{% block datetime_javascript_prototype block('date_javascript_prototype') %}
+
+{% block time_widget block('date_widget') %}
+{% block time_javascript block('date_javascript') %}
+{% block time_javascript_prototype block('date_javascript_prototype') %}
