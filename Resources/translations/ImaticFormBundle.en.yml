@@ -1,3 +1,7 @@
 # Placeholders
 Select a value:                 Choose an item from the list
 Select values:                  Choose items from the list
+
+# Collections
+collection.add:         Add
+collection.delete:      Remove
