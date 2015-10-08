@@ -26,12 +26,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Imatic\\Bundle\\FormBundle": ""
+            "Imatic\\Bundle\\FormBundle\\": ""
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "target-dir": "Imatic/Bundle/FormBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "2.6.x-dev"
