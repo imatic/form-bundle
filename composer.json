@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Imatic\\Bundle\\FormBundle": ""
+            "Imatic\\Bundle\\FormBundle\\": ""
         }
     },
     "minimum-stability": "dev",
