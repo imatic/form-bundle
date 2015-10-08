@@ -31,7 +31,7 @@ class DatepickerExtension extends AbstractTypeExtension
         if ($options['rich']) {
             $pickDate = false;
             $pickTime = false;
-            $extraOptions = null;
+            $config = [];
 
             switch ($this->type) {
                 case 'date':
@@ -49,7 +49,7 @@ class DatepickerExtension extends AbstractTypeExtension
 
                 case 'birthday':
                     $pickDate = true;
-                    $extraOptions = ['viewMode' => 'years'];
+                    $config['viewMode'] = 'years';
                     break;
 
                 default:
@@ -58,7 +58,7 @@ class DatepickerExtension extends AbstractTypeExtension
 
             $view->vars['pick_date'] = $pickDate;
             $view->vars['pick_time'] = $pickTime;
-            $view->vars['extra_options'] = $extraOptions;
+            $view->vars['config'] = $config;
         }
     }
 

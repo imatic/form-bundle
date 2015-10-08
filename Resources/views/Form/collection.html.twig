@@ -23,8 +23,8 @@
                 $field,
                 {{ imatic_form_javascript_prototype(form) }},
                 {{ {
-                    add_label: 'collection.add'|trans,
-                    delete_label: 'collection.delete'|trans,
+                    addButtonLabel: 'collection.add'|trans,
+                    deleteButtonLabel: 'collection.delete'|trans,
                 }|json_encode|raw }}
             );
             collection.apply();

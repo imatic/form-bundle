@@ -14,13 +14,12 @@
             var $field = $(document.getElementById({{ id|json_encode|raw }}));
 
             {% block date_javascript_prototype %}
-            var datepicker = new Imatic.Form.Datepicker(
-                $field,
-                Imatic.View.App.getLocale(),
-                {{ pick_date ? 'true' : 'false' }},
-                {{ pick_time ? 'true' : 'false' }},
-                {{ extra_options|json_encode|raw }}
-            );
+            var datepicker = new Imatic.Form.Datepicker($field, {
+                locale: Imatic.View.App.getLocale(),
+                pickDate: {{ pick_date ? 'true' : 'false' }},
+                pickTime: {{ pick_time ? 'true' : 'false' }},
+                config: {{ config|json_encode(constant('JSON_FORCE_OBJECT'))|raw }}
+            });
 
             datepicker.apply();
             {% endblock %}

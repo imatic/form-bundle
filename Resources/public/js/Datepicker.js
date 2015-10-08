@@ -8,52 +8,49 @@
 export default class Datepicker
 {
     /**
-     * @param {jQuery}  $field
-     * @param {String}  locale
-     * @param {Boolean} pickDate
-     * @param {Boolean} pickTime
-     * @param {Object}  options
+     * @param {jQuery} $field
+     * @param {Object} options
      */
-    constructor($field, locale, pickDate, pickTime, options) {
-        if (!pickDate && !pickTime) {
-            throw new Error('pickDate and pickTime cannot be both false');
-        }
-
+    constructor($field, options) {
         this.$field = $field;
-        this.locale = locale;
-        this.pickDate = pickDate;
-        this.pickTime = pickTime;
-        this.options = options;
+        this.options = $.extend(true, {}, this.constructor.defaults, options);
     }
 
     apply() {
         var target = this.$field.parent('.input-group.date')[0] || this.$field[0];
 
         var format;
-        if (this.pickDate && this.pickTime) {
-            format = dateTimeFormat;
-        } else if (this.pickDate) {
-            format = dateFormat;
+        if (this.options.pickDate && this.options.pickTime) {
+            format = this.options.dateTimeFormat;
+        } else if (this.options.pickDate) {
+            format = this.options.dateFormat;
+        } else if (this.options.pickTime) {
+            format = this.options.timeFormat;
         } else {
-            format = timeFormat;
+            throw new Error('Cannot determine format - neither the option pickDate nor pickTime is enabled');
         }
 
-        var options = {
-            locale: this.locale,
-            format: format,
-            allowInputToggle: true,
-            sideBySide: true
-        };
-
-        if (this.options) {
-            $.extend(options, this.options);
-        }
-
-        $(target).datetimepicker(options);
+        $(target).datetimepicker($.extend(
+            {},
+            this.options.config,
+            {format: format}
+        ));
     }
 }
 
-// http://momentjs.com/docs/#/displaying/format/
-var dateFormat = 'YYYY-MM-DD';
-var dateTimeFormat = 'YYYY-MM-DD HH:mm';
-var timeFormat = 'HH:mm';
+// default options
+Datepicker.defaults = {
+    pickTime: false,
+    pickDate: true,
+
+    // https://eonasdan.github.io/bootstrap-datetimepicker/Options/
+    config: {
+        allowInputToggle: true,
+        sideBySide: true,
+    },
+
+    // http://momentjs.com/docs/#/displaying/format/
+    dateFormat: 'YYYY-MM-DD',
+    dateTimeFormat: 'YYYY-MM-DD HH:mm',
+    timeFormat: 'HH:mm',
+};

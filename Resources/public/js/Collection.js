@@ -17,7 +17,7 @@ export default class Collection
     constructor($rootContainer, initializableFields, options) {
         this.$rootContainer = $rootContainer;
         this.initializableFields = initializableFields;
-        this.options = options;
+        this.options = $.extend({}, this.constructor.defaults, options);
         this.idSequence = 0;
     }
 
@@ -25,14 +25,12 @@ export default class Collection
      * Apply dynamic collection to the root container
      */
     apply() {
-        var that = this;
-
         // init root
         this.initCollection(this.$rootContainer);
 
         // init children
-        this.getChildCollections().each(function () {
-            that.initCollection($(this));
+        this.getChildCollections(this.$rootContainer).each((i, elem) => {
+            this.initCollection($(elem));
         });
 
         // init fields
@@ -42,7 +40,13 @@ export default class Collection
         this.$rootContainer.on(
             'click',
             '.imatic-form-collection-btn',
-            function (e) { that.onButtonClick(e); }
+            e => this.onButtonClick(e)
+        );
+
+        this.$rootContainer.on(
+            'mouseenter mouseleave',
+            '.imatic-form-collection-btn',
+            e => this.onButtonHover(e)
         );
     }
 
@@ -52,18 +56,54 @@ export default class Collection
      * @param {MouseEvent} e
      */
     onButtonClick(e) {
-        var $button = $(e.target);
+        var $button = $(e.currentTarget);
 
-        if ($button.is('.imatic-form-collection-delete')) {
-            this.deleteItem($($button.parents('.form-group')[0]));
-        } else if ($button.is('.imatic-form-collection-add')) {
-            this.addItem($($button.parents('.imatic-form-collection')[0]));
+        if (this.isAddButton($button)) {
+            this.addItem(this.getCollectionForAddButton($button));
+        } else if (this.isDeleteButton($button)) {
+            this.deleteItem(this.getItemForDeleteButton($button));
         } else {
             throw new Error('Unrecognized button type');
         }
 
         e.stopPropagation();
         e.preventDefault();
+    }
+
+    /**
+     * Handle button hover
+     *
+     * @param {MouseEvent} e
+     */
+    onButtonHover(e) {
+        var $button = $(e.currentTarget);
+        var $target;
+
+        if (this.isAddButton($button)) {
+            $target = this.getCollectionForAddButton($button)
+        } else if (this.isDeleteButton($button)) {
+            $target = this.getItemForDeleteButton($button);
+        } else {
+            throw new Error('Unrecognized button type');
+        }
+
+        $target['mouseenter' === e.type ? 'addClass' : 'removeClass']('imatic-form-collection-marker');
+    }
+
+    /**
+     * @param {jQuery} $button
+     * @returns {Boolean}
+     */
+    isAddButton($button) {
+        return $button.is('.imatic-form-collection-add');
+    }
+
+    /**
+     * @param {jQuery} $button
+     * @returns {Boolean}
+     */
+    isDeleteButton($button) {
+        return $button.is('.imatic-form-collection-delete');
     }
 
     /**
@@ -109,6 +149,11 @@ export default class Collection
         // init fields in the newly created item
         this.initFields($item);
 
+        // init child collections
+        this.getChildCollections($item).each((i, elem) => {
+            this.initCollection($(elem));
+        });
+
         // trigger event
         $item.trigger('added.imatic.form.collection');
     }
@@ -116,10 +161,21 @@ export default class Collection
     /**
      * Find all nested collections
      *
+     * @param {jQuery} $context
      * @returns {jQuery}
      */
-    getChildCollections() {
-        return this.$rootContainer.find('.imatic-form-collection');
+    getChildCollections($context) {
+        return $context.find('.imatic-form-collection');
+    }
+
+    /**
+     * Find parent collection of the given add button
+     *
+     * @param {jQuery} $button
+     * @returns {jQuery}
+     */
+    getCollectionForAddButton($button) {
+        return $($button.parents('.imatic-form-collection')[0]);
     }
 
     /**
@@ -129,24 +185,37 @@ export default class Collection
      * @returns {jQuery}
      */
     getItems($container) {
-        return $container.children('.form-group');
+        return $container.children('.form-group:not(.imatic-form-collection-ambient)');
+    }
+
+    /**
+     * Find parent item of the given delete button
+     *
+     * @param {jQuery} $container
+     * @returns {jQuery}
+     */
+    getItemForDeleteButton($button) {
+        return $($button.parents('.form-group')[0]);
     }
 
     /**
      * Initialize a collection
+     *
+     * @param {jQuery} $container
      */
     initCollection($container) {
-        var that = this;
-
         // create add button
         if ($container.data('allowAdd')) {
-            $('<button class="imatic-form-collection-btn imatic-form-collection-add">' + Imatic.View.Html.escape(this.options.add_label) + '</button>').appendTo($container);
+            Imatic.View.Html.render(this.options.addButtonTemplate, {
+                classes: 'imatic-form-collection-btn imatic-form-collection-add',
+                label: this.options.addButtonLabel,
+            }).appendTo($container);
         }
 
         // create delete button for existing children
         if ($container.data('allowDelete')) {
-            this.getItems($container).each(function () {
-                that.addDeleteButtonToChild($(this));
+            this.getItems($container).each((i, elem) => {
+                this.addDeleteButtonToChild($(elem));
             });
         }
     }
@@ -157,7 +226,10 @@ export default class Collection
      * @param {jQuery} $item
      */
     addDeleteButtonToChild($item) {
-        $('<button class="imatic-form-collection-btn imatic-form-collection-delete">' + Imatic.View.Html.escape(this.options.delete_label) + '</button>').appendTo($item);
+        Imatic.View.Html.render(this.options.deleteButtonTemplate, {
+            classes: 'imatic-form-collection-btn imatic-form-collection-delete',
+            label: this.options.deleteButtonLabel,
+        }).appendTo($item);
     }
 
     /**
@@ -183,15 +255,13 @@ export default class Collection
      * @returns {Array}
      */
     findInitializableFields($context) {
-        var that = this;
-
         var fields = [];
 
-        $context.find('*[id]').each(function () {
-            var field = that.findInitializableField(this);
+        $context.find('*[id]').each((i, elem) => {
+            var field = this.findInitializableField(elem);
 
             if (field) {
-                fields.push({element: this, field: field});
+                fields.push({element: elem, field: field});
             }
         });
 
@@ -239,3 +309,11 @@ export default class Collection
         return field.regexp;
     }
 }
+
+// default options
+Collection.defaults = {
+    addButtonLabel: 'Add',
+    addButtonTemplate: '<div class="form-group imatic-form-collection-ambient"><div class="col-sm-2"></div><div class="col-sm-10"><button class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-plus"></i> {{label}}</button></div></div>',
+    deleteButtonLabel: 'Delete',
+    deleteButtonTemplate: '<div class="col-sm-2"></div><div class="col-sm-10 imatic-form-collection-control"><button class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-trash"></i> {{label}}</button></div>',
+};

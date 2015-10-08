@@ -5,5 +5,5 @@ import Collection from './Collection'
 export default {
     AjaxChoice: AjaxChoice,
     Datepicker: Datepicker,
-    Collection: Collection
+    Collection: Collection,
 }

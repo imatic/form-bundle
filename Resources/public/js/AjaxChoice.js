@@ -31,7 +31,7 @@ export default class AjaxChoice
                 processResults: processResponseData,
                 data: function (params) {
                     return prepareRequestData(params.term, options.requestType);
-                }
+                },
             }
         });
     }
