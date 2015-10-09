@@ -15,10 +15,10 @@
 
             {% block date_javascript_prototype %}
             var datepicker = new Imatic.Form.Datepicker($field, {
-                locale: Imatic.View.App.getLocale(),
                 pickDate: {{ pick_date ? 'true' : 'false' }},
                 pickTime: {{ pick_time ? 'true' : 'false' }},
-                config: {{ config|json_encode(constant('JSON_FORCE_OBJECT'))|raw }}
+                config: {{ config|json_encode(constant('JSON_FORCE_OBJECT'))|raw }},
+                defaultLocale: Imatic.View.App.getLocale(),
             });
 
             datepicker.apply();

@@ -26,14 +26,23 @@ export default class Datepicker
             format = this.options.dateFormat;
         } else if (this.options.pickTime) {
             format = this.options.timeFormat;
-        } else {
-            throw new Error('Cannot determine format - neither the option pickDate nor pickTime is enabled');
         }
 
         $(target).datetimepicker($.extend(
-            {},
-            this.options.config,
-            {format: format}
+            {
+                format: format,
+                locale: this.options.defaultLocale,
+                useCurrent: false,
+                toolbarPlacement: 'bottom',
+                showClose: true,
+                showClear: true,
+                showTodayButton: this.options.pickDate,
+                widgetPositioning: {
+                    horizontal: 'left',
+                    vertical: 'auto',
+                },
+            },
+            this.options.config
         ));
     }
 }
