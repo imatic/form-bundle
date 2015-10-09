@@ -17,23 +17,24 @@ export default class AjaxChoice
     }
 
     apply() {
-        var options = this.options;
-
-        this.$field.select2({
-            multiple: options.multiple,
-            allowClear: options.allowClear,
-            placeholder: options.placeholder,
-            minimumInputLength: 1,
-            ajax: {
-                url: options.ajaxPath,
-                datatype: 'json',
-                delay: 300,
-                processResults: processResponseData,
-                data: function (params) {
-                    return prepareRequestData(params.term, options.requestType);
+        var select2Options = $.extend(
+            {
+                minimumInputLength: 1,
+                placeholder: this.options.defaultPlaceholder,
+                ajax: {
+                    url: this.options.ajaxPath,
+                    datatype: 'json',
+                    delay: 300,
+                    processResults: processResponseData,
+                    data: (params) => {
+                        return prepareRequestData(params.term, this.options.requestType);
+                    },
                 },
-            }
-        });
+            },
+            this.options.configs
+        );
+
+        this.$field.select2(select2Options);
     }
 }
 

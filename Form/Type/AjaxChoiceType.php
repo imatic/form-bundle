@@ -32,6 +32,11 @@ class AjaxChoiceType extends AbstractType
         return 'imatic_type_ajax_choice';
     }
 
+    public function getParent()
+    {
+        return 'genemu_jqueryselect2_choice';
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['multiple']) {
@@ -41,21 +46,21 @@ class AjaxChoiceType extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        // check options
         if ($options['multiple'] && $options['allow_clear']) {
             throw new \RuntimeException('The "allow_clear" option has no effect in multiple choice mode');
         }
 
-        // set vars
-        $view->vars['placeholder'] = $options['placeholder'];
-        $view->vars['multiple'] = $options['multiple'];
-        $view->vars['allow_clear'] = $options['allow_clear'];
+        $view->vars['configs'] = array_merge($view->vars['configs'], [
+            'placeholder' => $options['placeholder'],
+            'multiple' => $options['multiple'],
+            'allow_clear' => $options['allow_clear'],
+        ]);
+
         $view->vars['ajax_path'] = $this->urlGenerator->generate(
             $options['route'],
             $options['route_attrs']
         );
 
-        // set initial value
         $formValue = $form->getData();
 
         $view->vars['initial_value'] = null !== $formValue

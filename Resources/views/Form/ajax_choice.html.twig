@@ -21,11 +21,10 @@
 
         {% block imatic_type_ajax_choice_javascript_prototype %}
             var ajaxChoice = new Imatic.Form.AjaxChoice($field, {{ {
-                multiple: multiple,
-                allowClear: allow_clear,
-                placeholder: placeholder|default((multiple ? 'Select a value' : 'Select values')|trans),
+                configs: configs,
+                defaultPlaceholder: (configs.multiple ? 'Select a value' : 'Select values')|trans,
                 ajaxPath: ajax_path,
-                requestType: 'filter'
+                requestType: 'filter',
             }|json_encode|raw }});
 
             ajaxChoice.apply();
