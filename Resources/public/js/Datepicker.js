@@ -28,22 +28,16 @@ export default class Datepicker
             format = this.options.timeFormat;
         }
 
-        $(target).datetimepicker($.extend(
+        var datepickerOptions = $.extend(
             {
                 format: format,
                 locale: this.options.defaultLocale,
-                useCurrent: false,
-                toolbarPlacement: 'bottom',
-                showClose: true,
-                showClear: true,
                 showTodayButton: this.options.pickDate,
-                widgetPositioning: {
-                    horizontal: 'left',
-                    vertical: 'auto',
-                },
             },
             this.options.config
-        ));
+        );
+
+        $(target).datetimepicker(datepickerOptions);
     }
 }
 
@@ -56,6 +50,14 @@ Datepicker.defaults = {
     config: {
         allowInputToggle: true,
         sideBySide: true,
+        widgetPositioning: {
+            horizontal: 'left',
+            vertical: 'auto',
+        },
+        toolbarPlacement: 'bottom',
+        showClose: true,
+        showClear: true,
+        useCurrent: false,
     },
 
     // http://momentjs.com/docs/#/displaying/format/
