@@ -18,18 +18,28 @@ class FormThemeExtension extends AbstractTypeExtension
 {
     /** @var \Twig_Environment */
     private $twig;
+    /** @var string|null */
+    private $defaultTheme;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(\Twig_Environment $twig, $defaultTheme = null)
     {
         $this->twig = $twig;
+        $this->defaultTheme = $defaultTheme;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if (!empty($options['template'])) {
+        $theme = $options['template'];
+
+        // set default theme if no template was specified
+        if (!$theme && $this->defaultTheme && !$form->getParent()) {
+            $theme = $this->defaultTheme;
+        }
+
+        if ($theme) {
             $this->twig->getExtension('form')->renderer->setTheme(
                 $view,
-                (array) $options['template']
+                (array) $theme
             );
         }
 

@@ -68,6 +68,7 @@ services:
         class: %imatic_view.form.extension.form_theme.class%
         arguments:
             - '@twig'
+            - '%imatic_form.form.default_theme%'
         tags:
             - { name: 'form.type_extension', alias: form }
 
