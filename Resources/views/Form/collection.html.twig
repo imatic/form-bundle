@@ -32,5 +32,7 @@
             {% endblock %}
         })(jQuery);
     </script>
+    {% else %}
+        {{ form_javascript(form) }}
     {% endif %}
 {% endblock %}
