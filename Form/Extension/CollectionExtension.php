@@ -25,9 +25,6 @@ class CollectionExtension extends AbstractTypeExtension
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'prototype' => true,
-            'allow_add' => true,
-            'allow_delete' => true,
             'template' => function (Options $options, $default) {
                 return $options['prototype']
                     ? 'ImaticFormBundle:Form:collection.html.twig'
