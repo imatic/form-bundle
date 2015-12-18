@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Collection extension
@@ -31,8 +32,8 @@ class CollectionExtension extends AbstractTypeExtension
                     : $default
                 ;
             },
-            'options' => function (Options $options, $default) {
-                return $default + [
+            Kernel::VERSION_ID < 20800 ? 'options' : 'entry_options' => function (Options $options, $default) {
+                return ($default ?: []) + [
                     'label' => false,
                 ];
             },
