@@ -313,7 +313,7 @@ export default class Collection
 // default options
 Collection.defaults = {
     addButtonLabel: 'Add',
-    addButtonTemplate: '<div class="form-group imatic-form-collection-ambient"><div class="col-sm-2"></div><div class="col-sm-10"><button class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-plus"></i> {{label}}</button></div></div>',
+    addButtonTemplate: '<div class="form-group imatic-form-collection-ambient"><div class="col-sm-2"></div><div class="col-sm-10"><a class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-plus"></i> {{label}}</a></div></div>',
     deleteButtonLabel: 'Delete',
-    deleteButtonTemplate: '<div class="col-sm-2"></div><div class="col-sm-10 imatic-form-collection-control"><button class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-trash"></i> {{label}}</button></div>',
+    deleteButtonTemplate: '<div class="col-sm-2"></div><div class="col-sm-10 imatic-form-collection-control"><a class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-trash"></i> {{label}}</a></div>',
 };
