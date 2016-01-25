@@ -20,7 +20,6 @@ export default class AjaxChoice
         var select2Options = $.extend(
             {
                 minimumInputLength: 1,
-                placeholder: this.options.defaultPlaceholder,
                 ajax: {
                     url: this.options.ajaxPath,
                     datatype: 'json',

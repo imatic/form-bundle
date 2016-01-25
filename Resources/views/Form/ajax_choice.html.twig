@@ -20,9 +20,12 @@
         var $field = $(document.getElementById({{ id|json_encode|raw }}));
 
         {% block imatic_type_ajax_choice_javascript_prototype %}
+            {% if configs.placeholder is empty %}
+                {% set configs = configs|merge({placeholder: (configs.multiple ? 'Select values' : 'Select a value')|trans}) %}
+            {% endif %}
+
             var ajaxChoice = new Imatic.Form.AjaxChoice($field, {{ {
                 configs: configs,
-                defaultPlaceholder: (configs.multiple ? 'Select a value' : 'Select values')|trans,
                 ajaxPath: ajax_path,
                 requestType: request_type
             }|json_encode|raw }});

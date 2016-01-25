@@ -63,7 +63,7 @@ class AjaxChoiceType extends AbstractType
             'configs' => [
                 'placeholder' => $options['placeholder'],
                 'multiple' => $options['multiple'],
-                'allow_clear' => $options['allow_clear'],
+                'allowClear' => $options['allow_clear'],
             ],
         ];
 
