@@ -17,7 +17,7 @@ export default class Collection
     constructor($rootContainer, initializableFields, options) {
         this.$rootContainer = $rootContainer;
         this.initializableFields = initializableFields;
-        this.options = $.extend({}, this.constructor.defaults, options);
+        this.options = processOptions($.extend({}, this.constructor.defaults, options));
         this.idSequence = 0;
     }
 
@@ -313,7 +313,32 @@ export default class Collection
 // default options
 Collection.defaults = {
     addButtonLabel: 'Add',
-    addButtonTemplate: '<div class="form-group imatic-form-collection-ambient"><div class="col-sm-2"></div><div class="col-sm-10"><a class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-plus"></i> {{label}}</a></div></div>',
+    addButtonTemplate: '<a class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-plus"></i> {{label}}</a>',
     deleteButtonLabel: 'Delete',
-    deleteButtonTemplate: '<div class="col-sm-2"></div><div class="col-sm-10 imatic-form-collection-control"><a class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-trash"></i> {{label}}</a></div>',
+    deleteButtonTemplate: '<a class="{{classes}} btn btn-default"><i class="glyphicon glyphicon-trash"></i> {{label}}</a>',
+    buttonWrapperStyle: 'boostrap-horizontal',
 };
+
+/**
+ * @param {Object} options
+ * @returns {Object}
+ */
+function processOptions(options)
+{
+    // apply button wrapper style
+    switch (options.buttonWrapperStyle) {
+        // horizontal boostrap forms
+        case 'bootstrap-horizontal':
+            options.addButtonTemplate = '<div class="form-group imatic-form-collection-ambient"><div class="col-sm-2"></div><div class="col-sm-10">' + options.addButtonTemplate + '</div></div>';
+            options.deleteButtonTemplate = '<div class="col-sm-2"></div><div class="col-sm-10 imatic-form-collection-inline-control">' + options.deleteButtonTemplate + '</div>';
+            break;
+
+        // generic bootstrap forms
+        case 'bootstrap':
+            options.addButtonTemplate = '<div class="form-group imatic-form-collection-ambient">' + options.addButtonTemplate + '</div>';
+            options.deleteButtonTemplate = '<div class="imatic-form-collection-inline-control">' + options.deleteButtonTemplate + '</div>';
+            break;
+    }
+    
+    return options;
+}

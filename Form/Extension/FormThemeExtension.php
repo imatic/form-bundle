@@ -32,7 +32,7 @@ class FormThemeExtension extends AbstractTypeExtension
         $theme = $options['template'];
 
         // set default theme if no template was specified
-        if (!$theme && $this->defaultTheme && !$form->getParent()) {
+        if (!$theme && $this->defaultTheme && !$view->parent) {
             $theme = $this->defaultTheme;
         }
 
