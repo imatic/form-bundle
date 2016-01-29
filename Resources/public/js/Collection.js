@@ -18,6 +18,7 @@ export default class Collection
         this.$rootContainer = $rootContainer;
         this.initializableFields = initializableFields;
         this.options = processOptions($.extend({}, this.constructor.defaults, options));
+        this.id = getUniqueCollectionId();
         this.idSequence = 0;
     }
 
@@ -130,7 +131,7 @@ export default class Collection
         // create item from the prototype template
         var $item = $(templateHtml.replace(
             new RegExp(Imatic.View.RegExp.escape(prototypeName), 'g'),
-            'new_' + (++this.idSequence)
+            'new_' + this.id + (++this.idSequence)
         ));
 
         // insert after last item or prepend to the container
@@ -342,3 +343,13 @@ function processOptions(options)
     
     return options;
 }
+
+/**
+ * @returns {Number}
+ */
+function getUniqueCollectionId()
+{
+    return new Date().getTime() + (++collectionIdSeq);
+}
+
+var collectionIdSeq = 0;
