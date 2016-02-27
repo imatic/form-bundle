@@ -17,8 +17,6 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
     private $strict;
 
     /**
-     * Constructor
-     *
      * @param array $properties array of property names
      * @param bool  $strict     consider only NULLs empty (not empty strings)
      */

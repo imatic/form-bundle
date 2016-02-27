@@ -2,9 +2,6 @@
 Select a value:                 Choose an item from the list
 Select values:                  Choose items from the list
 
-# Select2 widget
-select2:
-    placeholder:    Choose an item
-    searching:      Searching
-    inputTooShort:  Enter at least %minlen% character
-    noMatches:      No matches
+# Collections
+collection.add:         Add
+collection.delete:      Remove

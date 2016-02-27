@@ -6,7 +6,12 @@ parameters:
     imatic_form.form.type.range.class: Imatic\Bundle\FormBundle\Form\Type\RangeType
     imatic_form.form.type.ajax_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxChoiceType
     imatic_form.form.type.ajax_entity_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
-    imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormTypeThemeExtension
+    imatic_view.form.extension.collection.class: Imatic\Bundle\FormBundle\Form\Extension\CollectionExtension
+    imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormThemeExtension
+    imatic_view.form.extension.date.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
+    imatic_view.form.extension.datetime.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
+    imatic_view.form.extension.time.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
+    imatic_view.form.extension.birthday.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
     imatic_view.form.extension.genemu_jquery_select2_choice: Imatic\Bundle\FormBundle\Form\Extension\GenemuJQuerySelect2ChoiceExtension
 
 services:
@@ -41,6 +46,7 @@ services:
     imatic_form.form.type.ajax_choice:
         class: %imatic_form.form.type.ajax_choice.class%
         arguments:
+            - '%imatic_form.genemu_config%'
             - '@router'
         tags:
             - { name: form.type, alias: imatic_type_ajax_choice }
@@ -48,20 +54,63 @@ services:
     imatic_form.form.type.ajax_entity_choice:
         class: %imatic_form.form.type.ajax_entity_choice.class%
         arguments:
+            - '%imatic_form.genemu_config%'
             - '@router'
             - '@doctrine'
         tags:
             - { name: form.type, alias: imatic_type_ajax_entity_choice }
 
     # Form extensions
+    imatic_view.form.extension.collection:
+        class: %imatic_view.form.extension.collection.class%
+        tags:
+            - { name: 'form.type_extension', alias: collection }
+
     imatic_view.form.extension.form_theme:
         class: %imatic_view.form.extension.form_theme.class%
         arguments:
             - '@twig'
+            - '%imatic_form.form.default_theme%'
         tags:
             - { name: 'form.type_extension', alias: form }
+
+    imatic_view.form.extension.date:
+        class: %imatic_view.form.extension.date.class%
+        arguments:
+            - 'date'
+        tags:
+            - { name: 'form.type_extension', alias: date }
+
+    imatic_view.form.extension.datetime:
+        class: %imatic_view.form.extension.datetime.class%
+        arguments:
+            - 'datetime'
+        tags:
+            - { name: 'form.type_extension', alias: datetime }
+
+    imatic_view.form.extension.time:
+        class: %imatic_view.form.extension.time.class%
+        arguments:
+            - 'time'
+        tags:
+            - { name: 'form.type_extension', alias: time }
+
+    imatic_view.form.extension.birthday:
+        class: %imatic_view.form.extension.birthday.class%
+        arguments:
+            - 'birthday'
+        tags:
+            - { name: 'form.type_extension', alias: birthday }
 
     imatic_view.form.extension.genemu_jquery_select2_choice:
         class: %imatic_view.form.extension.genemu_jquery_select2_choice%
         tags:
             - { name: 'form.type_extension', alias: genemu_jqueryselect2_choice }
+
+    # Twig extensions
+    imatic_form.twig.extension.form:
+        class: Imatic\Bundle\FormBundle\Twig\Extension\FormExtension
+        arguments:
+            - '@twig.form.renderer'
+        tags:
+            - { name: 'twig.extension' }

@@ -1,0 +1,27 @@
+/* Collections */
+.imatic-form-collection {
+    outline: 0 solid transparent;
+
+    .form-group {
+        outline: 0 solid transparent;
+    }
+}
+
+.imatic-form-collection-marker {
+    transition: outline-width .5s, outline-color .5s, background-color .5s;
+    background-color: fade(@gray-lighter, 50%);
+    outline: 5px solid fade(@gray-lighter, 50%) !important;
+}
+
+.imatic-form-collection-inline-control {
+    padding-top: @form-group-margin-bottom;
+}
+
+/* Generic */
+label.required:before {
+    content: "*";
+    color: @brand-danger;
+}
+input[type=file].form-control {
+    height:auto;
+}

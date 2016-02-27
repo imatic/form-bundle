@@ -45,20 +45,6 @@ class DefaultTypeGuesser extends DoctrineOrmTypeGuesser
             ], Guess::VERY_HIGH_CONFIDENCE);
         }
 
-        $type = $metadata->getTypeOfField($property);
-
-        switch ($type) {
-            case 'date':
-            case 'datetime':
-            case 'time':
-                $options = [
-                    'widget' => 'single_text',
-                    "{$type}picker" => true,
-                ];
-
-                return new TypeGuess($type, $options, Guess::VERY_HIGH_CONFIDENCE);
-        }
-
         return parent::guessType($class, $property);
     }
 }
