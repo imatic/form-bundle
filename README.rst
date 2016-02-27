@@ -14,7 +14,7 @@ Form types
 Ajax entity choice
 ------------------
 
-Implements choice of single entity or collection of entities using ajax.
+Implements choice of single entity or collection of entities using XHR.
 
 Dependencies: jQuery, Select2
 
@@ -32,6 +32,32 @@ Dependencies: jQuery, Select2
             ]);
         }
     }
+
+The widget will send a GET request to the specified route with the entered
+search term. The request format depends on the ``request_type`` option:
+
+- ``filter`` - ?filter[search][value]=term
+- ``simple`` - ?search=term
+
+The application should reply with a JSON response, example:
+
+.. sourcecode:: json
+
+    [
+        {"id": 1, "text": "First Item"},
+        {"id": 2, "text": "Second Item"}
+    ]
+
+Additional options:
+
+- ``multiple`` - allow multiple items to be selected
+- ``placeholder`` - text displayed if no item is selected
+- ``query_builder`` - instance of QueryBuilder or Closure(EntityManager $em, $class): QueryBuilder
+- ``id_provider`` - callable(object $entity): scalar (should return ID of the entity)
+- ``text_provider`` - callable(object $item): string (should return text representation of the entity)
+- ``request_type`` - filter (default) or simple
+- ``route_attrs`` - custom route attributes
+- ``entity_manager`` - name of the entity manager to use
 
 
 ***************

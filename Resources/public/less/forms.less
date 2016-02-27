@@ -1,22 +1,20 @@
 /* Collections */
-.form-horizontal {
-    .imatic-form-collection {
+.imatic-form-collection {
+    outline: 0 solid transparent;
+
+    .form-group {
         outline: 0 solid transparent;
-
-        .form-group {
-            outline: 0 solid transparent;
-        }
     }
+}
 
-    .imatic-form-collection-marker {
-        transition: outline-width .5s, outline-color .5s, background-color .5s;
-        background-color: fade(@gray-lighter, 50%);
-        outline: 5px solid fade(@gray-lighter, 50%) !important;
-    }
+.imatic-form-collection-marker {
+    transition: outline-width .5s, outline-color .5s, background-color .5s;
+    background-color: fade(@gray-lighter, 50%);
+    outline: 5px solid fade(@gray-lighter, 50%) !important;
+}
 
-    .imatic-form-collection-control {
-        padding-top: @form-group-margin-bottom;
-    }
+.imatic-form-collection-inline-control {
+    padding-top: @form-group-margin-bottom;
 }
 
 /* Generic */

@@ -1,7 +1,7 @@
 {% trans_default_domain 'ImaticFormBundle' %}
 
 {% block imatic_type_ajax_choice_widget %}
-    <select class="form-control" {{ block('widget_attributes') }} value="{{ value }}">
+    <select class="form-control"{% if multiple %} multiple{% endif %} {{ block('widget_attributes') }}>
         {% if initial_value is not null %}
             {% if multiple %}
                 {% for item in initial_value %}
@@ -20,11 +20,14 @@
         var $field = $(document.getElementById({{ id|json_encode|raw }}));
 
         {% block imatic_type_ajax_choice_javascript_prototype %}
+            {% if configs.placeholder is empty %}
+                {% set configs = configs|merge({placeholder: (configs.multiple ? 'Select values' : 'Select a value')|trans}) %}
+            {% endif %}
+
             var ajaxChoice = new Imatic.Form.AjaxChoice($field, {{ {
                 configs: configs,
-                defaultPlaceholder: (configs.multiple ? 'Select a value' : 'Select values')|trans,
                 ajaxPath: ajax_path,
-                requestType: 'filter',
+                requestType: request_type
             }|json_encode|raw }});
 
             ajaxChoice.apply();

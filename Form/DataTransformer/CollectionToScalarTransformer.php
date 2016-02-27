@@ -2,9 +2,8 @@
 
 namespace Imatic\Bundle\FormBundle\Form\DataTransformer;
 
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -15,19 +14,15 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
  */
 class CollectionToScalarTransformer implements DataTransformerInterface
 {
-    /** @var EntityManager */
-    protected $em;
-    /** @var string */
-    protected $class;
+    /** @var QueryBuilder */
+    protected $qb;
+    /** @var callable */
+    protected $idProvider;
 
-    /**
-     * @param EntityManager $em
-     * @param string        $class
-     */
-    public function __construct(EntityManager $em, $class)
+    public function __construct(QueryBuilder $qb, callable $idProvider)
     {
-        $this->em = $em;
-        $this->class = $class;
+        $this->qb = $qb;
+        $this->idProvider = $idProvider;
     }
 
     public function transform($collection)
@@ -36,17 +31,13 @@ class CollectionToScalarTransformer implements DataTransformerInterface
         if (null === $collection) {
             return '';
         }
-        if (!($collection instanceof Collection)) {
-            throw new UnexpectedTypeException($collection, 'Doctrine\Common\Collections\Collection or null');
+        if (!$collection instanceof \Traversable && !is_array($collection)) {
+            throw new UnexpectedTypeException($collection, 'Traversable, array or null');
         }
-
-        // fetch class metadata
-        $metadata = $this->em->getClassMetadata($this->class);
 
         // fetch collection members
         $output = null;
         foreach ($collection as $entity) {
-
             if (null === $output) {
                 $output = '';
             } else {
@@ -54,8 +45,7 @@ class CollectionToScalarTransformer implements DataTransformerInterface
             }
 
             // add id
-            $output .= current($metadata->getIdentifierValues($entity));
-
+            $output .= call_user_func($this->idProvider, $entity);
         }
 
         // return
@@ -64,15 +54,19 @@ class CollectionToScalarTransformer implements DataTransformerInterface
 
     public function reverseTransform($value)
     {
-        $collection = new ArrayCollection;
         if (null === $value || '' === $value) {
-            return $collection;
+            return new ArrayCollection();
         }
-        $value = explode(',', $value);
-        for ($i = 0; isset($value[$i]); ++$i) {
-            $collection[] = $this->em->getReference($this->class, $value[$i]);
+        if (!is_array($value)) {
+            $value = explode(',', $value);
         }
 
-        return $collection;
+        $qb = clone $this->qb;
+        $qb
+            ->andWhere(current($qb->getRootAliases()) . " IN(:CollectionToScalarTransformer_Ids)")
+            ->setParameter('CollectionToScalarTransformer_Ids', $value)
+        ;
+        
+        return new ArrayCollection($qb->getQuery()->execute());
     }
 }

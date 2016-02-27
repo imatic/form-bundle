@@ -2,8 +2,7 @@
 
 namespace Imatic\Bundle\FormBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\Proxy;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -14,24 +13,19 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
  */
 class EntityToScalarTransformer implements DataTransformerInterface
 {
-    /** @var EntityManager */
-    protected $em;
-    /** @var string */
-    protected $class;
+    /** @var QueryBuilder */
+    protected $qb;
+    /** @var callable */
+    protected $idProvider;
 
-    /**
-     * @param EntityManager $em
-     * @param string        $class
-     */
-    public function __construct(EntityManager $em, $class)
+    public function __construct(QueryBuilder $qb, callable $idProvider)
     {
-        $this->em = $em;
-        $this->class = $class;
+        $this->qb = $qb;
+        $this->idProvider = $idProvider;
     }
 
     public function transform($entity)
     {
-        // handle value
         if (!is_object($entity)) {
             if (null === $entity) {
                 return '';
@@ -40,21 +34,19 @@ class EntityToScalarTransformer implements DataTransformerInterface
             }
         }
 
-        // fetch class metadata
-        $metadata = $this->em->getClassMetadata($this->class);
-
-        // force loading for proxies
-        if ($entity instanceof Proxy) {
-            $entity->__load();
-        }
-
-        return (string) current($metadata->getIdentifierValues($entity));
+        return (string) call_user_func($this->idProvider, $entity);
     }
 
     public function reverseTransform($value)
     {
         if (null !== $value && '' !== $value) {
-            return $this->em->find($this->class, $value);
+            $qb = clone $this->qb;
+            $qb
+                ->andWhere(current($qb->getRootAliases()) . " = :EntityToScalarTransformer_Id")
+                ->setParameter('EntityToScalarTransformer_Id', $value)
+            ;
+
+            return $qb->getQuery()->getOneOrNullResult();
         }
     }
 }

@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Collection extension
@@ -19,6 +20,7 @@ class CollectionExtension extends AbstractTypeExtension
     {
         if (isset($view->vars['prototype'])) {
             $view->vars['prototype_name'] = $options['prototype_name'];
+            $view->vars['collection_button_style'] = $options['collection_button_style'];
         }
     }
 
@@ -31,8 +33,9 @@ class CollectionExtension extends AbstractTypeExtension
                     : $default
                 ;
             },
-            'options' => function (Options $options, $default) {
-                return $default + [
+            'collection_button_style' => 'bootstrap-horizontal',
+            Kernel::VERSION_ID < 20800 ? 'options' : 'entry_options' => function (Options $options, $default) {
+                return ($default ?: []) + [
                     'label' => false,
                 ];
             },

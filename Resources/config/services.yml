@@ -46,6 +46,7 @@ services:
     imatic_form.form.type.ajax_choice:
         class: %imatic_form.form.type.ajax_choice.class%
         arguments:
+            - '%imatic_form.genemu_config%'
             - '@router'
         tags:
             - { name: form.type, alias: imatic_type_ajax_choice }
@@ -53,6 +54,7 @@ services:
     imatic_form.form.type.ajax_entity_choice:
         class: %imatic_form.form.type.ajax_entity_choice.class%
         arguments:
+            - '%imatic_form.genemu_config%'
             - '@router'
             - '@doctrine'
         tags:

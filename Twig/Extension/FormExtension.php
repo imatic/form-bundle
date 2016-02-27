@@ -108,9 +108,10 @@ class FormExtension extends Twig_Extension
     /**
      * @param FormView $rootForm
      * @param string   $newNamespace
+     * @param bool     $replaceFirstSegment
      * @throws \InvalidArgumentException
      */
-    public function overrideFormNamespace(FormView $rootForm, $newNamespace)
+    public function overrideFormNamespace(FormView $rootForm, $newNamespace, $replaceFirstSegment = false)
     {
         $stack = [$rootForm];
 
@@ -120,12 +121,21 @@ class FormExtension extends Twig_Extension
                     throw new \InvalidArgumentException('The given form view is not a root form view');
                 }
 
-                $form->vars['full_name'] = sprintf(
-                    '%s[%s]%s',
-                    $newNamespace,
-                    substr($form->vars['full_name'], 0, $firstSegmentPos),
-                    substr($form->vars['full_name'], $firstSegmentPos)
-                );
+                $rest = substr($form->vars['full_name'], $firstSegmentPos);
+
+                $form->vars['full_name'] = $replaceFirstSegment
+                    ? sprintf(
+                        '%s%s',
+                        $newNamespace,
+                        $rest
+                    )
+                    :  sprintf(
+                        '%s[%s]%s',
+                        $newNamespace,
+                        substr($form->vars['full_name'], 0, $firstSegmentPos),
+                        $rest
+                    )
+                ;
             } else {
                 $form->vars['full_name'] = sprintf(
                     '%s[%s]',
