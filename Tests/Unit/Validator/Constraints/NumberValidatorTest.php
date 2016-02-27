@@ -14,7 +14,7 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->executionContext = $this->getMock('Symfony\Component\Validator\ExecutionContextInterface');
+        $this->executionContext = $this->getMock('Symfony\Component\Validator\Context\ExecutionContextInterface');
     }
 
     /**
