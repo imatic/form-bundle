@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": ">=5.4",
-        "imatic/genemuform-bundle": "dev-master#c42e1beaec5a7ab270b7ff279a49553111a43f71",
+        "imatic/genemuform-bundle": "~3.0",
         "symfony/framework-bundle": "~2.7|~3.0",
         "doctrine/orm": "~2.3",
         "doctrine/doctrine-bundle": "~1.2",
