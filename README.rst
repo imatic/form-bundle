@@ -89,7 +89,7 @@ This extensions allows you to set form theme through the type's options.
             ]);
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             // example: setting template of the form type itself
             $resolver->setDefaults([

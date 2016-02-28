@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -75,7 +75,7 @@ class AjaxChoiceType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired([
             'route',
@@ -102,6 +102,7 @@ class AjaxChoiceType extends AbstractType
     /**
      * @param mixed $formValue
      * @param array $options
+     * @return array
      */
     protected function getInitialValue($formValue, array $options)
     {
@@ -111,9 +112,9 @@ class AjaxChoiceType extends AbstractType
                 throw new UnexpectedTypeException($formValue, 'array');
             }
 
-            $initalValue = [];
+            $initialValue = [];
             foreach ($formValue as $item) {
-                $initalValue[] = [
+                $initialValue[] = [
                     'id' => $options['id_provider']($item),
                     'text' => $options['text_provider']($item),
                 ];
@@ -124,12 +125,12 @@ class AjaxChoiceType extends AbstractType
                 throw new UnexpectedTypeException($formValue, 'scalar');
             }
 
-            $initalValue = [
+            $initialValue = [
                 'id' => $options['id_provider']($formValue),
                 'text' => $options['text_provider']($formValue),
             ];
         }
 
-        return $initalValue;
+        return $initialValue;
     }
 }

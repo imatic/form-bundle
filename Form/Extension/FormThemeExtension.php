@@ -5,7 +5,7 @@ namespace Imatic\Bundle\FormBundle\Form\Extension;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Form theme extension
@@ -46,16 +46,14 @@ class FormThemeExtension extends AbstractTypeExtension
         $view->vars += $options['template_parameters'];
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'template' => null,
             'template_parameters' => [],
         ]);
-        $resolver->setAllowedTypes([
-            'template' => ['null', 'string', 'array'],
-            'template_parameters' => 'array',
-        ]);
+        $resolver->setAllowedTypes('template', ['null', 'string', 'array']);
+        $resolver->setAllowedTypes('template_parameters', 'array');
     }
 
     public function getExtendedType()

@@ -5,7 +5,7 @@ namespace Imatic\Bundle\FormBundle\Twig\Extension;
 use Symfony\Bridge\Twig\Form\TwigRendererInterface;
 use Symfony\Component\Form\FormView;
 use Twig_Extension;
-use Twig_Function_Method;
+use Twig_SimpleFunction;
 
 /**
  * Form extension
@@ -27,20 +27,20 @@ class FormExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            'imatic_form_override_namespace' => new Twig_Function_method(
-                $this,
-                'overrideFormNamespace'
+            new Twig_SimpleFunction(
+                'imatic_form_override_namespace',
+                [$this, 'overrideFormNamespace']
             ),
-            'imatic_form_javascript_prototype' => new Twig_Function_Method(
-                $this,
-                'renderFormJavascriptPrototype',
+            new Twig_SimpleFunction(
+                'imatic_form_javascript_prototype',
+                [$this, 'renderFormJavascriptPrototype'],
                 ['needs_context' => true, 'is_safe' => ['html']]
             ),
         ];
     }
 
     /**
-     * @param array    $context
+     * @param array $context
      * @param FormView $rootForm
      * @throws \InvalidArgumentException if the given root form has no prototype
      * @return string javascript array
@@ -55,7 +55,7 @@ class FormExtension extends Twig_Extension
             // FormView $prototype, string $prototypeName, string[] $parentPrototypeNames
             [$rootForm->vars['prototype'], $rootForm->vars['prototype']->vars['name'], []],
         ];
-        
+
         $output = '[';
         $counter = 0;
 
@@ -70,7 +70,7 @@ class FormExtension extends Twig_Extension
                     throw new \RuntimeException('Directly nested collections with prototypes are not supported. Add an intermediate type or disable prototypes.');
                 }
                 $code = $this->renderer->searchAndRenderBlock($prototype, 'javascript_prototype', $context);
-                
+
                 if (++$counter > 1) {
                     $output .= ",\n";
                 }
@@ -94,8 +94,7 @@ class FormExtension extends Twig_Extension
                             $child,
                             $prototypeName,
                             $parentPrototypeNames,
-                        ]
-                    ;
+                        ];
                 }
             }
         }
@@ -107,8 +106,8 @@ class FormExtension extends Twig_Extension
 
     /**
      * @param FormView $rootForm
-     * @param string   $newNamespace
-     * @param bool     $replaceFirstSegment
+     * @param string $newNamespace
+     * @param bool $replaceFirstSegment
      * @throws \InvalidArgumentException
      */
     public function overrideFormNamespace(FormView $rootForm, $newNamespace, $replaceFirstSegment = false)
@@ -129,13 +128,12 @@ class FormExtension extends Twig_Extension
                         $newNamespace,
                         $rest
                     )
-                    :  sprintf(
+                    : sprintf(
                         '%s[%s]%s',
                         $newNamespace,
                         substr($form->vars['full_name'], 0, $firstSegmentPos),
                         $rest
-                    )
-                ;
+                    );
             } else {
                 $form->vars['full_name'] = sprintf(
                     '%s[%s]',
