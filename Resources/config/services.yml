@@ -77,28 +77,28 @@ services:
     imatic_view.form.extension.date:
         class: %imatic_view.form.extension.date.class%
         arguments:
-            - 'date'
+            - 'Symfony\Component\Form\Extension\Core\Type\DateType'
         tags:
             - { name: 'form.type_extension', extended_type: Symfony\Component\Form\Extension\Core\Type\DateType }
 
     imatic_view.form.extension.datetime:
         class: %imatic_view.form.extension.datetime.class%
         arguments:
-            - 'datetime'
+            - 'Symfony\Component\Form\Extension\Core\Type\DateTimeType'
         tags:
             - { name: 'form.type_extension', extended_type: Symfony\Component\Form\Extension\Core\Type\DateTimeType }
 
     imatic_view.form.extension.time:
         class: %imatic_view.form.extension.time.class%
         arguments:
-            - 'time'
+            - 'Symfony\Component\Form\Extension\Core\Type\TimeType'
         tags:
             - { name: 'form.type_extension', extended_type: Symfony\Component\Form\Extension\Core\Type\TimeType }
 
     imatic_view.form.extension.birthday:
         class: %imatic_view.form.extension.birthday.class%
         arguments:
-            - 'birthday'
+            - 'Symfony\Component\Form\Extension\Core\Type\BirthdayType'
         tags:
             - { name: 'form.type_extension', extended_type: Symfony\Component\Form\Extension\Core\Type\BirthdayType }
 

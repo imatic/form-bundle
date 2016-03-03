@@ -2,6 +2,10 @@
 
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -34,20 +38,20 @@ class DatepickerExtension extends AbstractTypeExtension
             $config = [];
 
             switch ($this->type) {
-                case 'date':
+                case DateType::class:
                     $pickDate = true;
                     break;
 
-                case 'datetime':
+                case DateTimeType::class:
                     $pickDate = true;
                     $pickTime = true;
                     break;
 
-                case 'time':
+                case TimeType::class:
                     $pickTime = true;
                     break;
 
-                case 'birthday':
+                case BirthdayType::class:
                     $pickDate = true;
                     $config['viewMode'] = 'years';
                     break;

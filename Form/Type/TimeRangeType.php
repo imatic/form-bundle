@@ -3,6 +3,7 @@
 namespace Imatic\Bundle\FormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,17 +26,11 @@ class TimeRangeType extends AbstractType
         );
     }
 
-    public function getName()
-    {
-        return 'imatic_type_time_range';
-    }
-
-    
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             [
-                'field_type' => 'time',
+                'field_type' => TimeType::class,
                 'field_options' => []
             ]
         );

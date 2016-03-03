@@ -2,6 +2,7 @@
 
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -44,6 +45,6 @@ class CollectionExtension extends AbstractTypeExtension
 
     public function getExtendedType()
     {
-        return 'collection';
+        return CollectionType::class;
     }
 }

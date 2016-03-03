@@ -3,6 +3,7 @@
 namespace Imatic\Bundle\FormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,18 +23,11 @@ class DateTimeRangeType extends AbstractType
         );
     }
 
-    
-    public function getName()
-    {
-        return 'imatic_type_datetime_range';
-    }
-
-    
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             [
-                'field_type' => 'datetime',
+                'field_type' => DateTimeType::class,
                 'field_options' => []
             ]
         );

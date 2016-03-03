@@ -2,6 +2,7 @@
 namespace Imatic\Bundle\FormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,22 +15,14 @@ class RangeType extends AbstractType
     {
         $builder
             ->add('start', $options['field_type'], $options['field_options'])
-            ->add('end', $options['field_type'], $options['field_options'])
-        ;
+            ->add('end', $options['field_type'], $options['field_options']);
     }
 
-    
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'field_type' => 'integer',
+            'field_type' => NumberType::class,
             'field_options' => [],
         ]);
-    }
-
-    
-    public function getName()
-    {
-        return 'imatic_type_range';
     }
 }
