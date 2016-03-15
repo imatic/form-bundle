@@ -23,8 +23,7 @@ class TimeRangeTypeTest extends TypeTestCase
             ],
         ];
 
-        $type = new TimeRangeType();
-        $form = $this->factory->create($type);
+        $form = $this->factory->create(TimeRangeType::class);
         $form->submit($formData);
 
         $this->assertTrue($form->has('start'));

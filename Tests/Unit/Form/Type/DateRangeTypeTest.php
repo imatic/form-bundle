@@ -25,8 +25,7 @@ class DateRangeTypeTest extends TypeTestCase
             ],
         ];
 
-        $type = new DateRangeType();
-        $form = $this->factory->create($type);
+        $form = $this->factory->create(DateRangeType::class);
         $form->submit($formData);
 
         $this->assertTrue($form->has('start'));

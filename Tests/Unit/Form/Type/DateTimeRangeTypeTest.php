@@ -37,8 +37,7 @@ class DateTimeRangeTypeTest extends TypeTestCase
             ],
         ];
 
-        $type = new DateTimeRangeType();
-        $form = $this->factory->create($type);
+        $form = $this->factory->create(DateTimeRangeType::class);
         $form->submit($formData);
 
         $this->assertTrue($form->has('start'));

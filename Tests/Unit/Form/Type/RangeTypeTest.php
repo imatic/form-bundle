@@ -16,7 +16,7 @@ class RangeTypeTest extends TypeTestCase
             'end' => 3,
         ];
 
-        $form = $this->factory->create(new RangeType());
+        $form = $this->factory->create(RangeType::class);
         $form->submit($formData);
 
         $this->assertTrue($form->isSubmitted());
