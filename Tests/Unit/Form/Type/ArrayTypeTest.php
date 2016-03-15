@@ -9,7 +9,7 @@ class ArrayTypeTest extends TypeTestCase
 {
     public function testSubmitValidData()
     {
-        $form = $this->factory->create(ArrayType::class);
+        $form = $this->factory->create(new ArrayType());
         $form->submit('a, b,c ,  d   ');
         $this->assertEquals(['a', 'b', 'c', 'd'], $form->getData());
     }

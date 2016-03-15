@@ -16,6 +16,11 @@ class ArrayType extends AbstractType
 
     public function getParent()
     {
-        return HiddenType::class;
+        return 'hidden';
+    }
+
+    public function getName()
+    {
+        return 'imatic_type_array';
     }
 }
