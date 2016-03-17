@@ -6,7 +6,6 @@ parameters:
     imatic_form.form.type.range.class: Imatic\Bundle\FormBundle\Form\Type\RangeType
     imatic_form.form.type.ajax_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxChoiceType
     imatic_form.form.type.ajax_entity_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
-    imatic_form.form.type.array.class: Imatic\Bundle\FormBundle\Form\Type\ArrayType
     imatic_view.form.extension.collection.class: Imatic\Bundle\FormBundle\Form\Extension\CollectionExtension
     imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormThemeExtension
     imatic_view.form.extension.date.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
@@ -60,11 +59,6 @@ services:
             - '@doctrine'
         tags:
             - { name: form.type, alias: imatic_type_ajax_entity_choice }
-
-    imatic_form.form.type.array:
-        class: %imatic_form.form.type.array.class%
-        tags:
-            - { name: form.type, alias: imatic_type_array }
 
     # Form extensions
     imatic_view.form.extension.collection:
