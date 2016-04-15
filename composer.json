@@ -16,12 +16,11 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "http://composer.imatic.cz"
+            "url": "https://composer.imatic.cz"
         }
     ],
     "require": {
         "php": ">=5.5",
-        "imatic/genemuform-bundle": "~3.0",
         "symfony/framework-bundle": "~3.0",
         "doctrine/orm": "~2.3",
         "doctrine/doctrine-bundle": "~1.2",
@@ -36,8 +35,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "secure-http": false
-    }
+    "prefer-stable": true
 }

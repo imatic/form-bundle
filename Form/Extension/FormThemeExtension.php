@@ -19,7 +19,7 @@ class FormThemeExtension extends AbstractTypeExtension
 {
     /** @var \Twig_Environment */
     private $twig;
-    /** @var string|null */
+    /** @var string|string[]|null */
     private $defaultTheme;
 
     public function __construct(\Twig_Environment $twig, $defaultTheme = null)

@@ -1,6 +1,6 @@
 {% trans_default_domain 'ImaticFormBundle' %}
 
-{% block imatic_type_ajax_choice_widget %}
+{% block imatic_ajax_choice_widget %}
     <select class="form-control"{% if multiple %} multiple{% endif %} {{ block('widget_attributes') }}>
         {% if initial_value is not null %}
             {% if multiple %}
@@ -14,12 +14,12 @@
     </select>
 {% endblock %}
 
-{% block imatic_type_ajax_choice_javascript %}
+{% block imatic_ajax_choice_javascript %}
     <script type="text/javascript">
     (function ($) {
         var $field = $(document.getElementById({{ id|json_encode|raw }}));
 
-        {% block imatic_type_ajax_choice_javascript_prototype %}
+        {% block imatic_ajax_choice_javascript_prototype %}
             {% if configs.placeholder is empty %}
                 {% set configs = configs|merge({placeholder: (configs.multiple ? 'Select values' : 'Select a value')|trans}) %}
             {% endif %}
@@ -36,6 +36,6 @@
     </script>
 {% endblock %}
 
-{% block imatic_type_ajax_entity_choice_widget block('imatic_type_ajax_choice_widget') %}
-{% block imatic_type_ajax_entity_choice_javascript block('imatic_type_ajax_choice_javascript') %}
-{% block imatic_type_ajax_entity_choice_javascript_prototype block('imatic_type_ajax_choice_javascript_prototype') %}
+{% block imatic_ajax_entity_choice_widget block('imatic_ajax_choice_widget') %}
+{% block imatic_ajax_entity_choice_javascript block('imatic_ajax_choice_javascript') %}
+{% block imatic_ajax_entity_choice_javascript_prototype block('imatic_ajax_choice_javascript_prototype') %}

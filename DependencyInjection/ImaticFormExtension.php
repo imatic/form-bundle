@@ -19,7 +19,8 @@ class ImaticFormExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('imatic_form.form.default_theme', $config['default_theme']);
+        $container->setParameter('imatic_form.default_theme', $config['default_theme']);
+        $container->setParameter('imatic_form.select2', $config['select2']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
