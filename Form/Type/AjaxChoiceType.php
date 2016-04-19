@@ -60,7 +60,7 @@ class AjaxChoiceType extends AbstractType
             'initial_value' => null !== $formValue
                 ? $this->getInitialValue($formValue, $options)
                 : null,
-            'configs' => [
+            'select2_options' => [
                 'placeholder' => $options['placeholder'],
                 'multiple' => $options['multiple'],
                 'allowClear' => $options['allow_clear'],

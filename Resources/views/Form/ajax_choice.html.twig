@@ -20,16 +20,11 @@
         var $field = $(document.getElementById({{ id|json_encode|raw }}));
 
         {% block imatic_ajax_choice_javascript_prototype %}
-            {% if configs.placeholder is empty %}
-                {% set configs = configs|merge({placeholder: (configs.multiple ? 'Select values' : 'Select a value')|trans}) %}
+            {% if select2_options.placeholder is empty %}
+                {% set select2_options = select2_options|merge({placeholder: (select2_options.multiple ? 'Select values' : 'Select a value')|trans}) %}
             {% endif %}
 
-            var ajaxChoice = new Imatic.Form.AjaxChoice($field, {{ {
-                configs: configs,
-                ajaxPath: ajax_path,
-                requestType: request_type
-            }|json_encode|raw }});
-
+            var ajaxChoice = new Imatic.Form.AjaxChoice($field, {{ ajax_path|json_encode|raw }}, {{ request_type|json_encode|raw }}, {{ select2_options|json_encode|raw }});
             ajaxChoice.apply();
         {% endblock %}
     })(jQuery);

@@ -1,5 +1,4 @@
 parameters:
-    imatic_form.form.type_guesser.default.class: Imatic\Bundle\FormBundle\Form\DefaultTypeGuesser
     imatic_form.form.type.date_range.class: Imatic\Bundle\FormBundle\Form\Type\DateRangeType
     imatic_form.form.type.datetime_range.class: Imatic\Bundle\FormBundle\Form\Type\DateTimeRangeType
     imatic_form.form.type.time_range.class: Imatic\Bundle\FormBundle\Form\Type\TimeRangeType
@@ -12,16 +11,9 @@ parameters:
     imatic_view.form.extension.datetime.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
     imatic_view.form.extension.time.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
     imatic_view.form.extension.birthday.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
+    imatic_view.form.extension.choice.class: Imatic\Bundle\FormBundle\Form\Extension\ChoiceExtension
 
 services:
-    imatic_form.form.type_guesser.default:
-        class: %imatic_form.form.type_guesser.default.class%
-        arguments: ['@doctrine']
-        calls:
-            - [ setTranslator, [ '@translator' ] ]
-        tags:
-            - { name: form.type_guesser }
-
     imatic_form.form.type.date_range:
         class: %imatic_form.form.type.date_range.class%
         tags:
@@ -100,6 +92,13 @@ services:
             - 'Symfony\Component\Form\Extension\Core\Type\BirthdayType'
         tags:
             - { name: 'form.type_extension', extended_type: Symfony\Component\Form\Extension\Core\Type\BirthdayType }
+
+    imatic_view.form.extension.choice:
+        class: %imatic_view.form.extension.choice.class%
+        arguments:
+            - '%imatic_form.select2%'
+        tags:
+            - { name: 'form.type_extension', extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
 
     # Twig extensions
     imatic_form.twig.extension.form:

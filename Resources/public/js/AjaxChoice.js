@@ -9,11 +9,15 @@ export default class AjaxChoice
 {
     /**
      * @param {jQuery} $field
-     * @param {Object} options
+     * @param {String} ajaxPath
+     * @param {String} requestType
+     * @param {Object} select2Options
      */
-    constructor($field, options) {
+    constructor($field, ajaxPath, requestType, select2Options) {
         this.$field = $field;
-        this.options = options;
+        this.ajaxPath = ajaxPath;
+        this.requestType = requestType;
+        this.select2Options = select2Options;
     }
 
     apply() {
@@ -21,16 +25,16 @@ export default class AjaxChoice
             {
                 minimumInputLength: 1,
                 ajax: {
-                    url: this.options.ajaxPath,
+                    url: this.ajaxPath,
                     datatype: 'json',
                     delay: 300,
                     processResults: processResponseData,
                     data: (params) => {
-                        return prepareRequestData(params.term, this.options.requestType);
+                        return prepareRequestData(params.term, this.requestType);
                     },
                 },
             },
-            this.options.configs
+            this.select2Options
         );
 
         this.$field.select2(select2Options);

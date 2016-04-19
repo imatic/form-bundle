@@ -1,0 +1,12 @@
+{% block choice_javascript %}
+    <script type="text/javascript">
+        (function ($) {
+            var $field = $(document.getElementById({{ id|json_encode|raw }}));
+
+            {% block choice_javascript_javascript %}
+                var choice = new Imatic.Form.Choice($field, {{ select2_options|json_encode|raw }});
+                choice.apply();
+            {% endblock %}
+        })(jQuery);
+    </script>
+{% endblock %}

@@ -38,7 +38,7 @@ class FormExtension extends Twig_Extension
             new Twig_SimpleFunction(
                 'form_javascript',
                 [$this, 'renderFormJavascript'],
-                ['is_safe' => ['html'], 'deprecated' => '3.0.6']
+                ['is_safe' => ['html'], 'deprecated' => '3.0.6', 'alternative' => 'imatic_form_javascript']
             ),
 
             // imatic_form_javascript_prototypes
