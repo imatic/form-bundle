@@ -22,16 +22,11 @@ class AjaxEntityChoiceType extends AjaxChoiceType
     /** @var Registry */
     protected $registry;
 
-    public function __construct(array $genemuConfig, UrlGeneratorInterface $urlGenerator, Registry $registry)
+    public function __construct(array $select2Config, UrlGeneratorInterface $urlGenerator, Registry $registry)
     {
-        parent::__construct($genemuConfig, $urlGenerator);
+        parent::__construct($select2Config, $urlGenerator);
 
         $this->registry = $registry;
-    }
-
-    public function getName()
-    {
-        return 'imatic_type_ajax_entity_choice';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

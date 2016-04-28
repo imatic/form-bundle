@@ -26,34 +26,68 @@ class FormExtension extends Twig_Extension
 
     public function getFunctions()
     {
-        return [
+        return [            
+            // imatic_form_javascript
+            new Twig_SimpleFunction(
+                'imatic_form_javascript',
+                [$this, 'renderFormJavascript'],
+                ['is_safe' => ['html']]
+            ),
+
+            // form_javascript (deprecated alias for BC)
+            new Twig_SimpleFunction(
+                'form_javascript',
+                [$this, 'renderFormJavascript'],
+                ['is_safe' => ['html'], 'deprecated' => '3.0.6', 'alternative' => 'imatic_form_javascript']
+            ),
+
+            // imatic_form_javascript_prototypes
+            new Twig_SimpleFunction(
+                'imatic_form_javascript_prototypes',
+                [$this, 'renderFormJavascriptPrototypes'],
+                ['needs_context' => true, 'is_safe' => ['html']]
+            ),
+
+            // imatic_form_override_namespace
             new Twig_SimpleFunction(
                 'imatic_form_override_namespace',
                 [$this, 'overrideFormNamespace']
-            ),
-            new Twig_SimpleFunction(
-                'imatic_form_javascript_prototype',
-                [$this, 'renderFormJavascriptPrototype'],
-                ['needs_context' => true, 'is_safe' => ['html']]
             ),
         ];
     }
 
     /**
+     * Render form javascript
+     *
+     * @param FormView $view      a form view
+     * @param bool     $prototype render inner JS only 1/0
+     * @return string
+     */
+    public function renderFormJavascript(FormView $view, $prototype = false)
+    {
+        $block = $prototype ? 'javascript_prototype' : 'javascript';
+
+        return $this->renderer->searchAndRenderBlock($view, $block);
+    }
+
+    /**
+     * Render javascript prototypes
+     *
+     * The form view must have a prototype.
+     *
      * @param array $context
-     * @param FormView $rootForm
-     * @throws \InvalidArgumentException if the given root form has no prototype
+     * @param FormView $rootView
      * @return string javascript array
      */
-    public function renderFormJavascriptPrototype(array $context, FormView $rootForm)
+    public function renderFormJavascriptPrototypes(array $context, FormView $rootView)
     {
-        if (!isset($rootForm->vars['prototype'])) {
+        if (!isset($rootView->vars['prototype'])) {
             throw new \InvalidArgumentException('The given root form view has no prototype');
         }
 
         $stack = [
             // FormView $prototype, string $prototypeName, string[] $parentPrototypeNames
-            [$rootForm->vars['prototype'], $rootForm->vars['prototype']->vars['name'], []],
+            [$rootView->vars['prototype'], $rootView->vars['prototype']->vars['name'], []],
         ];
 
         $output = '[';

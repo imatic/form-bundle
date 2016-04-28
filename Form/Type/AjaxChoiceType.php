@@ -2,7 +2,6 @@
 
 namespace Imatic\Bundle\FormBundle\Form\Type;
 
-use Genemu\Bundle\FormBundle\Form\JQuery\DataTransformer\ArrayToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,6 +10,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Imatic\Bundle\FormBundle\Form\DataTransformer\ArrayToStringTransformer;
 
 /**
  * Ajax choice type
@@ -20,19 +20,19 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class AjaxChoiceType extends AbstractType
 {
     /** @var array */
-    protected $genemuConfig;
+    protected $select2Config;
     /** @var UrlGeneratorInterface */
     protected $urlGenerator;
 
-    public function __construct(array $genemuConfig, UrlGeneratorInterface $urlGenerator)
+    public function __construct(array $select2Config, UrlGeneratorInterface $urlGenerator)
     {
-        $this->genemuConfig = $genemuConfig;
+        $this->select2Config = $select2Config;
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
-        return 'imatic_type_ajax_choice';
+        return 'imatic_ajax_choice';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -60,16 +60,13 @@ class AjaxChoiceType extends AbstractType
             'initial_value' => null !== $formValue
                 ? $this->getInitialValue($formValue, $options)
                 : null,
-            'configs' => [
+            'select2_options' => [
                 'placeholder' => $options['placeholder'],
                 'multiple' => $options['multiple'],
                 'allowClear' => $options['allow_clear'],
-            ],
+            ] + $this->select2Config,
         ];
 
-        if (isset($this->genemuConfig['select2']['configs'])) {
-            $view->vars['configs'] += $this->genemuConfig['select2']['configs'];
-        }
         if ($options['multiple']) {
             $view->vars['full_name'] .= '[]';
         }

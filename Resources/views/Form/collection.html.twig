@@ -22,7 +22,7 @@
             {% block collection_javascript_prototype %}
             var collection = new Imatic.Form.Collection(
                 $field,
-                {{ imatic_form_javascript_prototype(form) }},
+                {{ imatic_form_javascript_prototypes(form) }},
                 {{ {
                     addButtonLabel: 'collection.add'|trans,
                     deleteButtonLabel: 'collection.delete'|trans,
@@ -34,6 +34,6 @@
         })(jQuery);
     </script>
     {% else %}
-        {{ form_javascript(form) }}
+        {{ imatic_form_javascript(form) }}
     {% endif %}
 {% endblock %}

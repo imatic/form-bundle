@@ -20,6 +20,13 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->variableNode('default_theme')->defaultValue('bootstrap_3_horizontal_layout.html.twig')->end()
+                ->arrayNode('select2')
+                    ->addDefaultsIfNotSet()
+                    ->ignoreExtraKeys(false)
+                    ->children()
+                        ->scalarNode('theme')->defaultValue('bootstrap')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

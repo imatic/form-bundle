@@ -1,6 +1,6 @@
 {% trans_default_domain 'ImaticFormBundle' %}
 
-{% block imatic_type_ajax_choice_widget %}
+{% block imatic_ajax_choice_widget %}
     <select class="form-control"{% if multiple %} multiple{% endif %} {{ block('widget_attributes') }}>
         {% if initial_value is not null %}
             {% if multiple %}
@@ -14,28 +14,23 @@
     </select>
 {% endblock %}
 
-{% block imatic_type_ajax_choice_javascript %}
+{% block imatic_ajax_choice_javascript %}
     <script type="text/javascript">
     (function ($) {
         var $field = $(document.getElementById({{ id|json_encode|raw }}));
 
-        {% block imatic_type_ajax_choice_javascript_prototype %}
-            {% if configs.placeholder is empty %}
-                {% set configs = configs|merge({placeholder: (configs.multiple ? 'Select values' : 'Select a value')|trans}) %}
+        {% block imatic_ajax_choice_javascript_prototype %}
+            {% if select2_options.placeholder is empty %}
+                {% set select2_options = select2_options|merge({placeholder: (select2_options.multiple ? 'Select values' : 'Select a value')|trans}) %}
             {% endif %}
 
-            var ajaxChoice = new Imatic.Form.AjaxChoice($field, {{ {
-                configs: configs,
-                ajaxPath: ajax_path,
-                requestType: request_type
-            }|json_encode|raw }});
-
+            var ajaxChoice = new Imatic.Form.AjaxChoice($field, {{ ajax_path|json_encode|raw }}, {{ request_type|json_encode|raw }}, {{ select2_options|json_encode|raw }});
             ajaxChoice.apply();
         {% endblock %}
     })(jQuery);
     </script>
 {% endblock %}
 
-{% block imatic_type_ajax_entity_choice_widget block('imatic_type_ajax_choice_widget') %}
-{% block imatic_type_ajax_entity_choice_javascript block('imatic_type_ajax_choice_javascript') %}
-{% block imatic_type_ajax_entity_choice_javascript_prototype block('imatic_type_ajax_choice_javascript_prototype') %}
+{% block imatic_ajax_entity_choice_widget block('imatic_ajax_choice_widget') %}
+{% block imatic_ajax_entity_choice_javascript block('imatic_ajax_choice_javascript') %}
+{% block imatic_ajax_entity_choice_javascript_prototype block('imatic_ajax_choice_javascript_prototype') %}

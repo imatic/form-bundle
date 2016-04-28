@@ -1,0 +1,10 @@
+{# Global form blocks #}
+
+{% block form_javascript %}
+    {%- for child in form -%}
+        {{ imatic_form_javascript(child) }}
+    {%- endfor -%}
+{% endblock form_javascript %}
+
+{% block field_javascript '' %}
+{% block button_javascript '' %}
