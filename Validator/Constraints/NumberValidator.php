@@ -14,6 +14,7 @@ class NumberValidator extends ConstraintValidator
     /**
      * @param float  $value
      * @param Number $constraint
+     *
      * @throws Exception
      */
     public function validate($value, Constraint $constraint)

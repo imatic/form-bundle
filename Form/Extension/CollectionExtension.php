@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
 
 /**
- * Collection extension
+ * Collection extension.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */

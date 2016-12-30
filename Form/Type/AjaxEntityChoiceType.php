@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * Ajax entity choice type
+ * Ajax entity choice type.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */

@@ -29,7 +29,7 @@ class DateRangeType extends AbstractType
         $resolver->setDefaults(
             [
                 'field_type' => DateType::class,
-                'field_options' => []
+                'field_options' => [],
             ]
         );
     }

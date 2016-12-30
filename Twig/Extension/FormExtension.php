@@ -8,7 +8,7 @@ use Twig_Extension;
 use Twig_SimpleFunction;
 
 /**
- * Form extension
+ * Form extension.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
@@ -26,7 +26,7 @@ class FormExtension extends Twig_Extension
 
     public function getFunctions()
     {
-        return [            
+        return [
             // imatic_form_javascript
             new Twig_SimpleFunction(
                 'imatic_form_javascript',
@@ -57,10 +57,11 @@ class FormExtension extends Twig_Extension
     }
 
     /**
-     * Render form javascript
+     * Render form javascript.
      *
      * @param FormView $view      a form view
      * @param bool     $prototype render inner JS only 1/0
+     *
      * @return string
      */
     public function renderFormJavascript(FormView $view, $prototype = false)
@@ -71,12 +72,13 @@ class FormExtension extends Twig_Extension
     }
 
     /**
-     * Render javascript prototypes
+     * Render javascript prototypes.
      *
      * The form view must have a prototype.
      *
-     * @param array $context
+     * @param array    $context
      * @param FormView $rootView
+     *
      * @return string javascript array
      */
     public function renderFormJavascriptPrototypes(array $context, FormView $rootView)
@@ -140,8 +142,9 @@ class FormExtension extends Twig_Extension
 
     /**
      * @param FormView $rootForm
-     * @param string $newNamespace
-     * @param bool $replaceFirstSegment
+     * @param string   $newNamespace
+     * @param bool     $replaceFirstSegment
+     *
      * @throws \InvalidArgumentException
      */
     public function overrideFormNamespace(FormView $rootForm, $newNamespace, $replaceFirstSegment = false)
@@ -176,7 +179,7 @@ class FormExtension extends Twig_Extension
                 );
             }
 
-            $form->vars['id'] = $newNamespace . '_' . $form->vars['id'];
+            $form->vars['id'] = $newNamespace.'_'.$form->vars['id'];
 
             if (isset($form->vars['prototype'])) {
                 $stack[] = $form->vars['prototype'];

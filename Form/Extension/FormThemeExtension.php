@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Form theme extension
+ * Form theme extension.
  *
  * Allows configuring form theme through options.
  *

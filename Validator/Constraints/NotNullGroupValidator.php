@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Not null group validator
+ * Not null group validator.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
@@ -24,8 +24,8 @@ class NotNullGroupValidator extends ConstraintValidator
             }
         }
 
-        $nullPropertyCount = sizeof($nullProperties);
-        if ($nullPropertyCount > 0 && $nullPropertyCount !== sizeof($constraint->properties)) {
+        $nullPropertyCount = count($nullProperties);
+        if ($nullPropertyCount > 0 && $nullPropertyCount !== count($constraint->properties)) {
             for ($i = 0; $i < $nullPropertyCount; ++$i) {
                 $this->context->addViolationAt($nullProperties[$i], $constraint->message);
             }

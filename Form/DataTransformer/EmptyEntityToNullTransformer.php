@@ -5,7 +5,7 @@ namespace Imatic\Bundle\FormBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Empty entity to null transformer
+ * Empty entity to null transformer.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
@@ -26,7 +26,6 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
         $this->strict = $strict;
     }
 
-    
     public function reverseTransform($value)
     {
         if (is_object($value)) {
@@ -39,7 +38,7 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
                 if (
                     null !== $reflPropertyValue
                     && ($this->strict || '' !== $reflPropertyValue)
-                    && (!$reflPropertyValue instanceof \Countable || sizeof($reflPropertyValue) > 0)
+                    && (!$reflPropertyValue instanceof \Countable || count($reflPropertyValue) > 0)
                 ) {
                     $hasNonEmptyValue = true;
                     break;
@@ -56,7 +55,6 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
         }
     }
 
-    
     public function transform($value)
     {
         return $value;

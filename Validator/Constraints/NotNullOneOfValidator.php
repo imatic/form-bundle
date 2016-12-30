@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Not null one of validator
+ * Not null one of validator.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */

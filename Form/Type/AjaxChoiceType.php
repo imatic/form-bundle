@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Imatic\Bundle\FormBundle\Form\DataTransformer\ArrayToStringTransformer;
 
 /**
- * Ajax choice type
+ * Ajax choice type.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
@@ -99,6 +99,7 @@ class AjaxChoiceType extends AbstractType
     /**
      * @param mixed $formValue
      * @param array $options
+     *
      * @return array
      */
     protected function getInitialValue($formValue, array $options)

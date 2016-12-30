@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
 
 /**
- * Datepicker extension
+ * Datepicker extension.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */

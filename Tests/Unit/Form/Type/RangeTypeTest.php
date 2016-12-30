@@ -1,4 +1,5 @@
 <?php
+
 namespace Imatic\Bundle\FormBundle\Tests\Unit\Form\Type;
 
 use Imatic\Bundle\FormBundle\Form\Type\RangeType;

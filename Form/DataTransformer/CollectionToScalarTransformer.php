@@ -8,7 +8,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
- * Transforms collection to a scalar value
+ * Transforms collection to a scalar value.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
@@ -63,10 +63,10 @@ class CollectionToScalarTransformer implements DataTransformerInterface
 
         $qb = clone $this->qb;
         $qb
-            ->andWhere(current($qb->getRootAliases()) . " IN(:CollectionToScalarTransformer_Ids)")
+            ->andWhere(current($qb->getRootAliases()).' IN(:CollectionToScalarTransformer_Ids)')
             ->setParameter('CollectionToScalarTransformer_Ids', $value)
         ;
-        
+
         return new ArrayCollection($qb->getQuery()->execute());
     }
 }

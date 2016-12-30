@@ -5,10 +5,10 @@ namespace Imatic\Bundle\FormBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Not null one of constraint
+ * Not null one of constraint.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
- * 
+ *
  * @Annotation
  */
 class NotNullOneOf extends Constraint
@@ -18,13 +18,11 @@ class NotNullOneOf extends Constraint
     /** @var array */
     public $properties = [];
 
-    
     public function getTargets()
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    
     public function getRequiredOptions()
     {
         return ['properties'];

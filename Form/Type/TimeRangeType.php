@@ -31,7 +31,7 @@ class TimeRangeType extends AbstractType
         $resolver->setDefaults(
             [
                 'field_type' => TimeType::class,
-                'field_options' => []
+                'field_options' => [],
             ]
         );
     }

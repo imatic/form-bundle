@@ -28,7 +28,7 @@ class DateTimeRangeType extends AbstractType
         $resolver->setDefaults(
             [
                 'field_type' => DateTimeType::class,
-                'field_options' => []
+                'field_options' => [],
             ]
         );
     }

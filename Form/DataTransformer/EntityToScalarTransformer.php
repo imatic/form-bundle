@@ -7,7 +7,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
- * Transforms entity instance to a scalar value
+ * Transforms entity instance to a scalar value.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
@@ -42,7 +42,7 @@ class EntityToScalarTransformer implements DataTransformerInterface
         if (null !== $value && '' !== $value) {
             $qb = clone $this->qb;
             $qb
-                ->andWhere(current($qb->getRootAliases()) . " = :EntityToScalarTransformer_Id")
+                ->andWhere(current($qb->getRootAliases()).' = :EntityToScalarTransformer_Id')
                 ->setParameter('EntityToScalarTransformer_Id', $value)
             ;
 
