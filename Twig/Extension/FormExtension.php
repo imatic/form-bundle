@@ -24,6 +24,14 @@ class FormExtension extends Twig_Extension
         $this->renderer = $renderer;
     }
 
+    /**
+     * @return TwigRendererInterface
+     */
+    public function getRenderer()
+    {
+        return $this->renderer;
+    }
+
     public function getFunctions()
     {
         return [

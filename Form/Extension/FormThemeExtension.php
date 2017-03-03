@@ -2,6 +2,7 @@
 
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
+use Imatic\Bundle\FormBundle\Twig\Extension\FormExtension;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
@@ -38,7 +39,7 @@ class FormThemeExtension extends AbstractTypeExtension
         }
 
         if ($theme) {
-            $this->twig->getExtension('form')->renderer->setTheme(
+            $this->twig->getExtension(FormExtension::class)->getRenderer()->setTheme(
                 $view,
                 (array) $theme
             );
