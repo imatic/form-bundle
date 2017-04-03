@@ -28,7 +28,7 @@ class ChoiceExtension extends AbstractTypeExtension
     {
         if ($options['rich']) {
             $view->vars['select2_options'] = [
-                'placeholder' => $options['placeholder'] ?: null,
+                'placeholder' => $options['placeholder'] ?: '',
                 'multiple' => $options['multiple'],
                 'allowClear' => $options['multiple'] ? false : !$options['required'],
             ] + $this->select2Config;
