@@ -35,7 +35,6 @@ class DatepickerExtension extends AbstractTypeExtension
         if ($options['rich']) {
             $pickDate = false;
             $pickTime = false;
-            $config = [];
 
             switch ($this->type) {
                 case DateType::class:
@@ -53,7 +52,7 @@ class DatepickerExtension extends AbstractTypeExtension
 
                 case BirthdayType::class:
                     $pickDate = true;
-                    $config['viewMode'] = 'years';
+                    $options['config']['viewMode'] = 'years';
                     break;
 
                 default:
@@ -62,7 +61,7 @@ class DatepickerExtension extends AbstractTypeExtension
 
             $view->vars['pick_date'] = $pickDate;
             $view->vars['pick_time'] = $pickTime;
-            $view->vars['config'] = $config;
+            $view->vars['config'] = $options['config'];
         }
     }
 
@@ -70,6 +69,7 @@ class DatepickerExtension extends AbstractTypeExtension
     {
         $resolver->setDefaults([
             'rich' => true,
+            'config' => [],
             'template' => function (Options $options, $default) {
                 return $options['rich']
                     ? 'ImaticFormBundle:Form:datepicker.html.twig'
@@ -83,6 +83,7 @@ class DatepickerExtension extends AbstractTypeExtension
                 ;
             },
         ]);
+        $resolver->setAllowedTypes('config', 'array');
     }
 
     public function getExtendedType()
