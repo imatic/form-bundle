@@ -2,12 +2,13 @@
 
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Choice extension.
@@ -16,19 +17,28 @@ use Symfony\Component\OptionsResolver\Options;
  */
 class ChoiceExtension extends AbstractTypeExtension
 {
+    /** @var TranslatorInterface */
+    protected $translator;
+
     /** @var array */
     protected $select2Config;
 
-    public function __construct($select2Config)
+    public function __construct(TranslatorInterface $translator, $select2Config)
     {
         $this->select2Config = $select2Config;
+        $this->translator = $translator;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ($options['rich']) {
+            $placeholder = $options['placeholder'] ?: '';
+            if ($placeholder && $options['translation_domain'] !== false) {
+                $placeholder = $this->translator->trans($options['placeholder'], [], $options['translation_domain']);
+            }
+
             $view->vars['select2_options'] = [
-                'placeholder' => $options['placeholder'] ?: '',
+                'placeholder' => $placeholder,
                 'multiple' => $options['multiple'],
                 'allowClear' => $options['multiple'] ? false : !$options['required'],
             ] + $this->select2Config;
