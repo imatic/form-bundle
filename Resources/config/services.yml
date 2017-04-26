@@ -96,6 +96,7 @@ services:
     imatic_view.form.extension.choice:
         class: "%imatic_view.form.extension.choice.class%"
         arguments:
+            - '@translator'
             - '%imatic_form.select2%'
         tags:
             - { name: 'form.type_extension', extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }
