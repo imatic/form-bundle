@@ -1,16 +1,15 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Datepicker extension.
@@ -56,7 +55,7 @@ class DatepickerExtension extends AbstractTypeExtension
                     break;
 
                 default:
-                    throw new \OutOfBoundsException(sprintf('The type "%s" is not valid', $this->type));
+                    throw new \OutOfBoundsException(\sprintf('The type "%s" is not valid', $this->type));
             }
 
             $view->vars['pick_date'] = $pickDate;
@@ -73,14 +72,12 @@ class DatepickerExtension extends AbstractTypeExtension
             'template' => function (Options $options, $default) {
                 return $options['rich']
                     ? 'ImaticFormBundle:Form:datepicker.html.twig'
-                    : $default
-                ;
+                    : $default;
             },
             'widget' => function (Options $options, $default) {
                 return $options['rich']
                     ? 'single_text'
-                    : $default
-                ;
+                    : $default;
             },
         ]);
         $resolver->setAllowedTypes('config', 'array');

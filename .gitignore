@@ -1,7 +1,10 @@
 /vendor/
 /build/
 /build.local
+/.php_cs.cache
+/phpda.svg
 /.idea/
 /nbproject/
+/composer
 .DS_Store
 Thumbs.db

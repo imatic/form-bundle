@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;

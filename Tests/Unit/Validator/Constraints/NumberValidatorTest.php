@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Tests\Unit\Validator\Constraints;
 
 use Imatic\Bundle\FormBundle\Validator\Constraints\Number;
@@ -14,7 +13,7 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->executionContext = $this->getMock('Symfony\Component\Validator\Context\ExecutionContextInterface');
+        $this->executionContext = $this->createMock('Symfony\Component\Validator\Context\ExecutionContextInterface');
     }
 
     /**
@@ -24,8 +23,7 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->executionContext
             ->expects($this->never())
-            ->method('addViolation')
-        ;
+            ->method('addViolation');
 
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
@@ -53,8 +51,7 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase
             ->method('addViolation')
             ->with('The number cannot have bigger precision than "%maxPrecision%"', [
                 '%maxPrecision%' => 3,
-            ])
-        ;
+            ]);
 
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
@@ -72,8 +69,7 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase
             ->method('addViolation')
             ->with('The number cannot have bigger scale than "%maxScale%"', [
                 '%maxScale%' => 1,
-            ])
-        ;
+            ]);
 
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
@@ -88,22 +84,19 @@ class NumberValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->executionContext
             ->expects($this->exactly(2))
-            ->method('addViolation')
-        ;
+            ->method('addViolation');
         $this->executionContext
             ->expects($this->at(0))
             ->method('addViolation')
             ->with('The number cannot have bigger precision than "%maxPrecision%"', [
                 '%maxPrecision%' => 3,
-            ])
-        ;
+            ]);
         $this->executionContext
             ->expects($this->at(1))
             ->method('addViolation')
             ->with('The number cannot have bigger scale than "%maxScale%"', [
                 '%maxScale%' => 1,
-            ])
-        ;
+            ]);
 
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);

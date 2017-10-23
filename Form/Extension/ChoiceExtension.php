@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -51,14 +50,12 @@ class ChoiceExtension extends AbstractTypeExtension
             'rich' => function (Options $options) {
                 return !$options['expanded']
                     ? true
-                    : false
-                ;
+                    : false;
             },
             'template' => function (Options $options) {
                 return $options['rich']
                     ? 'ImaticFormBundle:Form:choice.html.twig'
-                    : null
-                ;
+                    : null;
             },
         ]);
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
 use Imatic\Bundle\FormBundle\Twig\Extension\FormExtension;

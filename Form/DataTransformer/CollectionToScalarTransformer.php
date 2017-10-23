@@ -1,9 +1,8 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Form\DataTransformer;
 
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -31,7 +30,7 @@ class CollectionToScalarTransformer implements DataTransformerInterface
         if (null === $collection) {
             return '';
         }
-        if (!$collection instanceof \Traversable && !is_array($collection)) {
+        if (!$collection instanceof \Traversable && !\is_array($collection)) {
             throw new UnexpectedTypeException($collection, 'Traversable, array or null');
         }
 
@@ -45,7 +44,7 @@ class CollectionToScalarTransformer implements DataTransformerInterface
             }
 
             // add id
-            $output .= call_user_func($this->idProvider, $entity);
+            $output .= \call_user_func($this->idProvider, $entity);
         }
 
         // return
@@ -57,15 +56,14 @@ class CollectionToScalarTransformer implements DataTransformerInterface
         if (null === $value || '' === $value) {
             return new ArrayCollection();
         }
-        if (!is_array($value)) {
-            $value = explode(',', $value);
+        if (!\is_array($value)) {
+            $value = \explode(',', $value);
         }
 
         $qb = clone $this->qb;
         $qb
-            ->andWhere(current($qb->getRootAliases()).' IN(:CollectionToScalarTransformer_Ids)')
-            ->setParameter('CollectionToScalarTransformer_Ids', $value)
-        ;
+            ->andWhere(\current($qb->getRootAliases()) . ' IN(:CollectionToScalarTransformer_Ids)')
+            ->setParameter('CollectionToScalarTransformer_Ids', $value);
 
         return new ArrayCollection($qb->getQuery()->execute());
     }

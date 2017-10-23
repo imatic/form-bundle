@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -22,7 +21,7 @@ class Number extends Constraint
         parent::__construct($options);
 
         if ($this->precision === null && $this->scale === null) {
-            throw new MissingOptionsException(sprintf('Either option "precision" or "scale" must be given for constraint %s', __CLASS__));
+            throw new MissingOptionsException(\sprintf('Either option "precision" or "scale" must be given for constraint %s', __CLASS__));
         }
     }
 }

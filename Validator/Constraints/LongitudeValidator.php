@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -13,7 +12,7 @@ class LongitudeValidator extends ConstraintValidator
             return;
         }
 
-        if (!is_numeric($value) || -180 > $value || 180 < $value) {
+        if (!\is_numeric($value) || -180 > $value || 180 < $value) {
             $this->context->addViolation($constraint->message, ['%value%' => $value]);
         }
     }

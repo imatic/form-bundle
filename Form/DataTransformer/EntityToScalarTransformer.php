@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Form\DataTransformer;
 
 use Doctrine\ORM\QueryBuilder;
@@ -26,15 +25,14 @@ class EntityToScalarTransformer implements DataTransformerInterface
 
     public function transform($entity)
     {
-        if (!is_object($entity)) {
+        if (!\is_object($entity)) {
             if (null === $entity) {
                 return '';
-            } else {
-                throw new UnexpectedTypeException($entity, 'object or null');
             }
+            throw new UnexpectedTypeException($entity, 'object or null');
         }
 
-        return (string) call_user_func($this->idProvider, $entity);
+        return (string) \call_user_func($this->idProvider, $entity);
     }
 
     public function reverseTransform($value)
@@ -42,9 +40,8 @@ class EntityToScalarTransformer implements DataTransformerInterface
         if (null !== $value && '' !== $value) {
             $qb = clone $this->qb;
             $qb
-                ->andWhere(current($qb->getRootAliases()).' = :EntityToScalarTransformer_Id')
-                ->setParameter('EntityToScalarTransformer_Id', $value)
-            ;
+                ->andWhere(\current($qb->getRootAliases()) . ' = :EntityToScalarTransformer_Id')
+                ->setParameter('EntityToScalarTransformer_Id', $value);
 
             return $qb->getQuery()->getOneOrNullResult();
         }

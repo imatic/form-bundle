@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -24,8 +23,8 @@ class NotNullGroupValidator extends ConstraintValidator
             }
         }
 
-        $nullPropertyCount = count($nullProperties);
-        if ($nullPropertyCount > 0 && $nullPropertyCount !== count($constraint->properties)) {
+        $nullPropertyCount = \count($nullProperties);
+        if ($nullPropertyCount > 0 && $nullPropertyCount !== \count($constraint->properties)) {
             for ($i = 0; $i < $nullPropertyCount; ++$i) {
                 $this->context->addViolationAt($nullProperties[$i], $constraint->message);
             }

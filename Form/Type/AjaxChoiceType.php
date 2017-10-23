@@ -1,7 +1,7 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Form\Type;
 
+use Imatic\Bundle\FormBundle\Form\DataTransformer\ArrayToStringTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Imatic\Bundle\FormBundle\Form\DataTransformer\ArrayToStringTransformer;
 
 /**
  * Ajax choice type.
@@ -106,7 +105,7 @@ class AjaxChoiceType extends AbstractType
     {
         if ($options['multiple']) {
             // array
-            if (!is_array($formValue)) {
+            if (!\is_array($formValue)) {
                 throw new UnexpectedTypeException($formValue, 'array');
             }
 
@@ -119,7 +118,7 @@ class AjaxChoiceType extends AbstractType
             }
         } else {
             // single value
-            if (!is_scalar($formValue)) {
+            if (!\is_scalar($formValue)) {
                 throw new UnexpectedTypeException($formValue, 'scalar');
             }
 

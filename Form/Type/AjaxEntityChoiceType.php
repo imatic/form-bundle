@@ -1,9 +1,8 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Form\Type;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\EntityManager;
 use Imatic\Bundle\FormBundle\Form\DataTransformer\CollectionToScalarTransformer;
 use Imatic\Bundle\FormBundle\Form\DataTransformer\EntityToScalarTransformer;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -59,20 +58,18 @@ class AjaxEntityChoiceType extends AjaxChoiceType
                 return $em
                     ->createQueryBuilder()
                     ->select('e')
-                    ->from($class, 'e')
-                ;
+                    ->from($class, 'e');
             },
             'id_provider' => function (Options $options) {
                 $metadata = $this
                     ->registry
                     ->getManager($options['entity_manager'])
-                    ->getClassMetadata($options['class'])
-                ;
+                    ->getClassMetadata($options['class']);
 
                 return function ($entity) use ($metadata) {
                     $ids = $metadata->getIdentifierValues($entity);
 
-                    return current($ids);
+                    return \current($ids);
                 };
             },
         ]);
@@ -82,7 +79,7 @@ class AjaxEntityChoiceType extends AjaxChoiceType
     {
         if ($options['multiple']) {
             // collection
-            if (!$formValue instanceof \Traversable && !is_array($formValue)) {
+            if (!$formValue instanceof \Traversable && !\is_array($formValue)) {
                 throw new UnexpectedTypeException($formValue, 'Traversable, array or null');
             }
 
@@ -95,7 +92,7 @@ class AjaxEntityChoiceType extends AjaxChoiceType
             }
         } else {
             // entity
-            if (!is_object($formValue)) {
+            if (!\is_object($formValue)) {
                 throw new UnexpectedTypeException($formValue, 'object or null');
             }
 

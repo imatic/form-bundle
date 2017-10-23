@@ -1,5 +1,4 @@
 <?php
-
 namespace Imatic\Bundle\FormBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
@@ -28,31 +27,27 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
 
     public function reverseTransform($value)
     {
-        if (is_object($value)) {
-            $hasNonEmptyValue = false;
-            foreach ($this->properties as $property) {
-                $reflProperty = new \ReflectionProperty($value, $property);
-                $reflProperty->setAccessible(true);
-                $reflPropertyValue = $reflProperty->getValue($value);
-
-                if (
-                    null !== $reflPropertyValue
-                    && ($this->strict || '' !== $reflPropertyValue)
-                    && (!$reflPropertyValue instanceof \Countable || count($reflPropertyValue) > 0)
-                ) {
-                    $hasNonEmptyValue = true;
-                    break;
-                }
-            }
-
-            if ($hasNonEmptyValue) {
-                return $value;
-            } else {
-                return null;
-            }
-        } else {
+        if (!\is_object($value)) {
             return $value;
         }
+
+        $hasNonEmptyValue = false;
+        foreach ($this->properties as $property) {
+            $reflProperty = new \ReflectionProperty($value, $property);
+            $reflProperty->setAccessible(true);
+            $reflPropertyValue = $reflProperty->getValue($value);
+
+            if (
+                null !== $reflPropertyValue
+                && ($this->strict || '' !== $reflPropertyValue)
+                && (!$reflPropertyValue instanceof \Countable || \count($reflPropertyValue) > 0)
+            ) {
+                $hasNonEmptyValue = true;
+                break;
+            }
+        }
+
+        return $hasNonEmptyValue ? $value : null;
     }
 
     public function transform($value)
