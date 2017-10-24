@@ -17,12 +17,7 @@ phpunit:
 
 .PHONY: update-test
 update-test: | composer
-	git checkout -- ./composer.lock
 	./composer install
-
-.PHONY: update-test-min
-update-test-min: | composer
-	./composer update --prefer-lowest
 
 composer:
 	$(if $(shell which composer 2> /dev/null),\
