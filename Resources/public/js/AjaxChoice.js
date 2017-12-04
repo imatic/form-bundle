@@ -33,6 +33,9 @@ export default class AjaxChoice
                         return prepareRequestData(params.term, this.requestType);
                     },
                 },
+                language: document.documentElement.getAttribute('lang') === 'cs'
+                    ? require('select2/src/js/select2/i18n/cs.js')
+                    : require('select2/src/js/select2/i18n/en.js')
             },
             this.select2Options
         );
