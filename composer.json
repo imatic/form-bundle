@@ -1,8 +1,8 @@
 {
     "name": "imatic/form-bundle",
     "type": "symfony-bundle",
-    "description": "Imatic Form Bundle",
-    "license": "proprietary",
+    "description": "Bundle for working with Symfony forms",
+    "license": "MIT",
     "authors": [
         {
             "name": "Viliam Husár",
