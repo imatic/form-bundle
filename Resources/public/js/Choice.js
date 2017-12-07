@@ -17,6 +17,14 @@ export default class Choice
     }
 
     apply() {
-        this.$field.select2(this.select2Options);
+        var select2Options = $.extend(
+            {
+                language: document.documentElement.getAttribute('lang') === 'cs'
+                    ? require('select2/src/js/select2/i18n/cs.js')
+                    : require('select2/src/js/select2/i18n/en.js')
+            },
+            this.select2Options
+        )
+        this.$field.select2(select2Options);
     }
 }
