@@ -8,3 +8,12 @@
 /composer
 .DS_Store
 Thumbs.db
+Tests/Fixtures/TestProject/web/bundles
+Tests/Fixtures/TestProject/cache
+Tests/Fixtures/TestProject/logs
+Tests/Fixtures/TestProject/ProjectBundle/DataFixtures
+Tests/Fixtures/TestProject/ProjectBundle/EntityTests/Fixtures/TestProject/web/bundles
+Tests/Fixtures/TestProject/cache
+Tests/Fixtures/TestProject/logs
+Tests/Fixtures/TestProject/ProjectBundle/DataFixtures
+Tests/Fixtures/TestProject/ProjectBundle/Entity

@@ -1,7 +1,7 @@
 <?php
 namespace Imatic\Bundle\FormBundle\Twig\Extension;
 
-use Symfony\Bridge\Twig\Form\TwigRendererInterface;
+use Symfony\Component\Form\FormRendererInterface;
 use Symfony\Component\Form\FormView;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -13,18 +13,18 @@ use Twig_SimpleFunction;
  */
 class FormExtension extends Twig_Extension
 {
-    /** @var TwigRendererInterface */
+    /** @var FormRendererInterface */
     private $renderer;
     /** @var int */
     private $prototypeRenderUidSeq = 0;
 
-    public function __construct(TwigRendererInterface $renderer)
+    public function __construct(FormRendererInterface $renderer)
     {
         $this->renderer = $renderer;
     }
 
     /**
-     * @return TwigRendererInterface
+     * @return FormRendererInterface
      */
     public function getRenderer()
     {

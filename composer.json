@@ -13,12 +13,6 @@
             "homepage": "http://imatic.cz/"
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://composer.imatic.cz"
-        }
-    ],
     "require": {
         "php": ">=5.5",
         "symfony/framework-bundle": "~3.0",
@@ -32,7 +26,8 @@
         "friendsofphp/php-cs-fixer": "^2.7",
         "phpdocumentor/reflection-docblock": "4.1.1 as 3.3.0",
         "phpmd/phpmd": "^2.6",
-        "mamuz/php-dependency-analysis": "^1.3"
+        "mamuz/php-dependency-analysis": "^1.3",
+        "imatic/testing": "^4.0"
     },
     "autoload": {
         "psr-4": {
