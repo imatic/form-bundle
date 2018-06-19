@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e92aa841c7f366c36294aa7e04626b56",
+    "content-hash": "9a91193897cf1ebc5406319d6e9eed61",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2069,16 +2069,16 @@
         },
         {
             "name": "imatic/testing",
-            "version": "4.0",
+            "version": "dev-parklane",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imatic/testing.git",
-                "reference": "fc196c02ab030ad98ce8f45da598ef7f68a726dc"
+                "reference": "9da546d06cacff4a75479b58b6beda7445c65623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imatic/testing/zipball/fc196c02ab030ad98ce8f45da598ef7f68a726dc",
-                "reference": "fc196c02ab030ad98ce8f45da598ef7f68a726dc",
+                "url": "https://api.github.com/repos/imatic/testing/zipball/9da546d06cacff4a75479b58b6beda7445c65623",
+                "reference": "9da546d06cacff4a75479b58b6beda7445c65623",
                 "shasum": ""
             },
             "require": {
@@ -2086,7 +2086,7 @@
                 "php": ">=5.4",
                 "phpunit/phpunit": "~5.1",
                 "symfony/monolog-bundle": "~2.7|~3.0",
-                "symfony/symfony": "~2.7|~3.0"
+                "symfony/symfony": "~2.7|~3.0|~4.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.7",
@@ -2120,7 +2120,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2017-12-07T13:50:04+00:00"
+            "time": "2018-06-19T08:49:05+00:00"
         },
         {
             "name": "mamuz/php-dependency-analysis",
@@ -3916,7 +3916,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "imatic/testing": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
