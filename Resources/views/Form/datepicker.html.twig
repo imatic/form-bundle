@@ -1,6 +1,7 @@
 {% block date_widget %}
     <div class="input-group date">
         {% set type = 'text' %}
+        {% set attr = attr|merge({'autocomplete': 'off'}) %}
         {{- block('form_widget_simple') -}}
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
