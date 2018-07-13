@@ -20,7 +20,8 @@ services:
 
     Imatic\Bundle\FormBundle\Form\Extension\FormThemeExtension:
         arguments:
-            $defaultTheme: '%imatic_form.default_theme%'
+            - '@twig.form.renderer'
+            - '%imatic_form.default_theme%'
         tags:
             - { name: 'form.type_extension', extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
