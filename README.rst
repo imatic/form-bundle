@@ -67,6 +67,42 @@ Additional options:
 - ``route_attrs`` - custom route attributes
 - ``entity_manager`` - name of the entity manager to use
 
+Datepicker
+----------
+
+* `Imatic\\Bundle\\FormBundle\\Form\\Extension\\DatepickerExtension </Form/Extension/DatepickerExtension.php>`_
+
+This example shows, how to change default date type format and modify moment configurations by form extension.
+
+.. sourcecode:: php
+
+    <?php
+
+    use Symfony\Component\Form\AbstractTypeExtension;
+    use Symfony\Component\Form\Extension\Core\Type\DateType;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
+
+    class DateTypeExtension extends AbstractTypeExtension
+    {
+        public function configureOptions(OptionsResolver $resolver)
+        {
+            $resolver->setDefaults([
+                'format' => 'dd.MM.yyyy',
+                'date_format' => 'DD.MM.YYYY',
+                'config_locale' => [
+                    'en' => [
+                        'week' => [ 'dow' => 1 ],
+                    ],
+                ]
+            ]);
+        }
+
+        public function getExtendedType()
+        {
+            return DateType::class;
+        }
+    }
+
 
 ***************
 Form extensions

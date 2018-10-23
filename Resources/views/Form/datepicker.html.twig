@@ -19,7 +19,11 @@
                 pickDate: {{ pick_date ? 'true' : 'false' }},
                 pickTime: {{ pick_time ? 'true' : 'false' }},
                 config: {{ config|json_encode(constant('JSON_FORCE_OBJECT'))|raw }},
+                configLocale: {{ config_locale|json_encode(constant('JSON_FORCE_OBJECT'))|raw }},
                 defaultLocale: Imatic.View.App.getLocale(),
+                dateFormat: {{ date_format|json_encode|raw }},
+                dateTimeFormat: {{ date_time_format|json_encode|raw }},
+                timeFormat: {{ time_format|json_encode|raw }},
             });
 
             datepicker.apply();
