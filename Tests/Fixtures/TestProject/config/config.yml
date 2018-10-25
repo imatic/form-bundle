@@ -1,3 +1,8 @@
+parameters:
+    env(TESTING_DATA_INIT): '1'
+
+    testing.data_init: '%env(TESTING_DATA_INIT)%'
+
 framework:
     secret:                     test
     test: ~
@@ -11,7 +16,7 @@ framework:
     translator:
         enabled:                true
     router:
-        resource:               %kernel.root_dir%/config/routing.yml
+        resource:               '%kernel.root_dir%/config/routing.yml'
     templating:
         engines:                [twig]
     default_locale:             cs_CZ
@@ -21,8 +26,8 @@ web_profiler:
     toolbar: true
 
 twig:
-    debug:                      %kernel.debug%
-    strict_variables:           %kernel.debug%
+    debug:                      '%kernel.debug%'
+    strict_variables:           '%kernel.debug%'
 
 doctrine:
     dbal:
@@ -31,10 +36,10 @@ doctrine:
                 wrapper_class: "Imatic\\Testing\\Doctrine\\DBAL\\PersistedConnection"
                 driver:         pdo_sqlite
                 memory:         false
-                path:           %kernel.root_dir%/cache/test.db
+                path:           '%kernel.root_dir%/cache/test.db'
 
     orm:
-        auto_generate_proxy_classes: %kernel.debug%
+        auto_generate_proxy_classes: '%kernel.debug%'
         auto_mapping:           true
         resolve_target_entities: []
 

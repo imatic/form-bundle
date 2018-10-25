@@ -2,17 +2,13 @@
 namespace Imatic\Bundle\FormBundle\Tests\Integration\Twig\Extension;
 
 use Imatic\Bundle\FormBundle\Tests\Fixtures\TestProject\WebTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class FormExtensionTest extends WebTestCase
 {
-    /** @var ContainerInterface */
-    private $container;
-
     public function setUp()
     {
-        $this->container = static::createClient()->getContainer();
+        static::createClient()->getContainer();
     }
 
     public function testImaticFormJavascriptWithJavascript()
@@ -47,7 +43,7 @@ EOF
      */
     private function getTwig()
     {
-        return $this->container->get('twig');
+        return self::$container->get('twig');
     }
 
     /**
@@ -55,6 +51,6 @@ EOF
      */
     private function getFormFactory()
     {
-        return $this->container->get('form.factory');
+        return self::$container->get('form.factory');
     }
 }

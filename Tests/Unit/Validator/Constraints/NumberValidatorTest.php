@@ -3,11 +3,12 @@ namespace Imatic\Bundle\FormBundle\Tests\Unit\Validator\Constraints;
 
 use Imatic\Bundle\FormBundle\Validator\Constraints\Number;
 use Imatic\Bundle\FormBundle\Validator\Constraints\NumberValidator;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Miloslav Nenadal <miloslav.nenadal@imatic.cz>
  */
-class NumberValidatorTest extends \PHPUnit_Framework_TestCase
+class NumberValidatorTest extends TestCase
 {
     private $executionContext;
 
