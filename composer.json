@@ -18,8 +18,8 @@
         "doctrine/doctrine-bundle": "^1.2",
         "doctrine/orm": "^2.3",
         "symfony/form": "^3.0|^4.0",
-        "symfony/validator": "^3.0|^4.0",
-        "symfony/symfony": "^3.4|^4.0"
+        "symfony/framework-bundle": "^3.4|^4.0",
+        "symfony/validator": "^3.0|^4.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.7",
