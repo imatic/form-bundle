@@ -1,7 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Validator\Constraints;
 
-use Symfony\Component\Serializer\Exception\Exception;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -14,7 +13,7 @@ class NumberValidator extends ConstraintValidator
      * @param float  $value
      * @param Number $constraint
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function validate($value, Constraint $constraint)
     {
@@ -22,7 +21,7 @@ class NumberValidator extends ConstraintValidator
             return;
         }
 
-        $chunks = \explode('.', $value);
+        $chunks = \explode('.', (string) $value);
         if (\count($chunks) > 2) {
             throw new \Exception('Number can have only 1 "." character.');
         }

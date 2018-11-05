@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Form\DataTransformer;
 
 use Doctrine\ORM\QueryBuilder;

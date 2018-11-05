@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1f5a068d8af4b8260c198bdcf56b8ca",
+    "content-hash": "3b4f804d9705c91b7d9550cbcc6992a8",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2029,16 +2029,16 @@
         },
         {
             "name": "imatic/testing",
-            "version": "dev-parklane",
+            "version": "v5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/imatic/testing.git",
-                "reference": "dbdde05d23f6f07741008bb54b69b462452889c2"
+                "reference": "cc65d2d10f0afab2ae3bb36be8250f5acc180c62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/imatic/testing/zipball/dbdde05d23f6f07741008bb54b69b462452889c2",
-                "reference": "dbdde05d23f6f07741008bb54b69b462452889c2",
+                "url": "https://api.github.com/repos/imatic/testing/zipball/cc65d2d10f0afab2ae3bb36be8250f5acc180c62",
+                "reference": "cc65d2d10f0afab2ae3bb36be8250f5acc180c62",
                 "shasum": ""
             },
             "require": {
@@ -2082,7 +2082,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2018-10-24T15:35:40+00:00"
+            "time": "2018-11-05T14:51:04+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3910,9 +3910,7 @@
         }
     ],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "imatic/testing": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

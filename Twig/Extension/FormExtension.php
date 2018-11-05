@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Twig\Extension;
 
 use Symfony\Component\Form\FormRendererInterface;
