@@ -14,10 +14,11 @@ ImaticFormBundle
 Form types
 **********
 
-- imatic_type_date_range
-- imatic_type_datetime_range
-- imatic_type_range
-- imatic_type_ajax_entity_choice
+- `Imatic\\Bundle\\FormBundle\\Form\\Type\\AjaxChoiceType </Form/Type/AjaxChoiceType.php>`_
+- `Imatic\\Bundle\\FormBundle\\Form\\Type\\AjaxEntityChoiceType </Form/Type/AjaxEntityChoiceType.php>`_
+- `Imatic\\Bundle\\FormBundle\\Form\\Type\\DateRangeType </Form/Type/DateRangeType.php>`_
+- `Imatic\\Bundle\\FormBundle\\Form\\Type\\DateTimeRangeType </Form/Type/DateTimeRangeType.php>`_
+- `Imatic\\Bundle\\FormBundle\\Form\\Type\\RangeType </Form/Type/RangeType.php>`_
 
 Ajax entity choice
 ------------------
@@ -30,11 +31,13 @@ Dependencies: jQuery, Select2
 
     <?php
 
+    use Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType;
+
     class ExampleType extends AbstractType
     {
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $builder->add('author', 'imatic_type_ajax_entity_choice', [
+            $builder->add('author', AjaxEntityChoiceType::class, [
                 'class' => 'MyExampleBundle:User',
                 'route' => 'app_example_example_autocomplete',
             ]);
@@ -66,6 +69,45 @@ Additional options:
 - ``request_type`` - filter (default) or simple
 - ``route_attrs`` - custom route attributes
 - ``entity_manager`` - name of the entity manager to use
+
+Datepicker
+----------
+
+* `Imatic\\Bundle\\FormBundle\\Form\\Extension\\DatepickerExtension </Form/Extension/DatepickerExtension.php>`_
+
+This example shows, how to change default date type format and modify moment configurations by form extension.
+
+.. sourcecode:: php
+
+    <?php
+
+    namespace App\Form\Extension;
+
+    use Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
+
+    class DateTypeExtension extends DatepickerExtension
+    {
+        public function configureOptions(OptionsResolver $resolver)
+        {
+            parent::configureOptions($resolver);
+
+            $resolver->setDefaults([
+                'format' => 'dd.MM.yyyy',
+                'date_format' => 'DD.MM.YYYY',
+                'config_locale' => [
+                    'en' => [
+                        'week' => ['dow' => 1],
+                    ],
+                ],
+            ]);
+        }
+    }
+
+.. sourcecode:: yaml
+
+    parameters:
+        imatic_view.form.extension.date.class: App\Form\Extension\DateTypeExtension
 
 
 ***************

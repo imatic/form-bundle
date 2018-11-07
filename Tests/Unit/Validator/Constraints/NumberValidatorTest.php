@@ -1,19 +1,25 @@
-<?php
+<?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Tests\Unit\Validator\Constraints;
 
 use Imatic\Bundle\FormBundle\Validator\Constraints\Number;
 use Imatic\Bundle\FormBundle\Validator\Constraints\NumberValidator;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @author Miloslav Nenadal <miloslav.nenadal@imatic.cz>
  */
-class NumberValidatorTest extends \PHPUnit_Framework_TestCase
+class NumberValidatorTest extends TestCase
 {
+    /**
+     * @var MockObject|ExecutionContextInterface
+     */
     private $executionContext;
 
     protected function setUp()
     {
-        $this->executionContext = $this->createMock('Symfony\Component\Validator\Context\ExecutionContextInterface');
+        $this->executionContext = $this->createMock(ExecutionContextInterface::class);
     }
 
     /**

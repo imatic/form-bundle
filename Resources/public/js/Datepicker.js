@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 /**
  * Datepicker
  *
@@ -36,6 +38,10 @@ export default class Datepicker
             },
             this.options.config
         );
+        
+        for (var locale in this.options.configLocale) {
+            moment.updateLocale(locale, this.options.configLocale[locale]);
+        }
 
         $(target).datetimepicker(datepickerOptions);
     }
@@ -59,6 +65,9 @@ Datepicker.defaults = {
         showClear: true,
         useCurrent: false,
     },
+
+    // https://momentjs.com/docs/#/customization/
+    configLocale: {},
 
     // http://momentjs.com/docs/#/displaying/format/
     dateFormat: 'YYYY-MM-DD',

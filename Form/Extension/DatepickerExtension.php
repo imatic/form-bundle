@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -24,7 +24,7 @@ class DatepickerExtension extends AbstractTypeExtension
     /**
      * @param string $type
      */
-    public function __construct($type)
+    public function __construct(string $type)
     {
         $this->type = $type;
     }
@@ -61,6 +61,10 @@ class DatepickerExtension extends AbstractTypeExtension
             $view->vars['pick_date'] = $pickDate;
             $view->vars['pick_time'] = $pickTime;
             $view->vars['config'] = $options['config'];
+            $view->vars['config_locale'] = $options['config_locale'];
+            $view->vars['date_format'] = $options['date_format'];
+            $view->vars['date_time_format'] = $options['date_time_format'];
+            $view->vars['time_format'] = $options['time_format'];
         }
     }
 
@@ -69,6 +73,10 @@ class DatepickerExtension extends AbstractTypeExtension
         $resolver->setDefaults([
             'rich' => true,
             'config' => [],
+            'config_locale' => [],
+            'date_format' => 'YYYY-MM-DD',
+            'date_time_format' => 'YYYY-MM-DD HH:mm',
+            'time_format' => 'HH:mm',
             'template' => function (Options $options, $default) {
                 return $options['rich']
                     ? 'ImaticFormBundle:Form:datepicker.html.twig'

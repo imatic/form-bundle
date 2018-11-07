@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Twig\Extension;
 
 use Symfony\Component\Form\FormRendererInterface;
@@ -23,14 +23,6 @@ class FormExtension extends Twig_Extension
         $this->renderer = $renderer;
     }
 
-    /**
-     * @return FormRendererInterface
-     */
-    public function getRenderer()
-    {
-        return $this->renderer;
-    }
-
     public function getFunctions()
     {
         return [
@@ -39,13 +31,6 @@ class FormExtension extends Twig_Extension
                 'imatic_form_javascript',
                 [$this, 'renderFormJavascript'],
                 ['is_safe' => ['html']]
-            ),
-
-            // form_javascript (deprecated alias for BC)
-            new Twig_SimpleFunction(
-                'form_javascript',
-                [$this, 'renderFormJavascript'],
-                ['is_safe' => ['html'], 'deprecated' => '3.0.6', 'alternative' => 'imatic_form_javascript']
             ),
 
             // imatic_form_javascript_prototypes

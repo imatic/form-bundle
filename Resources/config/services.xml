@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="imatic_form.form.type.date_range.class">Imatic\Bundle\FormBundle\Form\Type\DateRangeType</parameter>
+        <parameter key="imatic_form.form.type.datetime_range.class">Imatic\Bundle\FormBundle\Form\Type\DateTimeRangeType</parameter>
+        <parameter key="imatic_form.form.type.time_range.class">Imatic\Bundle\FormBundle\Form\Type\TimeRangeType</parameter>
+        <parameter key="imatic_form.form.type.range.class">Imatic\Bundle\FormBundle\Form\Type\RangeType</parameter>
+        <parameter key="imatic_form.form.type.ajax_choice.class">Imatic\Bundle\FormBundle\Form\Type\AjaxChoiceType</parameter>
+        <parameter key="imatic_form.form.type.ajax_entity_choice.class">Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType</parameter>
+        <parameter key="imatic_view.form.extension.collection.class">Imatic\Bundle\FormBundle\Form\Extension\CollectionExtension</parameter>
+        <parameter key="imatic_view.form.extension.form_theme.class">Imatic\Bundle\FormBundle\Form\Extension\FormThemeExtension</parameter>
+        <parameter key="imatic_view.form.extension.date.class">Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension</parameter>
+        <parameter key="imatic_view.form.extension.datetime.class">Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension</parameter>
+        <parameter key="imatic_view.form.extension.time.class">Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension</parameter>
+        <parameter key="imatic_view.form.extension.birthday.class">Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension</parameter>
+        <parameter key="imatic_view.form.extension.choice.class">Imatic\Bundle\FormBundle\Form\Extension\ChoiceExtension</parameter>
+    </parameters>
+    
+    <services>
+        <defaults public="false" />
+
+        <!-- Form types -->
+        <service id="imatic_form.form.type.date_range" class="%imatic_form.form.type.date_range.class%">
+            <tag name="form.type" />
+        </service>
+        
+        <service id="imatic_form.form.type.datetime_range" class="%imatic_form.form.type.datetime_range.class%">
+            <tag name="form.type" />
+        </service>
+
+        <service id="imatic_form.form.type.time_range" class="%imatic_form.form.type.time_range.class%">
+            <tag name="form.type" />
+        </service>
+
+        <service id="imatic_form.form.type.range" class="%imatic_form.form.type.range.class%">
+            <tag name="form.type" />
+        </service>
+
+        <service id="imatic_form.form.type.ajax_choice" class="%imatic_form.form.type.ajax_choice.class%">
+            <tag name="form.type" />
+            <argument>%imatic_form.select2%</argument>
+            <argument type="service" id="router" />
+        </service>
+
+        <service id="imatic_form.form.type.ajax_entity_choice" class="%imatic_form.form.type.ajax_entity_choice.class%">
+            <tag name="form.type" />
+            <argument>%imatic_form.select2%</argument>
+            <argument type="service" id="router" />
+            <argument type="service" id="doctrine" />
+        </service>
+        
+        <!-- Form extensions -->
+        <service id="imatic_view.form.extension.collection" class="%imatic_view.form.extension.collection.class%">
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
+        </service>
+
+        <service id="imatic_view.form.extension.form_theme" class="%imatic_view.form.extension.form_theme.class%">
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType" />
+            <argument type="service" id="twig.form.renderer" />
+            <argument>%imatic_form.default_theme%</argument>
+        </service>
+
+        <service id="imatic_view.form.extension.date" class="%imatic_view.form.extension.date.class%">
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\DateType" />
+            <argument type="string">Symfony\Component\Form\Extension\Core\Type\DateType</argument>
+        </service>
+
+        <service id="imatic_view.form.extension.datetime" class="%imatic_view.form.extension.datetime.class%">
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\DateTimeType" />
+            <argument type="string">Symfony\Component\Form\Extension\Core\Type\DateTimeType</argument>
+        </service>
+
+        <service id="imatic_form.form.extension.time" class="%imatic_view.form.extension.time.class%">
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\TimeType" />
+            <argument type="string">Symfony\Component\Form\Extension\Core\Type\TimeType</argument>
+        </service>
+
+        <service id="imatic_view.form.extension.birthday" class="%imatic_view.form.extension.birthday.class%">
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\BirthdayType" />
+            <argument type="string">Symfony\Component\Form\Extension\Core\Type\BirthdayType</argument>
+        </service>
+
+        <service id="imatic_view.form.extension.choice" class="%imatic_view.form.extension.choice.class%">
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\ChoiceType" />
+            <argument type="service" id="translator" />
+            <argument>%imatic_form.select2%</argument>
+        </service>
+
+        <!-- Twig extensions -->
+        <service id="Imatic\Bundle\FormBundle\Twig\Extension\FormExtension">
+            <tag name="twig.extension" />
+            <argument type="service" id="twig.form.renderer" />
+        </service>
+    </services>
+</container>

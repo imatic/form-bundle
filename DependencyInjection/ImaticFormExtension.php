@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -21,7 +21,7 @@ class ImaticFormExtension extends Extension
         $container->setParameter('imatic_form.default_theme', $config['default_theme']);
         $container->setParameter('imatic_form.select2', $config['select2']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.xml');
     }
 }

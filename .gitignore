@@ -6,6 +6,7 @@
 /.idea/
 /nbproject/
 /composer
+/phpunit.xml
 .DS_Store
 Thumbs.db
 Tests/Fixtures/TestProject/web/bundles

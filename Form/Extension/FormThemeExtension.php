@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
-use Imatic\Bundle\FormBundle\Twig\Extension\FormExtension;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormRendererInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,14 +17,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FormThemeExtension extends AbstractTypeExtension
 {
-    /** @var \Twig_Environment */
-    private $twig;
+    /** @var FormRendererInterface */
+    private $renderer;
     /** @var string|string[]|null */
     private $defaultTheme;
 
-    public function __construct(\Twig_Environment $twig, $defaultTheme = null)
+    public function __construct(FormRendererInterface $renderer, $defaultTheme = null)
     {
-        $this->twig = $twig;
+        $this->renderer = $renderer;
         $this->defaultTheme = $defaultTheme;
     }
 
@@ -38,10 +38,7 @@ class FormThemeExtension extends AbstractTypeExtension
         }
 
         if ($theme) {
-            $this->twig->getExtension(FormExtension::class)->getRenderer()->setTheme(
-                $view,
-                (array) $theme
-            );
+            $this->renderer->setTheme($view, $theme);
         }
 
         $view->vars += $options['template_parameters'];
