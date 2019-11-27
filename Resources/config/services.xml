@@ -18,6 +18,7 @@
         <parameter key="imatic_view.form.extension.time.class">Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension</parameter>
         <parameter key="imatic_view.form.extension.birthday.class">Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension</parameter>
         <parameter key="imatic_view.form.extension.choice.class">Imatic\Bundle\FormBundle\Form\Extension\ChoiceExtension</parameter>
+        <parameter key="imatic_form.form.extension.entity.class">Imatic\Bundle\FormBundle\Form\Extension\EntityExtension</parameter>
     </parameters>
     
     <services>
@@ -88,6 +89,12 @@
             <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\ChoiceType" />
             <argument type="service" id="translator" />
             <argument>%imatic_form.select2%</argument>
+        </service>
+
+        <service id="imatic_form.form.extension.entity" class="%imatic_form.form.extension.entity.class%">
+            <tag name="form.type_extension" extended-type="Symfony\Bridge\Doctrine\Form\Type\EntityType" priority="-255" />
+            <argument type="service" id="logger"/>
+            <argument type="expression">container.hasParameter('imatic_form.entity.throw_on_unmanaged_possibility') ? parameter('imatic_form.entity.throw_on_unmanaged_possibility') : parameter('kernel.environment') === 'dev'</argument>
         </service>
 
         <!-- Twig extensions -->
