@@ -40,8 +40,8 @@ class CollectionExtension extends AbstractTypeExtension
         ]);
     }
 
-    public function getExtendedType()
+    public static function getExtendedTypes(): iterable
     {
-        return CollectionType::class;
+        return [CollectionType::class];
     }
 }

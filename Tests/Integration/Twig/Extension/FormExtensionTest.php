@@ -22,7 +22,7 @@ class FormExtensionTest extends WebTestCase
             ->getForm();
 
         $content = $this->getTwig()->render(
-            'AppImaticFormBundle:Form:testing.html.twig',
+            '@AppImaticForm/Form/testing.html.twig',
             ['form' => $testingForm->createView()]
         );
 
