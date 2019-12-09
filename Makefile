@@ -9,7 +9,7 @@ phpcs:
 
 .PHONY: phpmd
 phpmd:
-	./vendor/bin/phpmd $$(find * -maxdepth 0 -not -name 'vendor' -not -name 'Tests' -type d | paste --delimiter , --serial) text phpmd.xml
+	./vendor/bin/phpmd $$(find * -maxdepth 0 -not -name 'var' -not -name 'vendor' -not -name 'Tests' -type d | paste --delimiter , --serial) text phpmd.xml
 
 .PHONY: phpunit
 phpunit:
