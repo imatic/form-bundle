@@ -10,7 +10,7 @@ class FormPass implements CompilerPassInterface
     {
         $resources = $container->getParameter('twig.form.resources');
 
-        $resources[] = 'ImaticFormBundle:Form:global.html.twig';
+        $resources[] = '@ImaticForm/Form/global.html.twig';
 
         $container->setParameter('twig.form.resources', $resources);
     }

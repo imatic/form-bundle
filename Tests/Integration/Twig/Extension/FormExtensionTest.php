@@ -14,15 +14,15 @@ class FormExtensionTest extends WebTestCase
     public function testImaticFormJavascriptWithJavascript()
     {
         $testingForm = $this->getFormFactory()->createBuilder(
-                'Symfony\Component\Form\Extension\Core\Type\FormType',
-                null,
-                ['csrf_protection' => false]
-            )
+            'Symfony\Component\Form\Extension\Core\Type\FormType',
+            null,
+            ['csrf_protection' => false]
+        )
             ->add('testing_input')
             ->getForm();
 
         $content = $this->getTwig()->render(
-            'AppImaticFormBundle:Form:testing.html.twig',
+            '@AppImaticForm/Form/testing.html.twig',
             ['form' => $testingForm->createView()]
         );
 

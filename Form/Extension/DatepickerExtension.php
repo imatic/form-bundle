@@ -18,24 +18,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class DatepickerExtension extends AbstractTypeExtension
 {
-    /** @var string */
-    protected $type;
-
-    /**
-     * @param string $type
-     */
-    public function __construct(string $type)
-    {
-        $this->type = $type;
-    }
-
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ($options['rich']) {
             $pickDate = false;
             $pickTime = false;
 
-            switch ($this->type) {
+            $type = $form->getConfig()->getType()->getInnerType();
+            switch ($type) {
                 case DateType::class:
                     $pickDate = true;
                     break;
@@ -55,7 +45,7 @@ class DatepickerExtension extends AbstractTypeExtension
                     break;
 
                 default:
-                    throw new \OutOfBoundsException(\sprintf('The type "%s" is not valid', $this->type));
+                    throw new \OutOfBoundsException(\sprintf('The type "%s" is not valid', $type));
             }
 
             $view->vars['pick_date'] = $pickDate;
@@ -91,8 +81,13 @@ class DatepickerExtension extends AbstractTypeExtension
         $resolver->setAllowedTypes('config', 'array');
     }
 
-    public function getExtendedType()
+    public static function getExtendedTypes(): iterable
     {
-        return $this->type;
+        return [
+            DateType::class,
+            DateTimeType::class,
+            TimeType::class,
+            BirthdayType::class,
+        ];
     }
 }

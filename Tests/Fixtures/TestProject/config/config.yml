@@ -16,9 +16,7 @@ framework:
     translator:
         enabled:                true
     router:
-        resource:               '%kernel.root_dir%/config/routing.yml'
-    templating:
-        engines:                [twig]
+        resource:               '%kernel.project_dir%/config/routing.yml'
     default_locale:             cs_CZ
     profiler:                   { only_exceptions: false }
 
@@ -36,7 +34,7 @@ doctrine:
                 wrapper_class: "Imatic\\Testing\\Doctrine\\DBAL\\PersistedConnection"
                 driver:         pdo_sqlite
                 memory:         false
-                path:           '%kernel.root_dir%/cache/test.db'
+                path:           '%kernel.cache_dir%/../test.db'
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
@@ -46,7 +44,8 @@ doctrine:
 monolog:
     handlers:
         main:
-          type:                 "null"
+          # null type doesn't work with Symfony 5: https://github.com/symfony/monolog-bundle/issues/335
+          type: 'test'
 
 security:
     encoders:

@@ -13,8 +13,8 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('imatic_form');
+        $treeBuilder = new TreeBuilder('imatic_form');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()

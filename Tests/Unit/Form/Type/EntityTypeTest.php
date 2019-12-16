@@ -17,7 +17,7 @@ class EntityTypeTest extends TypeTestCase
 {
     private $registry;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $qb = $this->createMock(QueryBuilder::class);
 

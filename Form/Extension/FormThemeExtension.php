@@ -54,8 +54,8 @@ class FormThemeExtension extends AbstractTypeExtension
         $resolver->setAllowedTypes('template_parameters', 'array');
     }
 
-    public function getExtendedType()
+    public static function getExtendedTypes(): iterable
     {
-        return FormType::class;
+        return [FormType::class];
     }
 }
