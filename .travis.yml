@@ -1,11 +1,6 @@
 language: php
 
-php: 7.1
-
-addons:
-    apt:
-        packages:
-            - graphviz
+php: 7.2
 
 before_script:
     composer install

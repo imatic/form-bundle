@@ -3,15 +3,15 @@ namespace Imatic\Bundle\FormBundle\Twig\Extension;
 
 use Symfony\Component\Form\FormRendererInterface;
 use Symfony\Component\Form\FormView;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Form extension.
  *
  * @author Pavel Batecko <pavel.batecko@imatic.cz>
  */
-class FormExtension extends Twig_Extension
+class FormExtension extends AbstractExtension
 {
     /** @var FormRendererInterface */
     private $renderer;
@@ -27,21 +27,21 @@ class FormExtension extends Twig_Extension
     {
         return [
             // imatic_form_javascript
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'imatic_form_javascript',
                 [$this, 'renderFormJavascript'],
                 ['is_safe' => ['html']]
             ),
 
             // imatic_form_javascript_prototypes
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'imatic_form_javascript_prototypes',
                 [$this, 'renderFormJavascriptPrototypes'],
                 ['needs_context' => true, 'is_safe' => ['html']]
             ),
 
             // imatic_form_override_namespace
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'imatic_form_override_namespace',
                 [$this, 'overrideFormNamespace']
             ),
