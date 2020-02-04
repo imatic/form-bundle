@@ -8,7 +8,7 @@ class FormExtensionTest extends WebTestCase
 {
     public function setUp()
     {
-        static::createClient()->getContainer();
+        static::createClient();
     }
 
     public function testImaticFormJavascriptWithJavascript()

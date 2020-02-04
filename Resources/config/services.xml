@@ -48,7 +48,7 @@
             <tag name="form.type" />
             <argument>%imatic_form.select2%</argument>
             <argument type="service" id="router" />
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="Doctrine\Common\Persistence\ManagerRegistry" />
         </service>
         
         <!-- Form extensions -->
