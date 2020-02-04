@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Form\Type;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Imatic\Bundle\FormBundle\Form\DataTransformer\CollectionToScalarTransformer;
 use Imatic\Bundle\FormBundle\Form\DataTransformer\EntityToScalarTransformer;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -18,10 +18,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class AjaxEntityChoiceType extends AjaxChoiceType
 {
-    /** @var RegistryInterface */
+    /** @var ManagerRegistry */
     protected $registry;
 
-    public function __construct(array $select2Config, UrlGeneratorInterface $urlGenerator, RegistryInterface $registry)
+    public function __construct(array $select2Config, UrlGeneratorInterface $urlGenerator, ManagerRegistry $registry)
     {
         parent::__construct($select2Config, $urlGenerator);
 

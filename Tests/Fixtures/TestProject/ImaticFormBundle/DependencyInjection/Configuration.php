@@ -11,8 +11,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('app_imatic_form');
+        $treeBuilder = new TreeBuilder('app_imatic_form');
+        $rootNode = $treeBuilder->getRootNode();
 
         return $treeBuilder;
     }
