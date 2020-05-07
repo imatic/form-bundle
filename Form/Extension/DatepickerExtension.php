@@ -25,7 +25,8 @@ class DatepickerExtension extends AbstractTypeExtension
             $pickTime = false;
 
             $type = $form->getConfig()->getType()->getInnerType();
-            switch ($type) {
+
+            switch (\get_class($type)) {
                 case DateType::class:
                     $pickDate = true;
                     break;
@@ -45,7 +46,7 @@ class DatepickerExtension extends AbstractTypeExtension
                     break;
 
                 default:
-                    throw new \OutOfBoundsException(\sprintf('The type "%s" is not valid', $type));
+                    throw new \OutOfBoundsException(\sprintf('The type "%s" is not valid', \get_class($type)));
             }
 
             $view->vars['pick_date'] = $pickDate;
@@ -69,7 +70,7 @@ class DatepickerExtension extends AbstractTypeExtension
             'time_format' => 'HH:mm',
             'template' => function (Options $options, $default) {
                 return $options['rich']
-                    ? 'ImaticFormBundle:Form:datepicker.html.twig'
+                    ? '@ImaticForm/Form/datepicker.html.twig'
                     : $default;
             },
             'widget' => function (Options $options, $default) {
@@ -78,6 +79,7 @@ class DatepickerExtension extends AbstractTypeExtension
                     : $default;
             },
         ]);
+
         $resolver->setAllowedTypes('config', 'array');
     }
 
