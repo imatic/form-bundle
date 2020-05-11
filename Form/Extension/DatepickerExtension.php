@@ -63,11 +63,21 @@ class DatepickerExtension extends AbstractTypeExtension
     {
         $resolver->setDefaults([
             'rich' => true,
-            'config' => [],
-            'config_locale' => [],
-            'date_format' => 'YYYY-MM-DD',
-            'date_time_format' => 'YYYY-MM-DD HH:mm',
-            'time_format' => 'HH:mm',
+            'config' => function (Options $options, $default) {
+                return $default ?? [];
+            },
+            'config_locale' => function (Options $options, $default) {
+                return $default ?? [];
+            },
+            'date_format' => function (Options $options, $default) {
+                return $default ?? 'YYYY-MM-DD';
+            },
+            'date_time_format' => function (Options $options, $default) {
+                return $default ?? 'YYYY-MM-DD HH:mm';
+            },
+            'time_format' => function (Options $options, $default) {
+                return $default ?? 'HH:mm';
+            },
             'template' => function (Options $options, $default) {
                 return $options['rich']
                     ? '@ImaticForm/Form/datepicker.html.twig'
@@ -81,6 +91,7 @@ class DatepickerExtension extends AbstractTypeExtension
         ]);
 
         $resolver->setAllowedTypes('config', 'array');
+        $resolver->setAllowedTypes('config_locale', 'array');
     }
 
     public static function getExtendedTypes(): iterable
