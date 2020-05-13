@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->variableNode('default_theme')->defaultValue('bootstrap_4_horizontal_layout.html.twig')->end()
+                ->variableNode('default_theme')->defaultValue('@ImaticForm/Form/imatic_horizontal_layout.html.twig')->end()
                 ->arrayNode('select2')
                     ->addDefaultsIfNotSet()
                     ->ignoreExtraKeys(false)

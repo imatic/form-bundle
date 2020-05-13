@@ -1,0 +1,39 @@
+{#
+    - override default bootstrap4 error messages, because it is not show properly (#eu-fossa)
+    - https://github.com/symfony/symfony/issues/28086
+#}
+{% use "bootstrap_4_horizontal_layout.html.twig" %}
+
+{# Disable errors shown on form labels #}
+{% block form_label_errors %}{% endblock form_label_errors %}
+
+{% block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <span class="{% if form is not rootform %}invalid-feedback{% else %}alert alert-danger{% endif %} d-block">
+            {%- for error in errors -%}
+                <span class="d-block">
+                    <i class="fas fa-exclamation-circle"></i> <span class="form-error-message">{{ error.message }}</span>
+                </span>
+            {%- endfor -%}
+        </span>
+    {%- endif %}
+{%- endblock form_errors %}
+
+{% block form_row -%}
+    {%- if expanded is defined and expanded -%}
+        {{ block('fieldset_form_row') }}
+    {%- else -%}
+        {%- set widget_attr = {} -%}
+        {%- if help is not empty -%}
+            {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+        {%- endif -%}
+        <div{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group row' ~ ((not compound or force_error|default(false)) and not valid ? ' is-invalid'))|trim})} %}{{ block('attributes') }}{% endwith %}>
+            {{- form_label(form) -}}
+            <div class="{{ block('form_group_class') }}">
+                {{- form_widget(form, widget_attr) -}}
+                {{- form_help(form) -}}
+                {{- form_errors(form) -}}
+            </div>
+        </div>
+    {%- endif -%}
+{%- endblock form_row %}
