@@ -28,7 +28,7 @@ class CollectionExtension extends AbstractTypeExtension
         $resolver->setDefaults([
             'template' => function (Options $options, $default) {
                 return $options['prototype']
-                    ? 'ImaticFormBundle:Form:collection.html.twig'
+                    ? '@ImaticForm/Form/collection.html.twig'
                     : $default;
             },
             'collection_button_style' => 'bootstrap-horizontal',

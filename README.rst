@@ -102,12 +102,12 @@ This example shows, how to change default date type format and modify moment con
                 ],
             ]);
         }
+
+        public static function getExtendedTypes(): iterable
+        {
+            return [DateType::class];
+        }
     }
-
-.. sourcecode:: yaml
-
-    parameters:
-        imatic_view.form.extension.date.class: App\Form\Extension\DateTypeExtension
 
 
 ***************

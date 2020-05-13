@@ -3,8 +3,8 @@
         {% set type = 'text' %}
         {% set attr = attr|merge({'autocomplete': 'off'}) %}
         {{- block('form_widget_simple') -}}
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
+        <span class="input-group-append">
+            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
         </span>
     </div>
 {% endblock %}

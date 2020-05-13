@@ -54,7 +54,7 @@ class ChoiceExtension extends AbstractTypeExtension
             },
             'template' => function (Options $options) {
                 return $options['rich']
-                    ? 'ImaticFormBundle:Form:choice.html.twig'
+                    ? '@ImaticForm/Form/choice.html.twig'
                     : null;
             },
         ]);

@@ -10,25 +10,25 @@
 
 .imatic-form-collection-marker {
     transition: outline-width .5s, outline-color .5s, background-color .5s;
-    background-color: fade(@gray-lighter, 50%);
-    outline: 5px solid fade(@gray-lighter, 50%) !important;
+    background-color: rgba($gray-lighter, 50%);
+    outline: 5px solid rgba($gray-lighter, 50%) !important;
 }
 
 .imatic-form-collection-inline-control {
-    padding-top: @form-group-margin-bottom;
+    padding-top: $form-group-margin-bottom;
 }
 
 .form-group.imatic-form-collection-ambient {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: inherit;
+
+    @media (min-width: breakpoint-min('md')) {
+        position: absolute;
+        top: 0;
+    }
 }
 
 /* Generic */
 label.required:before {
     content: "*";
-    color: @brand-danger;
-}
-input[type=file].form-control {
-    height:auto;
+    color: theme-color("danger");
 }

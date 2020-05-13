@@ -18,12 +18,13 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->variableNode('default_theme')->defaultValue('bootstrap_3_horizontal_layout.html.twig')->end()
+                ->variableNode('default_theme')->defaultValue('@ImaticForm/Form/imatic_horizontal_layout.html.twig')->end()
                 ->arrayNode('select2')
                     ->addDefaultsIfNotSet()
                     ->ignoreExtraKeys(false)
                     ->children()
-                        ->scalarNode('theme')->defaultValue('bootstrap')->end()
+                        ->scalarNode('theme')->defaultValue('bootstrap4')->end()
+                        ->scalarNode('width')->defaultValue('style')->end()
                     ->end()
                 ->end()
             ->end();

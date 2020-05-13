@@ -91,7 +91,7 @@ class AjaxChoiceType extends AbstractType
             'route_attrs' => [],
             'request_type' => 'filter',
             'compound' => false,
-            'template' => 'ImaticFormBundle:Form:ajax_choice.html.twig',
+            'template' => '@ImaticForm/Form/ajax_choice.html.twig',
         ]);
     }
 

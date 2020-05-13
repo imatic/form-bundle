@@ -25,7 +25,8 @@ class DatepickerExtension extends AbstractTypeExtension
             $pickTime = false;
 
             $type = $form->getConfig()->getType()->getInnerType();
-            switch ($type) {
+
+            switch (\get_class($type)) {
                 case DateType::class:
                     $pickDate = true;
                     break;
@@ -45,7 +46,7 @@ class DatepickerExtension extends AbstractTypeExtension
                     break;
 
                 default:
-                    throw new \OutOfBoundsException(\sprintf('The type "%s" is not valid', $type));
+                    throw new \OutOfBoundsException(\sprintf('The type "%s" is not valid', \get_class($type)));
             }
 
             $view->vars['pick_date'] = $pickDate;
@@ -62,14 +63,24 @@ class DatepickerExtension extends AbstractTypeExtension
     {
         $resolver->setDefaults([
             'rich' => true,
-            'config' => [],
-            'config_locale' => [],
-            'date_format' => 'YYYY-MM-DD',
-            'date_time_format' => 'YYYY-MM-DD HH:mm',
-            'time_format' => 'HH:mm',
+            'config' => function (Options $options, $default) {
+                return $default ?? [];
+            },
+            'config_locale' => function (Options $options, $default) {
+                return $default ?? [];
+            },
+            'date_format' => function (Options $options, $default) {
+                return $default ?? 'YYYY-MM-DD';
+            },
+            'date_time_format' => function (Options $options, $default) {
+                return $default ?? 'YYYY-MM-DD HH:mm';
+            },
+            'time_format' => function (Options $options, $default) {
+                return $default ?? 'HH:mm';
+            },
             'template' => function (Options $options, $default) {
                 return $options['rich']
-                    ? 'ImaticFormBundle:Form:datepicker.html.twig'
+                    ? '@ImaticForm/Form/datepicker.html.twig'
                     : $default;
             },
             'widget' => function (Options $options, $default) {
@@ -78,7 +89,9 @@ class DatepickerExtension extends AbstractTypeExtension
                     : $default;
             },
         ]);
+
         $resolver->setAllowedTypes('config', 'array');
+        $resolver->setAllowedTypes('config_locale', 'array');
     }
 
     public static function getExtendedTypes(): iterable
