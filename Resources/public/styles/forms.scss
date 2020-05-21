@@ -10,8 +10,8 @@
 
 .imatic-form-collection-marker {
     transition: outline-width .5s, outline-color .5s, background-color .5s;
-    background-color: rgba($gray-lighter, 50%);
-    outline: 5px solid rgba($gray-lighter, 50%) !important;
+    background-color: $table-hover-bg;
+    outline: 1px solid $table-hover-bg !important;
 }
 
 .imatic-form-collection-inline-control {
@@ -30,5 +30,5 @@
 /* Generic */
 label.required:before {
     content: "*";
-    color: theme-color("danger");
+    color: #d9534f;
 }
