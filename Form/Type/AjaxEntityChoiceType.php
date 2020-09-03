@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 use Imatic\Bundle\FormBundle\Form\DataTransformer\CollectionToScalarTransformer;
 use Imatic\Bundle\FormBundle\Form\DataTransformer\EntityToScalarTransformer;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;

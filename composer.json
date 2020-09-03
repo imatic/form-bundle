@@ -20,7 +20,6 @@
         "symfony/form": "^4.4|^5.0",
         "symfony/framework-bundle": "^4.4|^5.0",
         "symfony/expression-language": "^4.4|^5.0",
-        "symfony/templating": "^4.4|^5.0",
         "symfony/translation": "^4.4|^5.0",
         "symfony/twig-bundle": "^4.4|^5.0",
         "symfony/validator": "^4.4|^5.0",
@@ -38,7 +37,10 @@
     "autoload": {
         "psr-4": {
             "Imatic\\Bundle\\FormBundle\\": ""
-        }
+        },
+        "exclude-from-classmap": [
+            "Tests/"
+        ]
     },
     "config": {
         "sort-packages": true

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Tests\Unit\Form\Type;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Imatic\Bundle\FormBundle\Form\Extension\EntityExtension;
 use Imatic\Bundle\FormBundle\Tests\Fixtures\TestProject\ImaticFormBundle\Log\ArrayLogger;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
@@ -47,11 +47,9 @@ class EntityTypeTest extends TypeTestCase
             ->willReturn($em);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testExceptionShouldBeThrownWhenChoiceValueIsNotSpecified()
     {
+        $this->expectException(\RuntimeException::class);
         $logger = new ArrayLogger();
 
         $this->factory = Forms::createFormFactoryBuilder()

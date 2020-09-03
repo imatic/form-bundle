@@ -5,6 +5,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\Form\ChoiceList\IdReader;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceValue;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class EntityExtension extends AbstractTypeExtension
@@ -22,10 +23,14 @@ class EntityExtension extends AbstractTypeExtension
     {
         $choiceValue = $options['choice_value'] ?? null;
 
+        if (\class_exists('Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceValue') && $choiceValue instanceof ChoiceValue) {
+            $choiceValue = $choiceValue->getOption();
+        }
+
         return \is_array($choiceValue)
-           && \count($choiceValue) === 2
-           && $choiceValue[1] === 'getIdValue'
-           && $choiceValue[0] instanceof IdReader;
+            && \count($choiceValue) === 2
+            && $choiceValue[1] === 'getIdValue'
+            && $choiceValue[0] instanceof IdReader;
     }
 
     private function createErrorMessage(string $formType): string
