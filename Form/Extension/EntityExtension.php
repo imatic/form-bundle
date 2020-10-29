@@ -1,55 +1,36 @@
 <?php declare(strict_types=1);
 namespace Imatic\Bundle\FormBundle\Form\Extension;
 
-use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\Form\ChoiceList\IdReader;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceValue;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EntityExtension extends AbstractTypeExtension
 {
-    private $logger;
-    private $throw;
+    private $manager;
 
-    public function __construct(LoggerInterface $logger, bool $throw)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->logger = $logger;
-        $this->throw = $throw;
+        $this->manager = $manager;
     }
 
-    private function unmanagedErrorPossibility(array $options): bool
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceValue = $options['choice_value'] ?? null;
+        $resolver->setDefaults([
+            // specify `choice_value` option prevent unmanaged entity exception in case `UnitOfWork` state which is cleared before constructing the form
+            'choice_value' => function ($entity) {
+                if (\is_object($entity)) {
+                    $metadata = $this->manager->getClassMetadata(\get_class($entity));
 
-        if (\class_exists('Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceValue') && $choiceValue instanceof ChoiceValue) {
-            $choiceValue = $choiceValue->getOption();
-        }
+                    if (1 === \count($metadata->getIdentifierFieldNames())) {
+                        return (string) \current($metadata->getIdentifierValues($entity));
+                    }
+                }
 
-        return \is_array($choiceValue)
-            && \count($choiceValue) === 2
-            && $choiceValue[1] === 'getIdValue'
-            && $choiceValue[0] instanceof IdReader;
-    }
-
-    private function createErrorMessage(string $formType): string
-    {
-        return "Form type `{$formType}` does not specify `choice_value` option which can lead to unmanaged entity exception in case `UnitOfWork` state is cleared before constructing the form.";
-    }
-
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        if ($this->unmanagedErrorPossibility($options)) {
-            $formType = \get_class($builder->getFormConfig()->getType()->getInnerType());
-            $message = $this->createErrorMessage($formType);
-
-            if ($this->throw) {
-                throw new \RuntimeException($message);
-            }
-
-            $this->logger->error($message);
-        }
+                return '';
+            },
+        ]);
     }
 
     public static function getExtendedTypes(): iterable

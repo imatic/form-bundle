@@ -53,29 +53,28 @@
         
         <!-- Form extensions -->
         <service id="imatic_view.form.extension.collection" class="%imatic_view.form.extension.collection.class%">
-            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
+            <tag name="form.type_extension" />
         </service>
 
         <service id="imatic_view.form.extension.form_theme" class="%imatic_view.form.extension.form_theme.class%">
-            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\FormType" />
+            <tag name="form.type_extension" />
             <argument type="service" id="twig.form.renderer" />
             <argument>%imatic_form.default_theme%</argument>
         </service>
 
         <service id="imatic_view.form.extension.datepicker" class="%imatic_view.form.extension.datepicker.class%">
-            <tag name="form.type_extension"/>
+            <tag name="form.type_extension" />
         </service>
 
         <service id="imatic_view.form.extension.choice" class="%imatic_view.form.extension.choice.class%">
-            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\ChoiceType" />
+            <tag name="form.type_extension" />
             <argument type="service" id="translator" />
             <argument>%imatic_form.select2%</argument>
         </service>
 
         <service id="imatic_form.form.extension.entity" class="%imatic_form.form.extension.entity.class%">
-            <tag name="form.type_extension" extended-type="Symfony\Bridge\Doctrine\Form\Type\EntityType" priority="-255" />
-            <argument type="service" id="logger"/>
-            <argument type="expression">container.hasParameter('imatic_form.entity.throw_on_unmanaged_possibility') ? parameter('imatic_form.entity.throw_on_unmanaged_possibility') : parameter('kernel.environment') === 'dev'</argument>
+            <tag name="form.type_extension" priority="-255" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <!-- Twig extensions -->

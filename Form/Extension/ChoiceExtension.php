@@ -48,9 +48,7 @@ class ChoiceExtension extends AbstractTypeExtension
     {
         $resolver->setDefaults([
             'rich' => function (Options $options) {
-                return !$options['expanded']
-                    ? true
-                    : false;
+                return !$options['expanded'];
             },
             'template' => function (Options $options) {
                 return $options['rich']
