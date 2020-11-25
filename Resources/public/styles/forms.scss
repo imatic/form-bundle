@@ -28,7 +28,10 @@
 }
 
 /* Generic */
-label.required:before {
-    content: "*";
-    color: #d9534f;
+label.required,
+legend.required {
+    &:before {
+        content: "*";
+        color: #d9534f;
+    }
 }
