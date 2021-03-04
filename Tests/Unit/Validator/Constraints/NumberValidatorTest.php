@@ -17,7 +17,7 @@ class NumberValidatorTest extends TestCase
      */
     private $executionContext;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->executionContext = $this->createMock(ExecutionContextInterface::class);
     }
@@ -92,17 +92,11 @@ class NumberValidatorTest extends TestCase
             ->expects($this->exactly(2))
             ->method('addViolation');
         $this->executionContext
-            ->expects($this->at(0))
             ->method('addViolation')
-            ->with('The number cannot have bigger precision than "%maxPrecision%"', [
-                '%maxPrecision%' => 3,
-            ]);
-        $this->executionContext
-            ->expects($this->at(1))
-            ->method('addViolation')
-            ->with('The number cannot have bigger scale than "%maxScale%"', [
-                '%maxScale%' => 1,
-            ]);
+            ->withConsecutive(
+                ['The number cannot have bigger precision than "%maxPrecision%"', ['%maxPrecision%' => 3]],
+                ['The number cannot have bigger scale than "%maxScale%"', ['%maxScale%' => 1]]
+            );
 
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
