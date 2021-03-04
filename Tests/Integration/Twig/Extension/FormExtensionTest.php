@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class FormExtensionTest extends WebTestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         static::createClient();
     }
