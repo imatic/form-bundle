@@ -43,7 +43,10 @@
         ]
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "ocramius/package-versions": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
