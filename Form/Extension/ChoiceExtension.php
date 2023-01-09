@@ -3,6 +3,7 @@ namespace Imatic\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
@@ -28,6 +29,13 @@ class ChoiceExtension extends AbstractTypeExtension
         $this->translator = $translator;
     }
 
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        if ($options['tags']) {
+            $builder->resetViewTransformers();
+        }
+    }
+
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ($options['rich']) {
@@ -39,7 +47,8 @@ class ChoiceExtension extends AbstractTypeExtension
             $view->vars['select2_options'] = [
                 'placeholder' => $placeholder,
                 'multiple' => $options['multiple'],
-                'allowClear' => $options['multiple'] ? false : !$options['required'],
+                'allowClear' => !$options['multiple'] && !$options['required'],
+                'tags' => $options['tags'],
             ] + $this->select2Config;
         }
     }
@@ -55,7 +64,10 @@ class ChoiceExtension extends AbstractTypeExtension
                     ? '@ImaticForm/Form/choice.html.twig'
                     : null;
             },
+            'tags' => false,
         ]);
+
+        $resolver->addAllowedTypes('tags', 'bool');
     }
 
     public static function getExtendedTypes(): iterable
