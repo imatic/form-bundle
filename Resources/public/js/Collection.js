@@ -18,8 +18,12 @@ export default class Collection
         this.$rootContainer = $rootContainer;
         this.initializableFields = initializableFields;
         this.options = processOptions($.extend({}, this.constructor.defaults, options));
-        this.id = getUniqueCollectionId();
-        this.idSequence = 0;
+
+        if (false !== $rootContainer.data('index')) {
+            this.id = $rootContainer.data('items');
+        } else {
+            this.id = new Date().getTime();
+        }
     }
 
     /**
@@ -113,6 +117,49 @@ export default class Collection
      * @param {jQuery} $item
      */
     deleteItem($item) {
+        const rootId = this.$rootContainer.attr('id'); // collection items are prefixed with root element id
+        const collectionData = $item.find(`[id*='${rootId}_'`);
+
+        if (this.$rootContainer.data('index') && collectionData) {
+            const collectionDataId = collectionData[0].id.match(new RegExp(rootId + '_(\\d+)'))
+            // make changes only if newly added item is removed
+            if (collectionDataId && collectionDataId[1] >= this.$rootContainer.data('index')) {
+                // decrease id in attributes of all next collection items
+                for (let i = parseInt(collectionDataId[1]) + 1; i < this.id; i++) {
+                    let collection = $(`#${rootId}_${i}`)
+
+                    collection.find(`label[for*='${rootId}_${i}']`).each(function() {
+                        let attr = $(this).attr('for');
+
+                        if (attr) {
+                            $(this).attr('for', attr.replace(`${rootId}_${i}`, `${rootId}_${i-1}`))
+                        }
+                    })
+
+                    collection.find(`[id*='${rootId}_${i}']`).each(function() {
+                        let attr = $(this).attr('id');
+
+                        if (attr) {
+                            $(this).attr('id', attr.replace(`${rootId}_${i}`, `${rootId}_${i-1}`))
+                        }
+
+                        attr = $(this).attr('name');
+
+                        if (attr) {
+                            $(this).attr('name', attr.replace(`[${i}]`, `[${i-1}]`))
+                        }
+                    })
+
+                    collection.attr('id', `${rootId}_${i-1}`)
+                }
+
+                // decrease id value only if newly added item in collection is removed
+                if (this.id > collectionDataId[1]) {
+                    this.id--;
+                }
+            }
+        }
+
         $item
             .trigger('delete.imatic.form.collection')
             .remove()
@@ -131,7 +178,7 @@ export default class Collection
         // create item from the prototype template
         var $item = $(templateHtml.replace(
             new RegExp(Imatic.View.RegExp.escape(prototypeName), 'g'),
-            'new_' + this.id + (++this.idSequence)
+            (false !== $container.data('index')) ? this.id++ : 'new_' + this.id++
         ));
 
         // insert after last item or prepend to the container
@@ -344,12 +391,3 @@ function processOptions(options)
     return options;
 }
 
-/**
- * @returns {Number}
- */
-function getUniqueCollectionId()
-{
-    return new Date().getTime() + (++collectionIdSeq);
-}
-
-var collectionIdSeq = 0;

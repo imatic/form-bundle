@@ -20,6 +20,11 @@ class CollectionExtension extends AbstractTypeExtension
         if (isset($view->vars['prototype'])) {
             $view->vars['prototype_name'] = $options['prototype_name'];
             $view->vars['collection_button_style'] = $options['collection_button_style'];
+            $view->vars['data_index'] = false !== $options['data_index'];
+
+            if (\is_numeric($options['data_index'])) {
+                $view->vars['data_index_value'] = $options['data_index'];
+            }
         }
     }
 
@@ -37,7 +42,10 @@ class CollectionExtension extends AbstractTypeExtension
                     'label' => false,
                 ];
             },
+            'data_index' => false,
         ]);
+
+        $resolver->setAllowedTypes('data_index', ['boolean', 'integer']);
     }
 
     public static function getExtendedTypes(): iterable
