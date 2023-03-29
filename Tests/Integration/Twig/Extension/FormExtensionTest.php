@@ -43,7 +43,7 @@ EOF
      */
     private function getTwig()
     {
-        return self::$container->get('twig');
+        return self::getContainer()->get('twig');
     }
 
     /**
@@ -51,6 +51,6 @@ EOF
      */
     private function getFormFactory()
     {
-        return self::$container->get('form.factory');
+        return self::getContainer()->get('form.factory');
     }
 }
