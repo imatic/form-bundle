@@ -69,7 +69,7 @@ class AjaxEntityChoiceType extends AjaxChoiceType
                 return function ($entity) use ($metadata) {
                     $ids = $metadata->getIdentifierValues($entity);
 
-                    return \current($ids);
+                    return current($ids);
                 };
             },
         ]);

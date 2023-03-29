@@ -11,7 +11,7 @@ class ArrayToStringTransformer implements DataTransformerInterface
             return '';
         }
 
-        return \implode(',', $array);
+        return implode(',', $array);
     }
 
     public function reverseTransform($string)
@@ -23,6 +23,6 @@ class ArrayToStringTransformer implements DataTransformerInterface
             return $string;
         }
 
-        return \explode(',', $string);
+        return explode(',', $string);
     }
 }

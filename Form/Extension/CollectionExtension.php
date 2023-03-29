@@ -22,7 +22,7 @@ class CollectionExtension extends AbstractTypeExtension
             $view->vars['collection_button_style'] = $options['collection_button_style'];
             $view->vars['data_index'] = false !== $options['data_index'];
 
-            if (\is_numeric($options['data_index'])) {
+            if (is_numeric($options['data_index'])) {
                 $view->vars['data_index_value'] = $options['data_index'];
             }
         }

@@ -21,12 +21,12 @@ class NumberValidator extends ConstraintValidator
             return;
         }
 
-        $chunks = \explode('.', (string) $value);
+        $chunks = explode('.', (string) $value);
         if (\count($chunks) > 2) {
             throw new \Exception('Number can have only 1 "." character.');
         }
 
-        $precision = \strlen(\implode('', $chunks));
+        $precision = \strlen(implode('', $chunks));
         $scale = isset($chunks[1]) ? \strlen($chunks[1]) : 0;
 
         if ($constraint->precision !== null && $precision > $constraint->precision) {

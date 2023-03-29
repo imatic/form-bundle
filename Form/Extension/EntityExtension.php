@@ -24,7 +24,7 @@ class EntityExtension extends AbstractTypeExtension
                     $metadata = $this->manager->getClassMetadata(\get_class($entity));
 
                     if (1 === \count($metadata->getIdentifierFieldNames())) {
-                        return (string) \current($metadata->getIdentifierValues($entity));
+                        return (string) current($metadata->getIdentifierValues($entity));
                     }
                 }
 

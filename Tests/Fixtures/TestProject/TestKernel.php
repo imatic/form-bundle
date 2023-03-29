@@ -19,7 +19,7 @@ class TestKernel extends BaseTestKernel
             new \Imatic\Bundle\FormBundle\Tests\Fixtures\TestProject\ImaticFormBundle\AppImaticFormBundle(),
         ];
 
-        return \array_merge($parentBundles, $bundles);
+        return array_merge($parentBundles, $bundles);
     }
 
     public function getProjectDir(): string

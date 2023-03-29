@@ -57,12 +57,12 @@ class CollectionToScalarTransformer implements DataTransformerInterface
             return new ArrayCollection();
         }
         if (!\is_array($value)) {
-            $value = \explode(',', $value);
+            $value = explode(',', $value);
         }
 
         $qb = clone $this->qb;
         $qb
-            ->andWhere(\current($qb->getRootAliases()) . ' IN(:CollectionToScalarTransformer_Ids)')
+            ->andWhere(current($qb->getRootAliases()) . ' IN(:CollectionToScalarTransformer_Ids)')
             ->setParameter('CollectionToScalarTransformer_Ids', $value);
 
         return new ArrayCollection($qb->getQuery()->execute());
