@@ -14,7 +14,7 @@ class ArrayLogger extends AbstractLogger
 
     public function log($level, $message, array $context = []): void
     {
-        $this->buffer = array_merge(
+        $this->buffer = \array_merge(
             $this->buffer,
             [
                 ['level' => $level, 'message' => $message, 'context' => $context],

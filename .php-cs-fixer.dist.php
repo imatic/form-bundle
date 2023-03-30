@@ -18,7 +18,9 @@ return (new PhpCsFixer\Config())
         'magic_constant_casing' => true,
         'modernize_types_casting' => true,
         'native_function_casing' => true,
-        'native_function_invocation' => true,
+        'native_function_invocation' => [
+            'include' => ['@internal'], 'scope' => 'namespaced', 'strict' => true
+        ],
         'new_with_braces' => true,
         'no_alias_functions' => true,
         'no_blank_lines_after_class_opening' => true,
@@ -36,8 +38,7 @@ return (new PhpCsFixer\Config())
         'no_php4_constructor' => true,
         'no_singleline_whitespace_before_semicolons' => true,
         'no_spaces_around_offset' => true,
-        'no_trailing_comma_in_list_call' => true,
-        'no_trailing_comma_in_singleline_array' => true,
+        'no_trailing_comma_in_singleline' => true,
         'no_unneeded_control_parentheses' => true,
         'no_unneeded_curly_braces' => true,
         'no_unused_imports' => true,

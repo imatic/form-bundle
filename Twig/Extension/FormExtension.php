@@ -87,11 +87,11 @@ class FormExtension extends AbstractExtension
         $output = '[';
         $counter = 0;
 
-        while (list($prototype, $prototypeName, $parentPrototypeNames) = array_pop($stack)) {
+        while (list($prototype, $prototypeName, $parentPrototypeNames) = \array_pop($stack)) {
             try {
                 // the "unique_block_prefix" must be changed to prevent messing
                 // up FormRenderer's internal cache and causing errors later on
-                $prototype->vars['unique_block_prefix'] .= sprintf('_%d', ++$this->prototypeRenderUidSeq);
+                $prototype->vars['unique_block_prefix'] .= \sprintf('_%d', ++$this->prototypeRenderUidSeq);
 
                 if (isset($prototype->vars['prototype'])) {
                     // directly nested collection prototypes lead to recursion in searchAndRenderBlock()
@@ -103,11 +103,11 @@ class FormExtension extends AbstractExtension
                     $output .= ",\n";
                 }
 
-                $output .= sprintf(
+                $output .= \sprintf(
                     '{id: %s, prototypeName: %s, parentPrototypeNames: %s, initializer: function ($field) { %s }}',
-                    json_encode($prototype->vars['id']),
-                    json_encode($prototypeName),
-                    json_encode($parentPrototypeNames),
+                    \json_encode($prototype->vars['id']),
+                    \json_encode($prototypeName),
+                    \json_encode($parentPrototypeNames),
                     $code
                 );
             } catch (\LogicException $e) {
@@ -116,7 +116,7 @@ class FormExtension extends AbstractExtension
                         ? [
                             $child->vars['prototype'],
                             $child->vars['prototype']->vars['name'],
-                            array_merge($parentPrototypeNames, [$prototypeName]),
+                            \array_merge($parentPrototypeNames, [$prototypeName]),
                         ]
                         : [
                             $child,
@@ -143,28 +143,28 @@ class FormExtension extends AbstractExtension
     {
         $stack = [$rootForm];
 
-        while ($form = array_pop($stack)) {
-            if (false !== ($firstSegmentPos = strpos($form->vars['full_name'], '['))) {
+        while ($form = \array_pop($stack)) {
+            if (false !== ($firstSegmentPos = \strpos($form->vars['full_name'], '['))) {
                 if ($form === $rootForm) {
                     throw new \InvalidArgumentException('The given form view is not a root form view');
                 }
 
-                $rest = substr($form->vars['full_name'], $firstSegmentPos);
+                $rest = \substr($form->vars['full_name'], $firstSegmentPos);
 
                 $form->vars['full_name'] = $replaceFirstSegment
-                    ? sprintf(
+                    ? \sprintf(
                         '%s%s',
                         $newNamespace,
                         $rest
                     )
-                    : sprintf(
+                    : \sprintf(
                         '%s[%s]%s',
                         $newNamespace,
-                        substr($form->vars['full_name'], 0, $firstSegmentPos),
+                        \substr($form->vars['full_name'], 0, $firstSegmentPos),
                         $rest
                     );
             } else {
-                $form->vars['full_name'] = sprintf(
+                $form->vars['full_name'] = \sprintf(
                     '%s[%s]',
                     $newNamespace,
                     $form->vars['full_name']

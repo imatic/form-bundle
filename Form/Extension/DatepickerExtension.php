@@ -46,7 +46,7 @@ class DatepickerExtension extends AbstractTypeExtension
                     break;
 
                 default:
-                    throw new \OutOfBoundsException(sprintf('The type "%s" is not valid', \get_class($type)));
+                    throw new \OutOfBoundsException(\sprintf('The type "%s" is not valid', \get_class($type)));
             }
 
             $view->vars['pick_date'] = $pickDate;

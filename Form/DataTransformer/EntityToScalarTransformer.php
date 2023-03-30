@@ -40,7 +40,7 @@ class EntityToScalarTransformer implements DataTransformerInterface
         if (null !== $value && '' !== $value) {
             $qb = clone $this->qb;
             $qb
-                ->andWhere(current($qb->getRootAliases()) . ' = :EntityToScalarTransformer_Id')
+                ->andWhere(\current($qb->getRootAliases()) . ' = :EntityToScalarTransformer_Id')
                 ->setParameter('EntityToScalarTransformer_Id', $value);
 
             return $qb->getQuery()->getOneOrNullResult();

@@ -19,8 +19,8 @@ class RemoveUnsentFieldsSubscriber implements EventSubscriberInterface
 
     public function preSubmit(FormEvent $event)
     {
-        $usedFields = array_keys($event->getData());
-        $children = array_keys($event->getForm()->all());
-        array_map([$event->getForm(), 'remove'], array_diff($children, $usedFields));
+        $usedFields = \array_keys($event->getData());
+        $children = \array_keys($event->getForm()->all());
+        \array_map([$event->getForm(), 'remove'], \array_diff($children, $usedFields));
     }
 }
