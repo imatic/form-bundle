@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 require __DIR__ . '/../../../bootstrap.php';
-\umask(0007);
+umask(0007);
 
 use Imatic\Bundle\FormBundle\Tests\Fixtures\TestProject\TestKernel;
 use Symfony\Component\HttpFoundation\Request;

@@ -8,7 +8,7 @@ class TestKernel extends BaseTestKernel
     /**
      * {@inheritdoc}
      */
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         $parentBundles = parent::registerBundles();
 
@@ -22,7 +22,7 @@ class TestKernel extends BaseTestKernel
         return \array_merge($parentBundles, $bundles);
     }
 
-    public function getProjectDir()
+    public function getProjectDir(): string
     {
         return __DIR__;
     }
