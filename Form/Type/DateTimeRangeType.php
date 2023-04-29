@@ -24,11 +24,9 @@ class DateTimeRangeType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            [
-                'field_type' => DateTimeType::class,
-                'field_options' => [],
-            ]
-        );
+        $resolver->setDefaults([
+            'field_type' => DateTimeType::class,
+            'field_options' => ['html5' => false, 'format' => 'non-html5'],
+        ]);
     }
 }
