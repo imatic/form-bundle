@@ -16,7 +16,9 @@ class NotNullOneOfValidator extends ConstraintValidator
         $hasNotNullValue = false;
         foreach ($constraint->properties as $property) {
             $reflProperty = new \ReflectionProperty($value, $property);
-            $reflProperty->setAccessible(true);
+            if (\PHP_VERSION_ID < 80100) {
+                $reflProperty->setAccessible(true);
+            }
 
             if (null !== $reflProperty->getValue($value)) {
                 $hasNotNullValue = true;
