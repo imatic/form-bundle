@@ -1,0 +1,95 @@
+parameters:
+    imatic_form.form.type.date_range.class: Imatic\Bundle\FormBundle\Form\Type\DateRangeType
+    imatic_form.form.type.datetime_range.class: Imatic\Bundle\FormBundle\Form\Type\DateTimeRangeType
+    imatic_form.form.type.time_range.class: Imatic\Bundle\FormBundle\Form\Type\TimeRangeType
+    imatic_form.form.type.range.class: Imatic\Bundle\FormBundle\Form\Type\RangeType
+    imatic_form.form.type.ajax_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxChoiceType
+    imatic_form.form.type.ajax_entity_choice.class: Imatic\Bundle\FormBundle\Form\Type\AjaxEntityChoiceType
+    imatic_view.form.extension.collection.class: Imatic\Bundle\FormBundle\Form\Extension\CollectionExtension
+    imatic_view.form.extension.form_theme.class: Imatic\Bundle\FormBundle\Form\Extension\FormThemeExtension
+    imatic_view.form.extension.datepicker.class: Imatic\Bundle\FormBundle\Form\Extension\DatepickerExtension
+    imatic_view.form.extension.choice.class: Imatic\Bundle\FormBundle\Form\Extension\ChoiceExtension
+    imatic_form.form.extension.entity.class: Imatic\Bundle\FormBundle\Form\Extension\EntityExtension
+
+services:
+    _defaults:
+        public: false
+
+    # Form types
+    imatic_form.form.type.date_range:
+        class: '%imatic_form.form.type.date_range.class%'
+        tags:
+            - { name: form.type }
+
+    imatic_form.form.type.datetime_range:
+        class: '%imatic_form.form.type.datetime_range.class%'
+        tags:
+            - { name: form.type }
+
+    imatic_form.form.type.time_range:
+        class: '%imatic_form.form.type.time_range.class%'
+        tags:
+            - { name: form.type }
+
+    imatic_form.form.type.range:
+        class: '%imatic_form.form.type.range.class%'
+        tags:
+            - { name: form.type }
+
+    imatic_form.form.type.ajax_choice:
+        class: '%imatic_form.form.type.ajax_choice.class%'
+        tags:
+            - { name: form.type }
+        arguments:
+            - '%imatic_form.select2%'
+            - '@router'
+
+    imatic_form.form.type.ajax_entity_choice:
+        class: '%imatic_form.form.type.ajax_entity_choice.class%'
+        tags:
+            - { name: form.type }
+        arguments:
+            - '%imatic_form.select2%'
+            - '@router'
+            - '@Doctrine\Persistence\ManagerRegistry'
+
+    # Form extensions
+    imatic_view.form.extension.collection:
+        class: '%imatic_view.form.extension.collection.class%'
+        tags:
+            - { name: form.type_extension }
+
+    imatic_view.form.extension.form_theme:
+        class: '%imatic_view.form.extension.form_theme.class%'
+        tags:
+            - { name: form.type_extension }
+        arguments:
+            - '@twig.form.renderer'
+            - '%imatic_form.default_theme%'
+
+    imatic_view.form.extension.datepicker:
+        class: '%imatic_view.form.extension.datepicker.class%'
+        tags:
+            - { name: form.type_extension }
+
+    imatic_view.form.extension.choice:
+        class: '%imatic_view.form.extension.choice.class%'
+        tags:
+            - { name: form.type_extension }
+        arguments:
+            - '@translator'
+            - '%imatic_form.select2%'
+
+    imatic_form.form.extension.entity:
+        class: '%imatic_form.form.extension.entity.class%'
+        tags:
+            - { name: form.type_extension, priority: -255 }
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    # Twig extensions
+    Imatic\Bundle\FormBundle\Twig\Extension\FormExtension:
+        tags:
+            - { name: twig.extension }
+        arguments:
+            - '@twig.form.renderer'

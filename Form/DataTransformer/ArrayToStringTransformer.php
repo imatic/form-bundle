@@ -5,7 +5,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class ArrayToStringTransformer implements DataTransformerInterface
 {
-    public function transform($array)
+    public function transform(mixed $value): mixed
     {
         if (null === $array || !\is_array($array)) {
             return '';
@@ -14,7 +14,7 @@ class ArrayToStringTransformer implements DataTransformerInterface
         return \implode(',', $array);
     }
 
-    public function reverseTransform($string)
+    public function reverseTransform(mixed $value): mixed
     {
         if ('' === $string) {
             return null;

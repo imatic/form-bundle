@@ -25,7 +25,7 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
         $this->strict = $strict;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): mixed
     {
         if (!\is_object($value)) {
             return $value;
@@ -52,7 +52,7 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
         return $hasNonEmptyValue ? $value : null;
     }
 
-    public function transform($value)
+    public function transform(mixed $value): mixed
     {
         return $value;
     }

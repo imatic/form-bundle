@@ -24,7 +24,7 @@ class CollectionToScalarTransformer implements DataTransformerInterface
         $this->idProvider = $idProvider;
     }
 
-    public function transform($collection)
+    public function transform(mixed $value): mixed
     {
         // handle value
         if (null === $collection) {
@@ -51,7 +51,7 @@ class CollectionToScalarTransformer implements DataTransformerInterface
         return $output;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): mixed
     {
         if (null === $value || '' === $value) {
             return new ArrayCollection();

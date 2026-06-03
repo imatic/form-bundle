@@ -28,7 +28,7 @@ class AjaxEntityChoiceType extends AjaxChoiceType
         $this->registry = $registry;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $em = $this->registry->getManager(isset($options['entity_manager']) ? $options['entity_manager'] : null);
 
@@ -45,7 +45,7 @@ class AjaxEntityChoiceType extends AjaxChoiceType
         );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 

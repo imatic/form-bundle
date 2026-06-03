@@ -28,7 +28,7 @@ class FormThemeExtension extends AbstractTypeExtension
         $this->defaultTheme = $defaultTheme;
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $theme = $options['template'];
 
@@ -44,7 +44,7 @@ class FormThemeExtension extends AbstractTypeExtension
         $view->vars += $options['template_parameters'];
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'template' => null,

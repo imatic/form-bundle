@@ -23,7 +23,7 @@ class EntityToScalarTransformer implements DataTransformerInterface
         $this->idProvider = $idProvider;
     }
 
-    public function transform($entity)
+    public function transform(mixed $value): mixed
     {
         if (!\is_object($entity)) {
             if (null === $entity) {
@@ -35,7 +35,7 @@ class EntityToScalarTransformer implements DataTransformerInterface
         return (string) \call_user_func($this->idProvider, $entity);
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): mixed
     {
         if (null !== $value && '' !== $value) {
             $qb = clone $this->qb;

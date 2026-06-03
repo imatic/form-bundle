@@ -15,7 +15,7 @@ class EntityExtension extends AbstractTypeExtension
         $this->manager = $manager;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             // specify `choice_value` option prevent unmanaged entity exception in case `UnitOfWork` state which is cleared before constructing the form
