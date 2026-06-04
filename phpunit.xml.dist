@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
         backupGlobals="false"
         colors="true"
         stopOnFailure="false"
         bootstrap="Tests/bootstrap.php"
+        cacheDirectory=".phpunit.cache"
 >
     <php>
-        <env name="KERNEL_CLASS" value="Imatic\Bundle\FormBundle\Tests\Fixtures\TestProject\TestKernel" />
+        <env name="KERNEL_CLASS" value="Imatic\Bundle\FormBundle\Tests\Fixtures\TestProject\TestKernel"/>
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
-        <env name="TESTING_DATA_INIT" value="0" />
+        <env name="TESTING_DATA_INIT" value="0"/>
     </php>
-
     <testsuites>
         <testsuite name="ImaticFormBundle Test Suite">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
-
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-    </listeners>
-
-    <coverage>
+    <source>
         <include>
             <directory>./</directory>
         </include>
@@ -31,5 +26,5 @@
             <directory>./Tests</directory>
             <directory>./vendor</directory>
         </exclude>
-    </coverage>
+    </source>
 </phpunit>
