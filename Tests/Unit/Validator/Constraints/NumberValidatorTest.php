@@ -3,6 +3,7 @@ namespace Imatic\Bundle\FormBundle\Tests\Unit\Validator\Constraints;
 
 use Imatic\Bundle\FormBundle\Validator\Constraints\Number;
 use Imatic\Bundle\FormBundle\Validator\Constraints\NumberValidator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -22,9 +23,7 @@ class NumberValidatorTest extends TestCase
         $this->executionContext = $this->createMock(ExecutionContextInterface::class);
     }
 
-    /**
-     * @dataProvider precision3Scale1ValidValues
-     */
+    #[DataProvider('precision3Scale1ValidValues')]
     public function testValidatorShouldNotAddViolationWhenValuesAreValid($validValue)
     {
         $this->executionContext
@@ -37,7 +36,7 @@ class NumberValidatorTest extends TestCase
         $validator->validate($validValue, new Number(precision: 3, scale: 1));
     }
 
-    public function precision3Scale1ValidValues()
+    public static function precision3Scale1ValidValues()
     {
         return [
             [32.5],
@@ -79,15 +78,16 @@ class NumberValidatorTest extends TestCase
 
     public function testValidatorShouldAddViolationWithMessageAboutInvalidScaleIfScaleIsInvalid2()
     {
+        $matcher = $this->exactly(2);
         $this->executionContext
-            ->expects($this->exactly(2))
-            ->method('addViolation');
-        $this->executionContext
+            ->expects($matcher)
             ->method('addViolation')
-            ->withConsecutive(
-                ['The number cannot have bigger precision than "%maxPrecision%"', ['%maxPrecision%' => 3]],
-                ['The number cannot have bigger scale than "%maxScale%"', ['%maxScale%' => 1]]
-            );
+            ->willReturnCallback(function (string $message, array $params) use ($matcher): void {
+                match ($matcher->numberOfInvocations()) {
+                    1 => $this->assertSame(['The number cannot have bigger precision than "%maxPrecision%"', ['%maxPrecision%' => 3]], [$message, $params]),
+                    2 => $this->assertSame(['The number cannot have bigger scale than "%maxScale%"', ['%maxScale%' => 1]], [$message, $params]),
+                };
+            });
 
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
