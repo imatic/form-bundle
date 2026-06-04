@@ -34,10 +34,7 @@ class NumberValidatorTest extends TestCase
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
 
-        $validator->validate($validValue, new Number([
-            'precision' => 3,
-            'scale' => 1,
-        ]));
+        $validator->validate($validValue, new Number(precision: 3, scale: 1));
     }
 
     public function precision3Scale1ValidValues()
@@ -62,10 +59,7 @@ class NumberValidatorTest extends TestCase
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
 
-        $validator->validate(325.5, new Number([
-            'precision' => 3,
-            'scale' => 1,
-        ]));
+        $validator->validate(325.5, new Number(precision: 3, scale: 1));
     }
 
     public function testValidatorShouldAddViolationWithMessageAboutInvalidScaleIfScaleIsInvalid()
@@ -80,10 +74,7 @@ class NumberValidatorTest extends TestCase
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
 
-        $validator->validate(3.25, new Number([
-            'precision' => 3,
-            'scale' => 1,
-        ]));
+        $validator->validate(3.25, new Number(precision: 3, scale: 1));
     }
 
     public function testValidatorShouldAddViolationWithMessageAboutInvalidScaleIfScaleIsInvalid2()
@@ -101,9 +92,6 @@ class NumberValidatorTest extends TestCase
         $validator = new NumberValidator();
         $validator->initialize($this->executionContext);
 
-        $validator->validate(33.25, new Number([
-            'precision' => 3,
-            'scale' => 1,
-        ]));
+        $validator->validate(33.25, new Number(precision: 3, scale: 1));
     }
 }
