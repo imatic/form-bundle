@@ -10,7 +10,7 @@ use Symfony\Component\Form\FormEvents;
  */
 class RemoveUnsentFieldsSubscriber implements EventSubscriberInterface
 {
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SUBMIT => 'preSubmit',
