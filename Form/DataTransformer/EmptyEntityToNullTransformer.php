@@ -34,9 +34,6 @@ class EmptyEntityToNullTransformer implements DataTransformerInterface
         $hasNonEmptyValue = false;
         foreach ($this->properties as $property) {
             $reflProperty = new \ReflectionProperty($value, $property);
-            if (\PHP_VERSION_ID < 80100) {
-                $reflProperty->setAccessible(true);
-            }
             $reflPropertyValue = $reflProperty->getValue($value);
 
             if (

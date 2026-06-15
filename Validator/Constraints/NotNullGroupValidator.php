@@ -11,15 +11,11 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class NotNullGroupValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         $nullProperties = [];
         foreach ($constraint->properties as $property) {
             $reflProperty = new \ReflectionProperty($value, $property);
-            if (\PHP_VERSION_ID < 80100) {
-                $reflProperty->setAccessible(true);
-            }
-
             if (null === $reflProperty->getValue($value)) {
                 $nullProperties[] = $property;
             }
