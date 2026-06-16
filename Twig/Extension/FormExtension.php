@@ -23,7 +23,7 @@ class FormExtension extends AbstractExtension
         $this->renderer = $renderer;
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             // imatic_form_javascript

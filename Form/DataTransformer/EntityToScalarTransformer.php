@@ -23,19 +23,19 @@ class EntityToScalarTransformer implements DataTransformerInterface
         $this->idProvider = $idProvider;
     }
 
-    public function transform($entity)
+    public function transform(mixed $value): mixed
     {
-        if (!\is_object($entity)) {
-            if (null === $entity) {
+        if (!\is_object($value)) {
+            if (null === $value) {
                 return '';
             }
-            throw new UnexpectedTypeException($entity, 'object or null');
+            throw new UnexpectedTypeException($value, 'object or null');
         }
 
-        return (string) \call_user_func($this->idProvider, $entity);
+        return (string) \call_user_func($this->idProvider, $value);
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): mixed
     {
         if (null !== $value && '' !== $value) {
             $qb = clone $this->qb;

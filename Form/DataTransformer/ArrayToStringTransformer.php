@@ -5,24 +5,24 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class ArrayToStringTransformer implements DataTransformerInterface
 {
-    public function transform($array)
+    public function transform(mixed $value): mixed
     {
-        if (null === $array || !\is_array($array)) {
+        if (null === $value || !\is_array($value)) {
             return '';
         }
 
-        return \implode(',', $array);
+        return \implode(',', $value);
     }
 
-    public function reverseTransform($string)
+    public function reverseTransform(mixed $value): mixed
     {
-        if ('' === $string) {
+        if ('' === $value) {
             return null;
         }
-        if (\is_array($string)) {
-            return $string;
+        if (\is_array($value)) {
+            return $value;
         }
 
-        return \explode(',', $string);
+        return \explode(',', $value);
     }
 }

@@ -29,19 +29,19 @@ class AjaxChoiceType extends AbstractType
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'imatic_ajax_choice';
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple']) {
             $builder->addViewTransformer(new ArrayToStringTransformer(), true);
         }
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if ($options['multiple'] && $options['allow_clear']) {
             throw new \RuntimeException('The "allow_clear" option has no effect in multiple choice mode');
@@ -71,7 +71,7 @@ class AjaxChoiceType extends AbstractType
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired([
             'route',

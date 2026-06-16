@@ -13,12 +13,12 @@ class TimeRangeTypeTest extends TypeTestCase
     {
         $formData = [
             'start' => [
-                'hour' => 13,
-                'minute' => 15,
+                'hour' => '13',
+                'minute' => '15',
             ],
             'end' => [
-                'hour' => 5,
-                'minute' => 59,
+                'hour' => '5',
+                'minute' => '59',
             ],
         ];
 

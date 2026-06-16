@@ -11,14 +11,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RangeType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('start', $options['field_type'], $options['field_options'])
             ->add('end', $options['field_type'], $options['field_options']);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'field_type' => NumberType::class,

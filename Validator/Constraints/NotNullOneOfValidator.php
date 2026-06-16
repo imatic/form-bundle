@@ -11,13 +11,11 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class NotNullOneOfValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         $hasNotNullValue = false;
         foreach ($constraint->properties as $property) {
             $reflProperty = new \ReflectionProperty($value, $property);
-            $reflProperty->setAccessible(true);
-
             if (null !== $reflProperty->getValue($value)) {
                 $hasNotNullValue = true;
                 break;

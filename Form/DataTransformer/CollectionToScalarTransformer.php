@@ -24,19 +24,19 @@ class CollectionToScalarTransformer implements DataTransformerInterface
         $this->idProvider = $idProvider;
     }
 
-    public function transform($collection)
+    public function transform(mixed $value): mixed
     {
         // handle value
-        if (null === $collection) {
+        if (null === $value) {
             return '';
         }
-        if (!$collection instanceof \Traversable && !\is_array($collection)) {
-            throw new UnexpectedTypeException($collection, 'Traversable, array or null');
+        if (!$value instanceof \Traversable && !\is_array($value)) {
+            throw new UnexpectedTypeException($value, 'Traversable, array or null');
         }
 
         // fetch collection members
         $output = null;
-        foreach ($collection as $entity) {
+        foreach ($value as $entity) {
             if (null === $output) {
                 $output = '';
             } else {
@@ -51,7 +51,7 @@ class CollectionToScalarTransformer implements DataTransformerInterface
         return $output;
     }
 
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): mixed
     {
         if (null === $value || '' === $value) {
             return new ArrayCollection();

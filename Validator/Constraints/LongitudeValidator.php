@@ -6,7 +6,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class LongitudeValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (null === $value) {
             return;

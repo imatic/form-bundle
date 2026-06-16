@@ -29,14 +29,14 @@ class ChoiceExtension extends AbstractTypeExtension
         $this->translator = $translator;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['tags']) {
             $builder->resetViewTransformers();
         }
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if ($options['rich']) {
             $placeholder = $options['placeholder'] ?: '';
@@ -53,7 +53,7 @@ class ChoiceExtension extends AbstractTypeExtension
         }
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'rich' => function (Options $options) {

@@ -12,14 +12,13 @@ framework:
     csrf_protection:            true
     validation:
         enabled:                true
-        enable_annotations:     true
     translator:
         enabled:                true
     router:
         utf8:                   true
         resource:               '%kernel.project_dir%/config/routing.yml'
     default_locale:             cs_CZ
-    profiler:                   { only_exceptions: false }
+    profiler:                   { only_exceptions: false, collect_serializer_data: true }
 
 web_profiler:
     toolbar: true
@@ -38,7 +37,6 @@ doctrine:
                 path:           '%kernel.cache_dir%/../test.db'
 
     orm:
-        auto_generate_proxy_classes: '%kernel.debug%'
         auto_mapping:           true
         resolve_target_entities: []
 

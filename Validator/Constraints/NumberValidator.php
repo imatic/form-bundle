@@ -15,7 +15,7 @@ class NumberValidator extends ConstraintValidator
      *
      * @throws \Exception
      */
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if ($value === null) {
             return;
